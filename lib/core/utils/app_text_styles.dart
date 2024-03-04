@@ -7,13 +7,15 @@ abstract class AppStyles {
       fontSize: _getResponsiveFontSize(context, fontSize: 16),
       fontFamily: AppFonts.englishFontFamily,
       fontWeight: FontWeight.w400,
+      letterSpacing: 0,
     );
   }
-  static TextStyle styleRegular18(BuildContext context) {
+  static TextStyle styleRegular20(BuildContext context) {
     return TextStyle(
-      fontSize: _getResponsiveFontSize(context, fontSize: 18),
+      fontSize: _getResponsiveFontSize(context, fontSize: 20),
       fontFamily: AppFonts.englishFontFamily,
       fontWeight: FontWeight.w400,
+      letterSpacing: 0,
     );
   }
   static TextStyle styleBold16(BuildContext context) {
@@ -21,6 +23,7 @@ abstract class AppStyles {
       fontSize: _getResponsiveFontSize(context, fontSize: 16),
       fontFamily: AppFonts.englishFontFamily,
       fontWeight: FontWeight.w700,
+      letterSpacing: 0,
     );
   }
   static TextStyle styleMedium16(BuildContext context) {
@@ -28,6 +31,7 @@ abstract class AppStyles {
       fontSize: _getResponsiveFontSize(context, fontSize: 16),
       fontFamily: AppFonts.englishFontFamily,
       fontWeight: FontWeight.w500,
+      letterSpacing: 0,
     );
   }
   static TextStyle styleMedium20(BuildContext context) {
@@ -35,6 +39,7 @@ abstract class AppStyles {
       fontSize: _getResponsiveFontSize(context, fontSize: 20),
       fontFamily: AppFonts.englishFontFamily,
       fontWeight: FontWeight.w500,
+      letterSpacing: 0,
     );
   }
   static TextStyle styleSemiBold16(BuildContext context) {
@@ -42,6 +47,7 @@ abstract class AppStyles {
       fontSize: _getResponsiveFontSize(context, fontSize: 16),
       fontFamily: AppFonts.englishFontFamily,
       fontWeight: FontWeight.w600,
+      letterSpacing: 0,
     );
   }
   static TextStyle styleSemiBold20(BuildContext context) {
@@ -49,6 +55,7 @@ abstract class AppStyles {
       fontSize: _getResponsiveFontSize(context, fontSize: 20),
       fontFamily: AppFonts.englishFontFamily,
       fontWeight: FontWeight.w600,
+      letterSpacing: 0,
     );
   }
   static TextStyle styleRegular12(BuildContext context) {
@@ -56,6 +63,7 @@ abstract class AppStyles {
       fontSize: _getResponsiveFontSize(context, fontSize: 12),
       fontFamily: AppFonts.englishFontFamily,
       fontWeight: FontWeight.w400,
+      letterSpacing: 0,
     );
   }
   static TextStyle styleSemiBold24(BuildContext context) {
@@ -63,6 +71,7 @@ abstract class AppStyles {
       fontSize: _getResponsiveFontSize(context, fontSize: 24),
       fontFamily: AppFonts.englishFontFamily,
       fontWeight: FontWeight.w600,
+      letterSpacing: 0,
     );
   }
   static TextStyle styleRegular14(BuildContext context) {
@@ -70,6 +79,7 @@ abstract class AppStyles {
       fontSize: _getResponsiveFontSize(context, fontSize: 14),
       fontFamily: AppFonts.englishFontFamily,
       fontWeight: FontWeight.w400,
+      letterSpacing: 0,
     );
   }
   static TextStyle styleSemiBold18(BuildContext context) {

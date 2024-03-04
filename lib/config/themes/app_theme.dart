@@ -6,48 +6,52 @@ import 'package:notes/core/utils/app_fonts.dart';
 
 abstract class AppTheme {
   static final ThemeData lightTheme = ThemeData(
-      fontFamily: AppFonts.englishFontFamily,
-      drawerTheme: const DrawerThemeData(
-        backgroundColor: AppColors.lightBackgroundColor,
-        elevation: 0,
-      ),
-      listTileTheme: const ListTileThemeData()
-          .copyWith(selectedColor: AppColors.lightActiveDrawerColor),
-      colorScheme: const ColorScheme.light().copyWith(
-        background: AppColors.lightBackgroundColor,
-        primary: Colors.black,
-        secondary: Colors.grey,
-      ));
+    fontFamily: AppFonts.englishFontFamily,
+    drawerTheme: const DrawerThemeData(
+      backgroundColor: AppColors.lightBackgroundColor,
+      elevation: 0,
+    ),
+    listTileTheme: const ListTileThemeData()
+        .copyWith(selectedColor: AppColors.lightActiveDrawerColor),
+    colorScheme: const ColorScheme.light().copyWith(
+      background: AppColors.lightBackgroundColor,
+      primary: Colors.black,
+      secondary: Colors.grey,
+      onSecondary: AppColors.lightSeconderBackgroundColor,
+    ),
+  );
   static final ThemeData darkTheme = ThemeData(
-      fontFamily: AppFonts.englishFontFamily,
-      drawerTheme: const DrawerThemeData(
-        backgroundColor:  AppColors.darkBackgroundColor,
-        elevation: 0,
-      ),
-      listTileTheme: const ListTileThemeData()
-          .copyWith(selectedColor: AppColors.darkActiveDrawerColor),
-      colorScheme: const ColorScheme.dark().copyWith(
-          background: AppColors.darkBackgroundColor,
-          primary: Colors.white,
-          secondary: Colors.white));
+    fontFamily: AppFonts.englishFontFamily,
+    drawerTheme: const DrawerThemeData(
+      backgroundColor: AppColors.darkBackgroundColor,
+      elevation: 0,
+    ),
+    listTileTheme: const ListTileThemeData()
+        .copyWith(selectedColor: AppColors.darkActiveDrawerColor),
+    colorScheme: const ColorScheme.dark().copyWith(
+        background: AppColors.darkBackgroundColor,
+        primary: Colors.white,
+        secondary: Colors.white,
+        onSecondary: AppColors.darkSeconderBackgroundColor),
+  );
 
   static SystemUiOverlayStyle systemUiOverlayStyle() =>
       SchedulerBinding.instance.platformDispatcher.platformBrightness ==
               Brightness.dark
           ? _darkSystemUiOverlayStyle
           : _whiteSystemUiOverlayStyle;
-  static const SystemUiOverlayStyle _whiteSystemUiOverlayStyle =
+  static final SystemUiOverlayStyle _whiteSystemUiOverlayStyle =
       SystemUiOverlayStyle(
-          // statusBarColor: AppColors.whiteBackgroundColor,
-          // statusBarBrightness: Brightness.dark,
-          // statusBarIconBrightness: Brightness.dark,
-          // systemNavigationBarColor: AppColors.whiteSecondaryColor
+          statusBarColor: AppColors.lightBackgroundColor.withOpacity(0.85),
+          statusBarBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarColor: AppColors.lightBackgroundColor
           );
-  static const SystemUiOverlayStyle _darkSystemUiOverlayStyle =
+  static final SystemUiOverlayStyle _darkSystemUiOverlayStyle =
       SystemUiOverlayStyle(
-          // statusBarColor: AppColors.blackBackgroundColor,
-          // statusBarBrightness: Brightness.light,
-          // statusBarIconBrightness: Brightness.light,
-          // systemNavigationBarColor: AppColors.blackSecondaryColor,
+          statusBarColor: AppColors.darkBackgroundColor.withOpacity(0.85),
+          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarColor: AppColors.darkBackgroundColor,
           );
 }
