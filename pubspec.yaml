@@ -1,0 +1,45 @@
+name: notes
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+dependencies:
+  flutter_localizations:
+    sdk: flutter
+  flutter:
+    sdk: flutter
+  intl: any
+  go_router: ^13.2.0
+  animations: ^2.0.11
+  cupertino_icons: ^1.0.6
+
+dev_dependencies:
+  flutter_lints: ^3.0.1
+flutter:
+  generate: true
+  uses-material-design: true
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+  fonts:
+    - family: sans
+      fonts:
+         - asset: assets/fonts/sans/DMSans-Thin.ttf
+           weight: 100
+         - asset: assets/fonts/sans/DMSans-ExtraLight.ttf
+           weight: 200
+         - asset: assets/fonts/sans/DMSans-Light.ttf
+           weight: 300
+         - asset: assets/fonts/sans/DMSans-Regular.ttf
+           weight: 400
+         - asset: assets/fonts/sans/DMSans-Medium.ttf
+           weight: 500
+         - asset: assets/fonts/sans/DMSans-SemiBold.ttf
+           weight: 600
+         - asset: assets/fonts/sans/DMSans-Bold.ttf
+           weight: 700
+         - asset: assets/fonts/sans/DMSans-ExtraBold.ttf
+           weight: 800
+         - asset: assets/fonts/sans/DMSans-Black.ttf
+           weight: 900
