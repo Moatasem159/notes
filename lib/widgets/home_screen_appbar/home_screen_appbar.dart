@@ -9,7 +9,7 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding:const EdgeInsets.symmetric(horizontal: 15,vertical:50),
+        padding:const EdgeInsets.symmetric(horizontal: 15,vertical:45),
         child: Material(
           color: context.theme.colorScheme.onSecondary,
           borderRadius: BorderRadius.circular(25),
