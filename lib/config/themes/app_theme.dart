@@ -23,6 +23,7 @@ abstract class AppTheme {
       secondary: Colors.grey,
       onSecondary: AppColors.lightSeconderBackgroundColor,
     ),
+    inputDecorationTheme: const InputDecorationTheme(border: InputBorder.none),
   );
   static final ThemeData darkTheme = ThemeData(
     appBarTheme: const AppBarTheme(
@@ -37,10 +38,12 @@ abstract class AppTheme {
     listTileTheme: const ListTileThemeData()
         .copyWith(selectedColor: AppColors.darkActiveDrawerColor),
     colorScheme: const ColorScheme.dark().copyWith(
-        background: AppColors.darkBackgroundColor,
-        primary: Colors.white,
-        secondary: Colors.white,
-        onSecondary: AppColors.darkSeconderBackgroundColor),
+      background: AppColors.darkBackgroundColor,
+      primary: Colors.white,
+      secondary: Colors.white,
+      onSecondary: AppColors.darkSeconderBackgroundColor,
+    ),
+    inputDecorationTheme: const InputDecorationTheme(border: InputBorder.none),
   );
 
   static SystemUiOverlayStyle systemUiOverlayStyle() =>

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:notes/app/app.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:notes/app/injection_container.dart'as di show init;
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  HydratedBloc.storage = await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
+  await di.init();
   runApp(const MyApp());
 }

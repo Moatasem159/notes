@@ -10,7 +10,7 @@ class SwitchListViewButton extends StatelessWidget {
       builder: (context, state) {
         return CustomIconButton(
             icon: state==ListViewType.normal ? Icons.view_agenda_outlined:Icons.grid_view_rounded,
-            onTap: BlocProvider.of<SwitchListViewCubit>(context).changeView);
+            onTap: SwitchListViewCubit.of(context).changeView);
       },
     );
   }
