@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:notes/core/extension/context_extension.dart';
+import 'package:notes/models/note.dart';
 part 'custom_popup_menu_item.dart';
 class CustomPopUpMenu extends StatelessWidget {
-  const CustomPopUpMenu({super.key});
+  final NoteStatus noteStatus;
+  const CustomPopUpMenu({super.key, required this.noteStatus});
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -11,7 +13,7 @@ class CustomPopUpMenu extends StatelessWidget {
       child:PopupMenuButton(
           clipBehavior: Clip.hardEdge,
           padding: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(
+          shape:RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15)),
           splashRadius: 20,
           constraints: BoxConstraints(
@@ -20,7 +22,7 @@ class CustomPopUpMenu extends StatelessWidget {
             return [
               PopupMenuItem(
                 onTap: () {},
-                child: CustomPopUpMenuItem(title:context.local.archive),
+                child: CustomPopUpMenuItem(title:noteStatus==NoteStatus.active?context.local.archive:context.local.unArchive),
               ),
               PopupMenuItem(
                 onTap: () {},

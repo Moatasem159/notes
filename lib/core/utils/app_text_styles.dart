@@ -18,6 +18,14 @@ abstract class AppStyles {
       letterSpacing: 0,
     );
   }
+  static TextStyle styleRegular24(BuildContext context) {
+    return TextStyle(
+      fontSize: _getResponsiveFontSize(context, fontSize: 24),
+      fontFamily: AppFonts.englishFontFamily,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0,
+    );
+  }
   static TextStyle styleBold16(BuildContext context) {
     return TextStyle(
       fontSize: _getResponsiveFontSize(context, fontSize: 16),

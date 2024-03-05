@@ -6,8 +6,7 @@ class CustomIconButton extends StatelessWidget {
   final double ?iconSize;
   final VoidCallback onTap;
 
-  const CustomIconButton(
-      {super.key, required this.onTap, required this.icon, this.tooltip, this.iconSize});
+  const CustomIconButton({super.key, required this.onTap, required this.icon, this.tooltip, this.iconSize});
 
   @override
   Widget build(BuildContext context) {

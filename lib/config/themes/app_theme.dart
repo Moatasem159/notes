@@ -7,6 +7,10 @@ import 'package:notes/core/utils/app_fonts.dart';
 abstract class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     fontFamily: AppFonts.englishFontFamily,
+    appBarTheme: const AppBarTheme(
+      scrolledUnderElevation: 0,
+      elevation: 0,
+    ),
     drawerTheme: const DrawerThemeData(
       backgroundColor: AppColors.lightBackgroundColor,
       elevation: 0,
@@ -21,6 +25,10 @@ abstract class AppTheme {
     ),
   );
   static final ThemeData darkTheme = ThemeData(
+    appBarTheme: const AppBarTheme(
+      elevation: 0,
+      scrolledUnderElevation: 0,
+    ),
     fontFamily: AppFonts.englishFontFamily,
     drawerTheme: const DrawerThemeData(
       backgroundColor: AppColors.darkBackgroundColor,
@@ -45,13 +53,12 @@ abstract class AppTheme {
           statusBarColor: AppColors.lightBackgroundColor.withOpacity(0.85),
           statusBarBrightness: Brightness.dark,
           statusBarIconBrightness: Brightness.dark,
-          systemNavigationBarColor: AppColors.lightBackgroundColor
-          );
+          systemNavigationBarColor: AppColors.lightBackgroundColor);
   static final SystemUiOverlayStyle _darkSystemUiOverlayStyle =
       SystemUiOverlayStyle(
-          statusBarColor: AppColors.darkBackgroundColor.withOpacity(0.85),
-          statusBarBrightness: Brightness.light,
-          statusBarIconBrightness: Brightness.light,
-          systemNavigationBarColor: AppColors.darkBackgroundColor,
-          );
+    statusBarColor: AppColors.darkBackgroundColor.withOpacity(0.85),
+    statusBarBrightness: Brightness.light,
+    statusBarIconBrightness: Brightness.light,
+    systemNavigationBarColor: AppColors.darkBackgroundColor,
+  );
 }

@@ -9,9 +9,9 @@ class AddNoteButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OpenContainer(
       transitionDuration: const Duration(milliseconds: 300),
-      openColor: Theme.of(context).colorScheme.background,
-      closedColor: context.scaffoldBackground,
-      middleColor: Theme.of(context).colorScheme.background,
+      openColor:context.theme.colorScheme.background,
+      closedColor: context.theme.colorScheme.onSecondary,
+      middleColor: context.theme.colorScheme.background,
       closedElevation: 10,
       openElevation: 10,
       closedShape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
