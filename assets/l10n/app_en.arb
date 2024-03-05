@@ -24,5 +24,7 @@
   "help": "Help & feedback",
   "homeBodyTitle": "Notes you add appear here",
   "archiveBodyTitle": "Your archive notes appear here",
-  "deletedBodyTitle": "No notes in Recycle Bin"
+  "deletedBodyTitle": "No notes in Recycle Bin",
+  "deleteForEver": "Delete for ever",
+  "emptyBin": "Empty Bin"
 }

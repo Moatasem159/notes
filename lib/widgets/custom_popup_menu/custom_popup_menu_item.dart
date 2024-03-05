@@ -6,7 +6,7 @@ class CustomPopUpMenuItem extends StatelessWidget{
   Widget build(BuildContext context) {
     return SizedBox(
         width: context.width/2.4,
-        child: Text(title)
+        child: Text(title,style: AppStyles.styleRegular20(context))
     );
   }
 }
