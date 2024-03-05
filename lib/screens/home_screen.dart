@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: context.scaffoldBackground,
         drawer: const MainDrawer(),
-        floatingActionButton: const AddNoteButton(),
+        floatingActionButton:const AddNoteButton(),
         body: const HomeScreenBody(),
       ),
     );
