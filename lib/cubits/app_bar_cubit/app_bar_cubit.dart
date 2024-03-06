@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes/core/image/image_helper.dart';
 import 'package:notes/models/note.dart';
 part 'app_bar_state.dart';
 class AppBarCubit extends Cubit<AppBarStates> {
@@ -51,38 +50,6 @@ class AppBarCubit extends Cubit<AppBarStates> {
     isBase=true;
     isPinned=true;
     emit(RemoveSelectionState());
-  }
-  // deleteNotes(){
-  //   for (var element in selectedNotes){
-  //     if(element.imagePath!=""){
-  //        ImageHelper.deleteImageFile(element.imagePath);
-  //     }
-  //     element.delete();
-  //   }
-  //   selectedNotes.clear();
-  //   hideOptionAppBar();
-  //   emit(DeleteNotesSuccessState());
-  // }
-  pinNotes(){
-    for (var element in selectedNotes){
-      if(isPinned)
-        {
-          if(element.pinned==true){
-            element.pinned=false;
-            element.save();
-          }
-        }
-      else{
-        if(element.pinned==false){
-          element.pinned=true;
-          element.save();
-        }
-      }
-    }
-    selectedNotes.clear();
-    isPinned=false;
-    hideOptionAppBar();
-    emit(PinNotesSuccessState());
   }
   _changeIsPinned(){
     for (var element in selectedNotes) {

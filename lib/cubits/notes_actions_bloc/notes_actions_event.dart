@@ -5,6 +5,11 @@ class ArchiveNote extends NotesActionsEvent{
   final List<Note> archivedNotes;
   ArchiveNote(this.archivedNotes,this.archive);
 }
+class PinNote extends NotesActionsEvent{
+  final bool pin;
+  final List<Note> pinnedNotes;
+  PinNote(this.pinnedNotes,this.pin);
+}
 class DeleteNote extends NotesActionsEvent{
   final List<Note> deletedNotes;
   DeleteNote(this.deletedNotes);

@@ -3,7 +3,7 @@ import 'package:notes/models/note.dart';
 abstract class NoteLocalDataSource {
   Future<int> addNote(Note note);
   Future<void> archiveNotes(List<Note> notes,bool archive);
-  Future<void> archiveNote(Note note,bool archive);
+  Future<void> pinNotes(List<Note> notes,bool pin);
   List<Note> getNotes();
 }
 class NoteLocalDataSourceImpl implements NoteLocalDataSource {
@@ -18,11 +18,6 @@ class NoteLocalDataSourceImpl implements NoteLocalDataSource {
     return _box.values.toList();
   }
   @override
-  Future<void> archiveNote(Note note,bool archive) async{
-    note.status==NoteStatus.archive;
-    await note.save();
-  }
-  @override
   Future<void> archiveNotes(List<Note> notes,bool archive)async{
     if(archive){
         for (Note note in notes) {
@@ -34,6 +29,26 @@ class NoteLocalDataSourceImpl implements NoteLocalDataSource {
     else{
       for (Note note in notes) {
         note.status=NoteStatus.active;
+        await note.save();
+      }
+    }
+  }
+
+  @override
+  Future<void> pinNotes(List<Note> notes, bool pin) async{
+    if(pin){
+      for (Note note in notes) {
+        note.pinned=false;
+        await note.save();
+      }
+    }
+    else{
+      for (Note note in notes) {
+        note.pinned=true;
+        if(note.status==NoteStatus.archive)
+          {
+            note.status=NoteStatus.active;
+          }
         await note.save();
       }
     }

@@ -7,12 +7,9 @@ import 'package:notes/models/note.dart';
 import 'package:notes/widgets/custom_icon_button.dart';
 import 'package:notes/widgets/default_options_appbar.dart';
 import 'package:notes/widgets/switch_list_view_button.dart';
-
 part 'default_home_appbar.dart';
-
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppBarCubit, AppBarStates>(

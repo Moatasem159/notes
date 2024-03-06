@@ -5,7 +5,7 @@ class _DeletedOptionsAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CustomIconButton(onTap:(){},icon: Icons.clear),
+        CustomIconButton(onTap:AppBarCubit.of(context).removeSelection,icon: Icons.clear),
         const NotesCounter(),
         const Spacer(),
         CustomIconButton(onTap: () {}, icon: Icons.restore),
