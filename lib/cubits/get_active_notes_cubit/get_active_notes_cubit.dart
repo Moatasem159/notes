@@ -7,7 +7,11 @@ class GetActiveNotesCubit extends Cubit<GetActiveNotesStates> {
   GetActiveNotesCubit(this._dataSource) : super(GetActiveNotesInitialState());
   final NoteLocalDataSource _dataSource;
   static GetActiveNotesCubit of(BuildContext context)=>BlocProvider.of(context);
-  getNotes()async{
+  getNotes({bool edit=false})async{
+    if(edit)
+      {
+        await Future.delayed(const Duration(milliseconds: 500));
+      }
     List<Note> notes=[];
     List<Note> pinnedNotes=[];
     notes=_dataSource.getNotes().where((element)=>element.pinned==false&&element.status==NoteStatus.active).toList();

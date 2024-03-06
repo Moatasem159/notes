@@ -29,7 +29,7 @@ class AddNoteScreen extends StatelessWidget {
             }
           if(state is EditNoteSuccessState)
             {
-              GetActiveNotesCubit.of(context).getNotes();
+              GetActiveNotesCubit.of(context).getNotes(edit: true);
             }
         },
         builder: (context, state) {
