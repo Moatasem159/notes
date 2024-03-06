@@ -53,21 +53,21 @@ class CustomPopUpMenu extends StatelessWidget {
                             : context.local.unArchive),
                   ),
                   PopupMenuItem(
-                    onTap: () {},
+                    onTap: () =>NotesActionsBloc.of(context).add(DeleteNote(AppBarCubit.of(context).selectedNotes, true)),
                     child: CustomPopUpMenuItem(title: context.local.delete),
                   ),
                 ],
                 if (noteStatus == NoteStatus.deleted)
-                  PopupMenuItem(
-                    onTap: () {},
-                    child:
-                    CustomPopUpMenuItem(title: context.local.emptyBin),
+                  if (AppBarCubit.of(context).isBase)
+                   PopupMenuItem(
+                      onTap: () {},
+                      child: CustomPopUpMenuItem(title: context.local.emptyBin),
+                    ),
+                if (noteStatus == NoteStatus.deleted&&!AppBarCubit.of(context).isBase)
+                   PopupMenuItem(
+                     onTap: () =>NotesActionsBloc.of(context).add(DeleteForever(AppBarCubit.of(context).selectedNotes)),
+                     child:CustomPopUpMenuItem(title: context.local.deleteForEver),
                   ),
-                PopupMenuItem(
-                  onTap: () {},
-                  child: CustomPopUpMenuItem(
-                      title: context.local.deleteForEver),
-                ),
               ];
             },
             icon: const Icon(Icons.more_vert_outlined)),

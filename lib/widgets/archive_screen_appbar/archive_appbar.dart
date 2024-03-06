@@ -19,12 +19,13 @@ class ArchiveAppbar extends StatelessWidget {
       builder: (context, state) {
         return SliverAppBar(
           floating: true,
-          pinned: false,
+          pinned:!AppBarCubit.of(context).isBase,
           titleSpacing: 0,
           expandedHeight: 60,
           collapsedHeight: 60,
           toolbarHeight: 60,
           automaticallyImplyLeading: false,
+          backgroundColor: AppBarCubit.of(context).isBase?Colors.transparent:context.theme.colorScheme.onSecondary,
           flexibleSpace: AnimatedSwitcher(
             duration: const Duration(milliseconds: 500),
             child: AppBarCubit.of(context).isBase

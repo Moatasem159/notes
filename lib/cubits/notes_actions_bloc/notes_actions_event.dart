@@ -11,6 +11,11 @@ class PinNote extends NotesActionsEvent{
   PinNote(this.pinnedNotes,this.pin);
 }
 class DeleteNote extends NotesActionsEvent{
+  final bool delete;
   final List<Note> deletedNotes;
-  DeleteNote(this.deletedNotes);
+  DeleteNote(this.deletedNotes, this.delete);
+}
+class DeleteForever extends NotesActionsEvent{
+  final List<Note> deletedNotes;
+  DeleteForever(this.deletedNotes);
 }

@@ -7,10 +7,8 @@ import 'package:notes/widgets/archive_screen_appbar/archive_appbar.dart';
 import 'package:notes/widgets/custom_scroll_list.dart';
 import 'package:notes/widgets/empty_body.dart';
 import 'package:notes/widgets/note_lists/notes_list.dart';
-
 class ArchiveScreenBody extends StatelessWidget {
   const ArchiveScreenBody({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GetArchivedNotesCubit, GetArchivedNotesStates>(

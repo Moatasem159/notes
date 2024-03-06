@@ -3,6 +3,8 @@ import 'package:notes/models/note.dart';
 abstract class NoteLocalDataSource {
   Future<int> addNote(Note note);
   Future<void> archiveNotes(List<Note> notes,bool archive);
+  Future<void> deleteNotes(List<Note> notes,bool delete);
+  Future<void> deleteForever(List<Note> notes);
   Future<void> pinNotes(List<Note> notes,bool pin);
   List<Note> getNotes();
 }
@@ -51,6 +53,29 @@ class NoteLocalDataSourceImpl implements NoteLocalDataSource {
           }
         await note.save();
       }
+    }
+  }
+
+  @override
+  Future<void> deleteNotes(List<Note> notes, bool delete) async{
+    if(delete){
+      for (Note note in notes) {
+        note.pinned=false;
+        note.status=NoteStatus.deleted;
+        await note.save();
+      }
+    }
+    else{
+      for (Note note in notes) {
+        note.status=NoteStatus.active;
+        await note.save();
+      }
+    }
+  }
+  @override
+  Future<void> deleteForever(List<Note> notes) async {
+    for (Note note in notes) {
+      await note.delete();
     }
   }
 }

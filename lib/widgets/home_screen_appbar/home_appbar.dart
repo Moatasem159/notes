@@ -16,11 +16,11 @@ class HomeAppBar extends StatelessWidget {
       builder: (context, state) {
         return  SliverAppBar(
           expandedHeight: 65,
+          pinned:!AppBarCubit.of(context).isBase,
           collapsedHeight: 65,
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
+          backgroundColor: AppBarCubit.of(context).isBase?Colors.transparent:context.theme.colorScheme.onSecondary,
           floating: true,
-          pinned: false,
           flexibleSpace: AnimatedSwitcher(
             duration: const Duration(milliseconds: 500),
             child: AppBarCubit.of(context).isBase?const _DefaultHomeAppbar():const DefaultOptionsAppBar(noteStatus:NoteStatus.active),
