@@ -15,7 +15,7 @@ class AddNoteScreenAppbar extends StatelessWidget implements PreferredSizeWidget
           leading:CustomIconButton(onTap: arrowBack, icon: Icons.arrow_back_outlined),
           actions: [
             CustomIconButton(
-              onTap: (){},
+              onTap: AddNoteCubit.of(context).changePinNote,
               icon: AddNoteCubit.of(context).note!.pinned?Icons.push_pin_rounded:Icons.push_pin_outlined,
               tooltip: context.local.pin,
             ),

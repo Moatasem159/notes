@@ -21,7 +21,7 @@ class NoteBuilder extends StatelessWidget {
       child: InkWell(
         onTap: () {
           // if (BlocProvider.of<AppBarCubit>(context).isBase) {
-          //   onTap();
+            onTap();
           // } else {
           //   BlocProvider.of<AppBarCubit>(context).selectNotes(note);
           // }

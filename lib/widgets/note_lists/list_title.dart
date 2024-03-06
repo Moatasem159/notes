@@ -8,7 +8,7 @@ class ListTitle extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Text(title, style: AppStyles.styleRegular14(context)),
+        child: Text(title, style: AppStyles.styleRegular16(context)),
       ),
     );
   }

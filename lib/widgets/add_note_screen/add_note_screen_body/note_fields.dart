@@ -18,6 +18,9 @@ class NoteFields extends StatelessWidget {
               if(value.length>=150){
                 CustomToast.showToast(context, msg: "Title too large");
               }
+              else{
+                AddNoteCubit.of(context).note!.title=value;
+              }
             },
             hintText: context.local.title,
             minLines: 1,
@@ -27,7 +30,9 @@ class NoteFields extends StatelessWidget {
           10.ph,
           CustomTextFormField(
             controller: AddNoteCubit.of(context).content,
-            onChange: (value) {},
+            onChange: (value) {
+              AddNoteCubit.of(context).note!.note=value;
+            },
             autoFocus:  AddNoteCubit.of(context).content.text.isEmpty?true:false,
             hintText: context.local.note,
             maxLines: null,
