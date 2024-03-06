@@ -13,7 +13,7 @@ class _NoteClosedBuilder extends StatelessWidget {
       color: AppBarCubit.of(context).selectedNotes.contains(note)
           ? Colors.blueAccent
           : (note.color == Colors.transparent.value
-          ? Theme.of(context).primaryColorLight
+          ? Colors.grey
           : Colors.transparent),
     );
   }
@@ -41,6 +41,7 @@ class _NoteClosedBuilder extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             child: Container(
                 width: double.infinity,
+                alignment: AlignmentDirectional.centerStart,
                 padding: note.imagePath.isNotEmpty
                     ? null
                     : const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -48,7 +49,7 @@ class _NoteClosedBuilder extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   border: _border(context),
                 ),
-                constraints: const BoxConstraints(minHeight: 40),
+                constraints: const BoxConstraints(minHeight: 50),
                 child: _NoteContent(note)),
           ),
         );

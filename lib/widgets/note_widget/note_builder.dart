@@ -9,8 +9,8 @@ class _NoteBuilder extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 8),
       child: OpenContainer(
-        closedElevation: 5,
-        openElevation: 10,
+        closedElevation: 0,
+        openElevation: 0,
         openColor: context.scaffoldBackground,
         closedColor: Colors.transparent,
         middleColor: context.scaffoldBackground,
