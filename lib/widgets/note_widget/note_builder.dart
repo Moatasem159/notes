@@ -25,7 +25,7 @@ class _NoteBuilder extends StatelessWidget {
           }
         },
         closedBuilder: (_, action) =>
-            _NoteClosedBuilder(note: note, isGrid: isGrid, onTap: action),
+            _NoteClosedBuilder(note: note, isGrid: isGrid, onTap:action),
       ),
     );
   }

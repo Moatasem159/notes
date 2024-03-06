@@ -13,8 +13,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GetActiveNotesCubit(sl())..getNotes(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => GetActiveNotesCubit(sl())..getNotes()),
+      ],
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: AppTheme.systemUiOverlayStyle(),
         child: Scaffold(
