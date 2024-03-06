@@ -8,7 +8,7 @@ class NoteNormalList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverList.builder(
       itemCount: notes.length,
-      itemBuilder: (context, index) => NoteWidget(isGrid: false, note: notes[index])
+      itemBuilder: (context, index) => NoteWidget(isGrid: false, note: notes[index],index: index)
     );
   }
 }

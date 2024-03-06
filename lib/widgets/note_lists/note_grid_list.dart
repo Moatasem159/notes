@@ -14,7 +14,7 @@ class NoteGridList extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         padding: EdgeInsets.zero,
         gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (context, index) => NoteWidget(isGrid: true, note: notes[index]),
+        itemBuilder: (context, index) => NoteWidget(isGrid: true, note: notes[index],index: index),
       ),
     );
   }

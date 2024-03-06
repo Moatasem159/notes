@@ -1,43 +1,39 @@
-import 'package:animations/animations.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes/core/extension/context_extension.dart';
-import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
 import 'package:notes/models/note.dart';
+import 'package:animations/animations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes/screens/add_note_screen.dart';
-import 'package:notes/widgets/note_widget/note_builder.dart';
-
-class NoteWidget extends StatelessWidget {
+import 'package:notes/core/extension/context_extension.dart';
+import 'package:notes/core/extension/empty_padding_extension.dart';
+import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
+part 'note_content.dart';
+part 'note_builder.dart';
+part 'note_closed_builder.dart';
+class NoteWidget extends StatefulWidget {
   final Note note;
   final bool isGrid;
-
-  const NoteWidget({super.key, required this.isGrid, required this.note});
-
+  final int index;
+  const NoteWidget({super.key,required this.isGrid,required this.note,required this.index});
+  @override
+  State<NoteWidget> createState() => _NoteWidgetState();
+}
+class _NoteWidgetState extends State<NoteWidget> {
+  double opacity=1;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-      child: OpenContainer(
-        closedElevation: 5,
-        openElevation: 10,
-        openColor: context.scaffoldBackground,
-        closedColor: note.color == Colors.transparent.value
-            ? context.scaffoldBackground
-            : Color(note.color),
-        middleColor: context.scaffoldBackground,
-        closedShape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        openBuilder: (_, action) {
-          if (note.status == NoteStatus.active) {
-            return BlocProvider.value(
-                value: GetActiveNotesCubit.of(context),
-                child: AddNoteScreen(note: note));
-          } else {
-            return AddNoteScreen(note: note);
-          }
+    return AnimatedOpacity(
+      opacity: opacity,
+      duration: const Duration(milliseconds: 50),
+      child: Dismissible(
+        key: ValueKey<int>(widget.index),
+        behavior: HitTestBehavior.deferToChild,
+        onUpdate: (details) {
+          setState(() {
+            opacity=1-details.progress;
+          });
         },
-        closedBuilder: (_, action) =>
-            NoteBuilder(note: note, isGrid: isGrid, onTap: action),
+        child: _NoteBuilder(widget.note, widget.isGrid),
       ),
     );
   }
