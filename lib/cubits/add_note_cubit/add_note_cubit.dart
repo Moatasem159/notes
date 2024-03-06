@@ -38,8 +38,22 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
     note!.color=value;
     emit(ChangeColorState());
   }
+  changeArchiveNote(){
+    if(note!.status==NoteStatus.archive){
+      note!.status=NoteStatus.active;
+    }
+    else if(note!.status==NoteStatus.active){
+      note!.status=NoteStatus.archive;
+      note!.pinned=false;
+    }
+    emit(ChangeNoteStatusState());
+  }
   changePinNote(){
     note!.pinned=!note!.pinned;
+    if(note!.pinned)
+      {
+        note!.status=NoteStatus.active;
+      }
     emit(ChangePinNoteState());
   }
   Future<void> getImage(ImageSource imageSource) async {

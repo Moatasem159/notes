@@ -6,15 +6,16 @@ import 'package:notes/widgets/note_lists/note_grid_list.dart';
 import 'package:notes/widgets/note_lists/note_normal_list.dart';
 class NotesList extends StatelessWidget {
   final List<Note> notes;
-  const NotesList({super.key, required this.notes});
+  final NoteStatus noteStatus;
+  const NotesList({super.key, required this.notes, required this.noteStatus});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SwitchListViewCubit, ListViewType>(
       builder: (context, state) {
         if (state == ListViewType.grid) {
-          return NoteGridList(notes: notes);
+          return NoteGridList(notes: notes,noteStatus: noteStatus);
         } else {
-          return NoteNormalList(notes: notes);
+          return NoteNormalList(notes: notes,noteStatus: noteStatus);
         }
       },
     );

@@ -10,5 +10,6 @@ class AddNoteLoadingState extends AddNoteStates {}
 class AddNoteErrorState extends AddNoteStates {}
 class ChangeColorState extends AddNoteStates {}
 class ChangePinNoteState extends AddNoteStates {}
+class ChangeNoteStatusState extends AddNoteStates {}
 class PickImageState extends AddNoteStates {}
 class RemoveImageState extends AddNoteStates {}

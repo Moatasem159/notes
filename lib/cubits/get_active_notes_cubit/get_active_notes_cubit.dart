@@ -12,10 +12,10 @@ class GetActiveNotesCubit extends Cubit<GetActiveNotesStates> {
       {
         await Future.delayed(const Duration(milliseconds: 500));
       }
-    List<Note> notes=[];
-    List<Note> pinnedNotes=[];
+    late List<Note> notes;
+    late List<Note> pinnedNotes;
     notes=_dataSource.getNotes().where((element)=>element.pinned==false&&element.status==NoteStatus.active).toList();
     pinnedNotes=_dataSource.getNotes().where((element)=>element.pinned==true&&element.status==NoteStatus.active).toList();
-    emit(GetActiveNotesSuccessState(notes: notes, pinnedNotes: pinnedNotes));
+    emit(GetActiveNotesSuccessState(notes: notes,pinnedNotes: pinnedNotes));
   }
 }

@@ -8,7 +8,7 @@ class _SecondBody extends StatelessWidget {
     return CustomScrollList(
       slivers: [
         const HomeAppBar(),
-        NotesList(notes:notes),
+        NotesList(notes:notes,noteStatus: NoteStatus.active),
       ],
     );
   }

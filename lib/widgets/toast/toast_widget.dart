@@ -8,11 +8,12 @@ class ToastWidget extends StatelessWidget {
     return Container(
       width:context.width,
       height: 40,
-      padding:const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      padding:const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       margin:EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       decoration: BoxDecoration(
         boxShadow: [BoxShadow(spreadRadius: 2.5,color: Theme.of(context).primaryColorDark.withOpacity(0.1))],
-          borderRadius: BorderRadius.circular(5), color: Theme.of(context).primaryColorLight),
+          borderRadius: BorderRadius.circular(5),
+          color: context.theme.colorScheme.secondary),
       child: Text(msg,style: Theme.of(context).textTheme.bodyMedium!.copyWith(
         color: Theme.of(context).primaryColorDark
       )),

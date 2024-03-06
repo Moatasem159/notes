@@ -11,7 +11,7 @@ class _ThirdBody extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 7),
           sliver: ListTitle(title: context.local.pinned),
         ),
-        NotesList(notes:pinnedNotes),
+        NotesList(notes:pinnedNotes,noteStatus: NoteStatus.active),
       ],
     );
   }

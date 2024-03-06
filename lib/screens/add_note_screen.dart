@@ -7,16 +7,15 @@ import 'package:notes/config/themes/app_theme.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
+import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/widgets/add_note_screen/add_note_screen_appbar.dart';
 import 'package:notes/widgets/add_note_screen/add_note_screen_body/add_note_screen_body.dart';
 import 'package:notes/widgets/add_note_screen/bottom_bar/add_note_bottom_bar.dart';
-
 class AddNoteScreen extends StatelessWidget {
   final Note? note;
-
-  const AddNoteScreen({super.key, this.note});
-
+  final NoteStatus? noteStatus;
+  const AddNoteScreen({super.key, this.note,this.noteStatus});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -27,10 +26,15 @@ class AddNoteScreen extends StatelessWidget {
             {
               GetActiveNotesCubit.of(context).getNotes();
             }
+          if(state is EditNoteSuccessState&&noteStatus==NoteStatus.archive)
+          {
+            GetArchivedNotesCubit.of(context).getArchivedNotes(edit: true);
+          }
           if(state is EditNoteSuccessState)
             {
               GetActiveNotesCubit.of(context).getNotes(edit: true);
             }
+
         },
         builder: (context, state) {
           AddNoteCubit cubit = AddNoteCubit.of(context);

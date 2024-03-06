@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:notes/models/note.dart';
 import 'package:notes/widgets/custom_icon_button.dart';
 class AddNoteScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback arrowBack;
@@ -25,8 +26,8 @@ class AddNoteScreenAppbar extends StatelessWidget implements PreferredSizeWidget
               tooltip: context.local.reminder,
             ),
             CustomIconButton(
-              onTap: () {},
-              icon: Icons.archive_outlined,
+              onTap:  AddNoteCubit.of(context).changeArchiveNote,
+              icon: AddNoteCubit.of(context).note!.status==NoteStatus.archive?Icons.unarchive_outlined:Icons.archive_outlined,
               tooltip: context.local.archive,
             ),
           ],
