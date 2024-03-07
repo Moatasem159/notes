@@ -49,7 +49,7 @@ class _NoteWidgetState extends State<NoteWidget> {
           CustomToast.showToast(context, msg: context.local.noteArchived);
         },
         confirmDismiss: (direction) async {
-          if (widget.note.status == NoteStatus.active) {
+          if (widget.note.status == NoteStatus.active&&AppBarCubit.of(context).isBase) {
             widget.note.status = NoteStatus.archive;
             widget.note.pinned = false;
             await widget.note.save();
