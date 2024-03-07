@@ -7,6 +7,12 @@ import 'package:notes/core/utils/app_fonts.dart';
 abstract class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     fontFamily: AppFonts.englishFontFamily,
+   disabledColor: Colors.black,
+    iconButtonTheme: IconButtonThemeData(
+      style: ButtonStyle(
+        iconColor: MaterialStateProperty.all(Colors.black),
+      )
+    ),
     appBarTheme: const AppBarTheme(
       scrolledUnderElevation: 0,
       elevation: 0,
@@ -29,6 +35,12 @@ abstract class AppTheme {
     appBarTheme: const AppBarTheme(
       elevation: 0,
       scrolledUnderElevation: 0,
+    ),
+    disabledColor: Colors.white,
+    iconButtonTheme: IconButtonThemeData(
+        style: ButtonStyle(
+          iconColor: MaterialStateProperty.all(Colors.white),
+        )
     ),
     fontFamily: AppFonts.englishFontFamily,
     drawerTheme: const DrawerThemeData(

@@ -9,7 +9,7 @@ abstract class Routes {
   static const String initialRoute = "/";
   static const String homeRoute = "home";
   static const String reminderRoute = "reminder";
-  static const String labelRoute = "label";
+  static const String createLabelRoute = "createLabel";
   static const String archivedRoute = "archived";
   static const String deletedRoute = "deleted";
   static const String settingsRoute = "settings";
@@ -29,9 +29,11 @@ abstract class AppRoute {
             builder: (__, _) =>const ReminderScreen(),
           ),
           GoRoute(
-            path: "label",
-            name: Routes.labelRoute,
-            builder: (__, _) =>const CreateLabelScreen(),
+            path: "createLabelRoute",
+            name: Routes.createLabelRoute,
+            builder: (__, state) =>CreateLabelScreen(
+              edit: state.uri.queryParameters["edit"]=="true"?true:false,
+            ),
           ),
           GoRoute(
             path: "archived",

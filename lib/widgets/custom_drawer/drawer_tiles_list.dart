@@ -27,7 +27,7 @@ class _DrawerTilesListState extends State<_DrawerTilesList> {
       DrawerItemModel(
         title: context.local.createNewLabel,
         icon: Icons.add,
-        location: Routes.labelRoute,
+        location: Routes.createLabelRoute,
       ),
       DrawerItemModel(
         title: context.local.archive,
@@ -51,7 +51,13 @@ class _DrawerTilesListState extends State<_DrawerTilesList> {
     if (e.location == Routes.settingsRoute) {
       context.pop();
       context.pushNamed(e.location);
-    } else if (AppRoute.location() != e.location) {
+    }
+    else if(e.location==Routes.createLabelRoute)
+      {
+        context.pop();
+        context.pushNamed(e.location,queryParameters: {"edit":"true"});
+      }
+    else if (AppRoute.location() != e.location) {
       context.pop();
       context.goNamed(e.location);
     } else {
