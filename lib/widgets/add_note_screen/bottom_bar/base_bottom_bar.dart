@@ -24,7 +24,7 @@ class BaseBottomBar extends StatelessWidget {
               );
             },
           );
-        }, icon: Icons.add_box_outlined),
+        }, icon: const Icon(Icons.add_box_outlined)),
         CustomIconButton(
             onTap: () {
               showModalBottomSheet(
@@ -37,14 +37,14 @@ class BaseBottomBar extends StatelessWidget {
                 },
               );
             },
-            icon: Icons.color_lens_outlined),
+            icon: const Icon(Icons.color_lens_outlined)),
         5.pw,
         Text(
           "${context.local.edited} ${formatCustomDate(AddNoteCubit.of(context).note!.date)}",
           style: AppStyles.styleMedium16(context).copyWith(color: Colors.grey),
         ),
         const Spacer(),
-        CustomIconButton(onTap: () {}, icon: Icons.more_vert_rounded),
+        CustomIconButton(onTap: () {}, icon:const Icon(Icons.more_vert_rounded)),
       ],
     );
   }

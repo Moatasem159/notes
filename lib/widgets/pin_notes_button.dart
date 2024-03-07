@@ -19,7 +19,7 @@ class PinNotesButton extends StatelessWidget {
        builder: (context, state) {
          return CustomIconButton(
              onTap: ()=> NotesActionsBloc.of(context).add(PinNote(AppBarCubit.of(context).selectedNotes, AppBarCubit.of(context).isPinned)),
-             icon: AppBarCubit.of(context).isPinned ?Icons.push_pin_rounded:Icons.push_pin_outlined);
+             icon: Icon(AppBarCubit.of(context).isPinned ?Icons.push_pin_rounded:Icons.push_pin_outlined));
        },
      ),
     );

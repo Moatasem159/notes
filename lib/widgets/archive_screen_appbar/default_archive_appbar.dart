@@ -5,10 +5,10 @@ class _DefaultArchiveAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CustomIconButton(icon: Icons.menu_rounded,onTap: Scaffold.of(context).openDrawer),
+        CustomIconButton(icon: const Icon(Icons.menu_rounded),onTap: Scaffold.of(context).openDrawer),
         Text(context.local.archive,style: AppStyles.styleRegular24(context)),
         const Spacer(),
-        CustomIconButton(onTap: (){}, icon: Icons.search),
+        CustomIconButton(onTap: (){}, icon: const Icon(Icons.search)),
         const SwitchListViewButton(),
       ],
     );

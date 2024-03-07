@@ -19,14 +19,14 @@ class DefaultOptionsAppBar extends StatelessWidget {
         padding: EdgeInsets.only(top: noteStatus == NoteStatus.active ? 45 : 0),
         child: Row(
           children: [
-            CustomIconButton(onTap:AppBarCubit.of(context).removeSelection,icon: Icons.clear),
+            CustomIconButton(onTap:AppBarCubit.of(context).removeSelection,icon: const Icon(Icons.clear)),
             const NotesCounter(),
             const Spacer(),
             const PinNotesButton(),
             CustomIconButton(
-                onTap: () {}, icon: Icons.notification_add_outlined),
-            CustomIconButton(onTap: () {}, icon: Icons.color_lens_outlined),
-            CustomIconButton(onTap: () {}, icon: Icons.label_outline_rounded),
+                onTap: () {}, icon: const Icon(Icons.notification_add_outlined)),
+            CustomIconButton(onTap: () {}, icon: const Icon(Icons.color_lens_outlined)),
+            CustomIconButton(onTap: () {}, icon:const Icon(Icons.label_outline_rounded)),
             CustomPopUpMenu(noteStatus: noteStatus)
           ],
         ),

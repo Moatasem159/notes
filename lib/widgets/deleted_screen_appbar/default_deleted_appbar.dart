@@ -7,7 +7,7 @@ class _DefaultDeletedAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CustomIconButton(icon: Icons.menu_rounded, onTap: Scaffold.of(context).openDrawer),
+        CustomIconButton(icon: const Icon(Icons.menu_rounded), onTap: Scaffold.of(context).openDrawer),
         Text(context.local.deleted, style: AppStyles.styleRegular24(context)),
         const Spacer(),
         const CustomPopUpMenu(noteStatus: NoteStatus.deleted)

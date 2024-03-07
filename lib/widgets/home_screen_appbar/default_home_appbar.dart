@@ -16,7 +16,7 @@ class _DefaultHomeAppbar extends StatelessWidget {
             child: Row(
               children: [
                 CustomIconButton(
-                    icon: Icons.menu_rounded,
+                    icon: const Icon(Icons.menu_rounded),
                     onTap: Scaffold.of(context).openDrawer),
                 Text(context.local.searchMsg,
                     style: AppStyles.styleRegular20(context)),

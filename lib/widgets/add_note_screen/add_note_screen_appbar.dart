@@ -6,10 +6,12 @@ import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/widgets/custom_icon_button.dart';
 
-class AddNoteScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
-  final Note ?note;
+class AddNoteScreenAppbar extends StatelessWidget
+    implements PreferredSizeWidget {
+  final Note? note;
   final NoteStatus? noteStatus;
-  const AddNoteScreenAppbar({super.key,this.note, this.noteStatus});
+
+  const AddNoteScreenAppbar({super.key, this.note, this.noteStatus});
 
   @override
   Widget build(BuildContext context) {
@@ -21,56 +23,60 @@ class AddNoteScreenAppbar extends StatelessWidget implements PreferredSizeWidget
               ? context.scaffoldBackground
               : Color(cubit.note!.color),
           leading: CustomIconButton(
-              onTap: (){
+              onTap: () {
                 if (note == null) {
                   AddNoteCubit.of(context).addNote();
                 } else {
                   AddNoteCubit.of(context).editNote();
                 }
                 context.pop();
-              }, icon: Icons.arrow_back_outlined),
+              },
+              icon: const Icon(Icons.arrow_back_outlined)),
           actions: [
-            if ((noteStatus != NoteStatus.deleted)||(noteStatus == NoteStatus.deleted && cubit.restored == true))...[
+            if ((noteStatus != NoteStatus.deleted) ||
+                (noteStatus == NoteStatus.deleted &&
+                    cubit.restored == true)) ...[
               CustomIconButton(
                   tooltip: context.local.delete,
                   onTap: cubit.deleteNote,
-                  icon: Icons.delete_outline_rounded),
+                  icon: const Icon(Icons.delete_outline_rounded)),
               CustomIconButton(
                 onTap: cubit.changePinNote,
-                icon: cubit.note!.pinned
+                icon: Icon(cubit.note!.pinned
                     ? Icons.push_pin_rounded
-                    : Icons.push_pin_outlined,
+                    : Icons.push_pin_outlined),
                 tooltip: context.local.pin,
               ),
               CustomIconButton(
                 onTap: () {},
-                icon: Icons.notification_add_outlined,
+                icon: const Icon(Icons.notification_add_outlined),
                 tooltip: context.local.reminder,
               ),
               CustomIconButton(
                 onTap: cubit.changeArchiveNote,
-                icon: cubit.note!.status == NoteStatus.archive
+                icon: Icon(cubit.note!.status == NoteStatus.archive
                     ? Icons.unarchive_outlined
-                    : Icons.archive_outlined,
+                    : Icons.archive_outlined),
                 tooltip: context.local.archive,
               ),
             ],
             if (noteStatus == NoteStatus.deleted) ...[
               if (cubit.restored == false)
-              CustomIconButton(
+                CustomIconButton(
                     tooltip: context.local.restore,
                     onTap: cubit.restoreNote,
-                    icon: Icons.restore),
+                    icon: const Icon(Icons.restore)),
               CustomIconButton(
                   tooltip: context.local.delete,
                   onTap: cubit.deleteForever,
-                  icon: Icons.delete_forever),
+                  icon: const Icon(Icons.delete_forever)),
             ]
           ],
         );
       },
     );
   }
+
   @override
   Size get preferredSize => const Size(double.infinity, 60);
 }

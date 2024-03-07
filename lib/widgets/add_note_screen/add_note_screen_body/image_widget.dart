@@ -28,7 +28,7 @@ class ImageWidget extends StatelessWidget {
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.black26),
                 child: CustomIconButton(
                   onTap:AddNoteCubit.of(context).removeImage,
-                  icon: Icons.clear,
+                  icon: const Icon(Icons.clear)
                 ),
               )
             ],

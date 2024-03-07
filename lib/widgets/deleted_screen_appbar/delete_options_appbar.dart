@@ -15,13 +15,13 @@ class _DeletedOptionsAppBar extends StatelessWidget {
         children: [
           CustomIconButton(
               onTap: AppBarCubit.of(context).removeSelection,
-              icon: Icons.clear),
+              icon: const Icon(Icons.clear)),
           const NotesCounter(),
           const Spacer(),
           CustomIconButton(
               onTap: () => NotesActionsBloc.of(context).add(
                   DeleteNote(AppBarCubit.of(context).selectedNotes, false)),
-              icon: Icons.restore),
+              icon: const Icon(Icons.restore)),
           const CustomPopUpMenu(noteStatus: NoteStatus.deleted)
         ],
       ),
