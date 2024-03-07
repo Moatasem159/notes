@@ -7,10 +7,13 @@ class _LabelTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 1),
       child: Material(
-        // color: item.location==AppRoute.location()?context.theme.listTileTheme.selectedColor:Colors.transparent,
+        color: AppRoute.location()=="label/${label.name}"?context.theme.listTileTheme.selectedColor:Colors.transparent,
         borderRadius:BorderRadius.circular(25),
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            context.pop();
+            context.goNamed(Routes.labelRoute,pathParameters: {"label":label.name});
+          },
           borderRadius: BorderRadius.circular(25),
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 2,horizontal: 7),

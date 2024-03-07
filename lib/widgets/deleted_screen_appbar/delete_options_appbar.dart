@@ -22,7 +22,7 @@ class _DeletedOptionsAppBar extends StatelessWidget {
               onTap: () => NotesActionsBloc.of(context).add(
                   DeleteNote(AppBarCubit.of(context).selectedNotes, false)),
               icon: const Icon(Icons.restore)),
-          const CustomPopUpMenu(noteStatus: NoteStatus.deleted)
+          const DeletePopUpMenu(noteStatus: NoteStatus.deleted)
         ],
       ),
     );

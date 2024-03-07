@@ -3,6 +3,7 @@ import 'package:notes/screens/archived_screen.dart';
 import 'package:notes/screens/create_label_screen.dart';
 import 'package:notes/screens/deleted_screen.dart';
 import 'package:notes/screens/home_screen.dart';
+import 'package:notes/screens/label_screen.dart';
 import 'package:notes/screens/reminder_screen.dart';
 import 'package:notes/screens/settings_screen.dart';
 abstract class Routes {
@@ -10,6 +11,7 @@ abstract class Routes {
   static const String homeRoute = "home";
   static const String reminderRoute = "reminder";
   static const String createLabelRoute = "createLabel";
+  static const String labelRoute = "label";
   static const String archivedRoute = "archived";
   static const String deletedRoute = "deleted";
   static const String settingsRoute = "settings";
@@ -33,6 +35,13 @@ abstract class AppRoute {
             name: Routes.createLabelRoute,
             builder: (__, state) =>CreateLabelScreen(
               edit: state.uri.queryParameters["isNew"]=="true"?true:false,
+            ),
+          ),
+          GoRoute(
+            path: "label/:label",
+            name: Routes.labelRoute,
+            builder: (__, state) =>LabelScreen(
+              title: state.pathParameters["label"]!,
             ),
           ),
           GoRoute(

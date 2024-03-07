@@ -1,4 +1,6 @@
-part of'custom_popup_menu.dart';
+import 'package:flutter/material.dart';
+import 'package:notes/core/extension/context_extension.dart';
+import 'package:notes/core/utils/app_text_styles.dart';
 class CustomPopUpMenuItem extends StatelessWidget{
   final String title;
   const CustomPopUpMenuItem({super.key, required this.title});

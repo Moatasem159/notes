@@ -23,6 +23,8 @@
   "reminders": "Reminders",
   "createNewLabel": "Create new label",
   "enterLabelName": "Enter a label name",
+  "renameLabel": "Rename label",
+  "deleteLabel": "Delete label",
   "labelAlreadyExists": "Label already exists",
   "enterShorterLabel": "Enter shorter label name",
   "editLabel": "Edit labels",
