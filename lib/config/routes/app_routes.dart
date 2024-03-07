@@ -32,7 +32,7 @@ abstract class AppRoute {
             path: "createLabelRoute",
             name: Routes.createLabelRoute,
             builder: (__, state) =>CreateLabelScreen(
-              edit: state.uri.queryParameters["edit"]=="true"?true:false,
+              edit: state.uri.queryParameters["isNew"]=="true"?true:false,
             ),
           ),
           GoRoute(

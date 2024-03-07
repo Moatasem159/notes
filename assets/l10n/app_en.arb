@@ -12,6 +12,8 @@
   "title": "Title",
   "note": "Note",
   "notes": "Notes",
+  "labels": "Labels",
+  "edit": "Edit",
   "color": "Color",
   "takePhoto": "Take photo",
   "addImage": "Add image",

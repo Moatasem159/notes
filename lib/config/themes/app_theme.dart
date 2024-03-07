@@ -8,6 +8,9 @@ abstract class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     fontFamily: AppFonts.englishFontFamily,
    disabledColor: Colors.black,
+    dividerTheme: const DividerThemeData(
+      color: AppColors.lightActiveDrawerColor
+    ),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
         iconColor: MaterialStateProperty.all(Colors.black),
@@ -35,6 +38,9 @@ abstract class AppTheme {
     appBarTheme: const AppBarTheme(
       elevation: 0,
       scrolledUnderElevation: 0,
+    ),
+    dividerTheme: const DividerThemeData(
+        color: AppColors.darkActiveDrawerColor
     ),
     disabledColor: Colors.white,
     iconButtonTheme: IconButtonThemeData(

@@ -7,8 +7,9 @@ import 'package:notes/widgets/custom_icon_button.dart';
 part 'done_buttons.dart';
 part 'clear_buttons.dart';
 class CreateLabelField extends StatefulWidget {
+  final bool isNew;
   final Label? label;
-  const CreateLabelField({super.key, this.label});
+  const CreateLabelField({super.key, this.label,this.isNew=false});
   @override
   State<CreateLabelField> createState() => _CreateLabelFieldState();
 }
@@ -68,7 +69,7 @@ class _CreateLabelFieldState extends State<CreateLabelField> {
             child: Form(
               key: _formKey,
               child: TextFormField(
-                autofocus: widget.label == null ? true : false,
+                autofocus: widget.isNew,
                 autovalidateMode: AutovalidateMode.always,
                 focusNode: _focusNode,
                 initialValue: widget.label?.name,

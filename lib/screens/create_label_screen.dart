@@ -18,9 +18,7 @@ class CreateLabelScreen extends StatelessWidget {
         body:  CustomScrollList(
           slivers: [
             const AppSliverAppbar(),
-            const SliverToBoxAdapter(
-              child: CreateLabelField(),
-            ),
+            SliverToBoxAdapter(child: CreateLabelField(isNew: edit)),
             SliverList.builder(
               itemCount: 5,
               itemBuilder: (context, index) => CreateLabelField(label: Label(name: "name"),),)

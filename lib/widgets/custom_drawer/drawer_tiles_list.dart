@@ -51,13 +51,10 @@ class _DrawerTilesListState extends State<_DrawerTilesList> {
     if (e.location == Routes.settingsRoute) {
       context.pop();
       context.pushNamed(e.location);
-    }
-    else if(e.location==Routes.createLabelRoute)
-      {
-        context.pop();
-        context.pushNamed(e.location,queryParameters: {"edit":"true"});
-      }
-    else if (AppRoute.location() != e.location) {
+    } else if (e.location == Routes.createLabelRoute) {
+      context.pop();
+      context.pushNamed(e.location, queryParameters: {"isNew": "true"});
+    } else if (AppRoute.location() != e.location) {
       context.pop();
       context.goNamed(e.location);
     } else {
@@ -67,11 +64,17 @@ class _DrawerTilesListState extends State<_DrawerTilesList> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: drawerItems
-          .map((DrawerItemModel e) =>
-              _DrawerTile(item: e, onTap: () => onTap(e)))
-          .toList(),
-    );
+    return Column(children: [
+      _DrawerTile(item: drawerItems[0], onTap: () => onTap(drawerItems[0])),
+      _DrawerTile(item: drawerItems[1], onTap: () => onTap(drawerItems[1])),
+      _LabelsList(item: drawerItems[2], onTap: () => onTap(drawerItems[2])),
+      // _DrawerTile(item: drawerItems[2], onTap: () => onTap(drawerItems[2])),
+      _DrawerTile(item: drawerItems[3], onTap: () => onTap(drawerItems[3])),
+      _DrawerTile(item: drawerItems[4], onTap: () => onTap(drawerItems[4])),
+      _DrawerTile(item: drawerItems[5], onTap: () => onTap(drawerItems[5])),
+      30.ph
+    ]);
   }
 }
+
+

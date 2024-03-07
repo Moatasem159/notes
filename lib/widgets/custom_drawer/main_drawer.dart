@@ -5,10 +5,14 @@ import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/core/extension/empty_padding_extension.dart';
 import 'package:notes/core/utils/app_text_styles.dart';
 import 'package:notes/models/drawer_item_model.dart';
+import 'package:notes/models/label.dart';
 part 'drawer_builder.dart';
 part 'drawer_title.dart';
 part 'drawer_tiles_list.dart';
+part 'label_header.dart';
 part 'drawer_tile.dart';
+part 'labels_list.dart';
+part 'label_tile.dart';
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
   @override
