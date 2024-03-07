@@ -21,7 +21,13 @@ class _NoteBuilder extends StatelessWidget {
             return BlocProvider.value(
                 value: GetArchivedNotesCubit.of(context),
                 child: AddNoteScreen(note: note,noteStatus: noteStatus));
-          } else {
+          } else if (noteStatus== NoteStatus.deleted)
+            {
+              return BlocProvider.value(
+                  value: GetDeletedNotesCubit.of(context),
+                  child: AddNoteScreen(note: note,noteStatus: noteStatus));
+            }
+          else {
             return AddNoteScreen(note: note,noteStatus: noteStatus);
           }
         },

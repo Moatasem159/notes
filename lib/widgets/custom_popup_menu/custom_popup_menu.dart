@@ -5,6 +5,7 @@ import 'package:notes/core/utils/app_text_styles.dart';
 import 'package:notes/cubits/app_bar_cubit/app_bar_cubit.dart';
 import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
+import 'package:notes/cubits/get_deleted_notes_cubit/get_deleted_notes_cubit.dart';
 import 'package:notes/cubits/notes_actions_bloc/notes_actions_bloc.dart';
 import 'package:notes/models/note.dart';
 part 'custom_popup_menu_item.dart';
@@ -23,6 +24,10 @@ class CustomPopUpMenu extends StatelessWidget {
           AppBarCubit.of(context).removeSelection();
           GetArchivedNotesCubit.of(context).getArchivedNotes();
           GetActiveNotesCubit.of(context).getNotes();
+        }
+        if (state is ActionSuccessState && noteStatus==NoteStatus.deleted) {
+          AppBarCubit.of(context).removeSelection();
+          GetDeletedNotesCubit.of(context).getDeletedNotes();
         }
       },
       child: Material(
@@ -60,7 +65,7 @@ class CustomPopUpMenu extends StatelessWidget {
                 if (noteStatus == NoteStatus.deleted)
                   if (AppBarCubit.of(context).isBase)
                    PopupMenuItem(
-                      onTap: () {},
+                      onTap:() => NotesActionsBloc.of(context).add(EmptyBin()),
                       child: CustomPopUpMenuItem(title: context.local.emptyBin),
                     ),
                 if (noteStatus == NoteStatus.deleted&&!AppBarCubit.of(context).isBase)

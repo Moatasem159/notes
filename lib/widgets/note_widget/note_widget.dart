@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:notes/cubits/app_bar_cubit/app_bar_cubit.dart';
 import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
+import 'package:notes/cubits/get_deleted_notes_cubit/get_deleted_notes_cubit.dart';
 import 'package:notes/models/note.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

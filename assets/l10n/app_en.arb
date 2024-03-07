@@ -6,6 +6,8 @@
   "reminder": "Reminder",
   "archive": "Archive",
   "noteArchived": "Note archived",
+  "noteRestored": "Note restored",
+  "canNotEdit": "Can't edit in Recycle Bin",
   "unArchive": "Unarchive",
   "title": "Title",
   "note": "Note",

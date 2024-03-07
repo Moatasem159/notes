@@ -19,3 +19,4 @@ class DeleteForever extends NotesActionsEvent{
   final List<Note> deletedNotes;
   DeleteForever(this.deletedNotes);
 }
+class EmptyBin extends NotesActionsEvent{}

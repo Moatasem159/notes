@@ -25,8 +25,8 @@ class DeletedScreenBody extends StatelessWidget {
           slivers: [
             const DeletedAppbar(),
             EmptyBody(
-                title: context.local.archiveBodyTitle,
-                icon: Icons.archive_outlined)
+                title: context.local.deletedBodyTitle,
+                icon: Icons.delete_outline_outlined)
           ],
         );
       },

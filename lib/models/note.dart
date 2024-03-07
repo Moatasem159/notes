@@ -38,6 +38,11 @@ class Note extends HiveObject {
   bool isEmpty() {
     return title == '' && note == '' && imagePath == '' ? true : false;
   }
+  void clear() {
+    title='';
+    note='';
+    imagePath='';
+  }
 }
 
 @HiveType(typeId: 1)
