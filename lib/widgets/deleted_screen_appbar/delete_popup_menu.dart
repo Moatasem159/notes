@@ -6,16 +6,7 @@ class DeletePopUpMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<NotesActionsBloc, NotesActionsState>(
         listener: (context, state) {
-          if (state is ActionSuccessState && noteStatus == NoteStatus.active) {
-            AppBarCubit.of(context).removeSelection();
-            GetActiveNotesCubit.of(context).getNotes();
-          }
-          if (state is ActionSuccessState && noteStatus == NoteStatus.archive) {
-            AppBarCubit.of(context).removeSelection();
-            GetArchivedNotesCubit.of(context).getArchivedNotes();
-            GetActiveNotesCubit.of(context).getNotes();
-          }
-          if (state is ActionSuccessState && noteStatus == NoteStatus.deleted) {
+          if (state is ActionSuccessState) {
             AppBarCubit.of(context).removeSelection();
             GetDeletedNotesCubit.of(context).getDeletedNotes();
           }

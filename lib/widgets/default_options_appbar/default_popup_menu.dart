@@ -15,10 +15,6 @@ class _DefaultPopupMenu extends StatelessWidget {
           GetArchivedNotesCubit.of(context).getArchivedNotes();
           GetActiveNotesCubit.of(context).getNotes();
         }
-        if (state is ActionSuccessState && noteStatus == NoteStatus.deleted) {
-          AppBarCubit.of(context).removeSelection();
-          GetDeletedNotesCubit.of(context).getDeletedNotes();
-        }
       },
       child: CustomPopupMenu(items: [
         PopupMenuItem(
