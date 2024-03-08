@@ -31,5 +31,3 @@ class AddNoteButton extends StatelessWidget {
     );
   }
 }
-// left: context.width / 1.357,
-// bottom: context.height - 707,
