@@ -1,57 +1,33 @@
 import 'package:flutter/material.dart';
 
-class CustomCheckbox extends StatefulWidget {
-  const CustomCheckbox({super.key,required this.onChanged, required this.checkType, required this.checked});
+class CustomCheckbox extends StatelessWidget {
   final CheckType checkType;
-  final Function(bool) onChanged;
+  final VoidCallback onTap;
   final bool checked;
-  @override
-  State<CustomCheckbox> createState() => _CustomCheckboxState();
-}
+  const CustomCheckbox({super.key,required this.onTap, required this.checkType, required this.checked});
 
-class _CustomCheckboxState extends State<CustomCheckbox> {
-  late bool _isChecked;
-  late CheckType _checkType;
-  @override
-  void initState() {
-    super.initState();
-    _checkType=widget.checkType;
-    _isChecked=widget.checked;
-  }
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(6.0),
-      onTap: () {
-        setState(() {
-          _isChecked=!_isChecked;
-          if (_isChecked)
-            {
-              _checkType=CheckType.all;
-            }
-          else{
-            _checkType=CheckType.none;
-          }
-          widget.onChanged.call(_isChecked);
-        });
-      },
+      onTap:onTap,
       child: Container(
         width: 24.0,
         height: 24.0,
         decoration: BoxDecoration(
-          color: (_isChecked&&_checkType==CheckType.all) ?
+          color: (checked&&checkType==CheckType.all) ?
           Colors.blue :Colors.transparent,
           border: Border.all(
-            color:_isChecked ? Colors.blue : Colors.grey,
+            color:checked ? Colors.blue : Colors.grey,
             width: 2.0,
           ),
           borderRadius: BorderRadius.circular(6.0),
         ),
-        child: _isChecked
+        child: checked
             ?  FittedBox(
                 child: Icon(
-                  _checkType==CheckType.all?Icons.done:Icons.remove,
-                  color: _checkType==CheckType.semi?Colors.blue:null,
+                  checkType==CheckType.all?Icons.done:Icons.remove,
+                  color: checkType==CheckType.semi?Colors.blue:null,
                 ),
               )
             : null,
