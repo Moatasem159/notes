@@ -67,8 +67,14 @@ class _DrawerTilesListState extends State<_DrawerTilesList> {
     return Column(children: [
       _DrawerTile(item: drawerItems[0], onTap: () => onTap(drawerItems[0])),
       _DrawerTile(item: drawerItems[1], onTap: () => onTap(drawerItems[1])),
-      _LabelsList(item: drawerItems[2], onTap: () => onTap(drawerItems[2])),
-      // _DrawerTile(item: drawerItems[2], onTap: () => onTap(drawerItems[2])),
+       BlocBuilder<GetLabelsCubit, GetLabelsStates>(
+        builder: (context, state) {
+          if(state is GetLabelsSuccessState && state.labels.isNotEmpty) {
+           return _LabelsList(labels: state.labels,item: drawerItems[2], onTap: () => onTap(drawerItems[2]));
+          }
+          return _DrawerTile(item: drawerItems[2], onTap: () => onTap(drawerItems[2]));
+        },
+      ),
       _DrawerTile(item: drawerItems[3], onTap: () => onTap(drawerItems[3])),
       _DrawerTile(item: drawerItems[4], onTap: () => onTap(drawerItems[4])),
       _DrawerTile(item: drawerItems[5], onTap: () => onTap(drawerItems[5])),
@@ -76,5 +82,3 @@ class _DrawerTilesListState extends State<_DrawerTilesList> {
     ]);
   }
 }
-
-

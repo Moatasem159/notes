@@ -1,105 +1,101 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes/core/extension/context_extension.dart';
-import 'package:notes/core/extension/empty_padding_extension.dart';
-import 'package:notes/core/utils/app_text_styles.dart';
-import 'package:notes/models/label.dart';
-import 'package:notes/widgets/custom_icon_button.dart';
-part 'done_buttons.dart';
-part 'clear_buttons.dart';
-class CreateLabelField extends StatefulWidget {
+import 'package:notes/cubits/create_label_cubit/create_label_cubit.dart';
+import 'package:notes/widgets/create_label_screen/label_field/label_field.dart';
+class AddLabelField extends StatefulWidget {
   final bool isNew;
-  final Label? label;
-  const CreateLabelField({super.key, this.label,this.isNew=false});
+  const AddLabelField({super.key, required this.isNew});
   @override
-  State<CreateLabelField> createState() => _CreateLabelFieldState();
+  State<AddLabelField> createState() => _AddLabelFieldState();
 }
-class _CreateLabelFieldState extends State<CreateLabelField> {
+class _AddLabelFieldState extends State<AddLabelField> {
+  late final TextEditingController _controller;
   late GlobalKey<FormState> _formKey;
-  late bool _isFocused;
   late FocusNode _focusNode;
+  late bool _found;
+  late bool _isFocused;
   @override
   void initState() {
     super.initState();
-    _isFocused = false;
-    _formKey = GlobalKey<FormState>();
     _focusNode = FocusNode();
-    _focusNode.addListener(_onFocusChange);
+    _focusNode.addListener(_listen);
+    _isFocused = widget.isNew;
+    _formKey = GlobalKey<FormState>();
+    _found = false;
+    _controller = TextEditingController();
   }
-  void toggleFocus() {
+  void _add() {
+    bool found=CreateLabelCubit.of(context).checkFound(_controller.text);
+    _found=found;
+    bool validate=_formKey.currentState!.validate();
+    if(validate){
+      if(_controller.text.isNotEmpty) {
+        CreateLabelCubit.of(context).addLabel(_controller.text);
+        _found=false;
+      }
+      else{
+        _focusNode.unfocus();
+      }
+    }
+    else{
+      _focusNode.requestFocus();
+    }
+  }
+  _listen() {
     setState(() {
-      if (_focusNode.hasFocus) {
+      _isFocused = _focusNode.hasFocus;
+      _formKey.currentState!.reset();
+      _controller.clear();
+    });
+  }
+  void _toggleFocus() {
+    setState(() {
+      if (_isFocused) {
+        _formKey.currentState!.reset();
+        _controller.clear();
         _focusNode.unfocus();
       } else {
         _focusNode.requestFocus();
       }
     });
   }
-  void _onFocusChange() {
-    setState(() {
-      _isFocused = _focusNode.hasFocus;
-    });
-  }
-  BorderSide _getBorder() {
-    return BorderSide(
-      color: _isFocused ? Colors.grey.withOpacity(0.7) : Colors.transparent,
-      width: 1,
-    );
-  }
   @override
   void dispose() {
-    _focusNode.removeListener(_onFocusChange);
+    _controller.dispose();
+    _focusNode.removeListener(_listen);
     _focusNode.dispose();
     super.dispose();
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(
-          top: _getBorder(),
-          bottom: _getBorder(),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _ClearButtons(label: widget.label, isFocused: _isFocused,toggle: toggleFocus),
-           Expanded(
-            flex: 2,
-            child: Form(
-              key: _formKey,
-              child: TextFormField(
-                autofocus: widget.isNew,
-                autovalidateMode: AutovalidateMode.always,
-                focusNode: _focusNode,
-                initialValue: widget.label?.name,
-                maxLength: 50,
-                validator: (value) {
-                  if (value!.length >= 50) {
-                    return context.local.enterShorterLabel;
-                  }
-                  if (widget.label != null) {
-                    if (value.isEmpty) {
-                      return context.local.enterLabelName;
-                    }
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                    isDense: true,
-                    isCollapsed: true,
-                    counterText: '',
-                    errorStyle: AppStyles.styleRegular16(context),
-                    hintText: widget.label == null
-                        ? context.local.createNewLabel
-                        : null,
-                    hintStyle: AppStyles.styleSemiBold20(context)),
-              ),
-            ),
-          ),
-          _DoneButtons(isFocused: _isFocused,label: widget.label),
-        ],
-      ),
+    return BlocListener<CreateLabelCubit, CreateLabelStates>(
+      listener: (context, state) {
+        if (state is AddLabelSuccessState) {
+          _controller.clear();
+          _focusNode.unfocus();
+        }
+      },
+        child:LabelField(
+          formKey: _formKey,
+          focusNode: _focusNode,
+          toggleFocus: _toggleFocus,
+          isNew: widget.isNew,
+          adding: true,
+          controller: _controller,
+          isFocused: _isFocused,
+          addLabel:_add,
+          onSubmit:_add,
+          validate: (value) {
+            if (value!.length >= 50) {
+              return context.local.enterShorterLabel;
+            }
+            if (_found) {
+              return context.local.labelAlreadyExists;
+            }
+            return null;
+          },
+        )
     );
   }
 }

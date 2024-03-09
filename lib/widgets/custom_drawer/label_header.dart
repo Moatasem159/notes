@@ -11,7 +11,10 @@ class _LabelsHeader extends StatelessWidget {
           Text(context.local.labels, style: AppStyles.styleRegular16(context)),
           const Spacer(),
           InkWell(
-            onTap: () => context.pushNamed(Routes.createLabelRoute,queryParameters: {"isNew":"false"}),
+            onTap: (){
+              context.pop();
+              context.pushNamed(Routes.createLabelRoute,queryParameters: {"isNew":"false"});
+            },
             borderRadius: BorderRadius.circular(15),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
