@@ -19,21 +19,20 @@ class NoteAdapter extends TypeAdapter<Note> {
     return Note(
       title: fields[0] as String,
       note: fields[1] as String,
-      date: fields[2] as String,
       status: fields[3] as NoteStatus,
       pinned: fields[4] as bool,
       labeled: fields[5] as bool,
-      label: fields[6] as String,
+      labels: (fields[6] as List).cast<Label>(),
+      imagePath: fields[8] as String,
+      date: fields[2] as String,
       color: fields[7] as int,
-      imagePath: fields[9] as String,
-      background: fields[8] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Note obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -47,12 +46,10 @@ class NoteAdapter extends TypeAdapter<Note> {
       ..writeByte(5)
       ..write(obj.labeled)
       ..writeByte(6)
-      ..write(obj.label)
+      ..write(obj.labels)
       ..writeByte(7)
       ..write(obj.color)
       ..writeByte(8)
-      ..write(obj.background)
-      ..writeByte(9)
       ..write(obj.imagePath);
   }
 

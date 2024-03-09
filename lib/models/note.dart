@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:notes/models/label.dart';
 
 part 'note.g.dart';
 
@@ -17,31 +18,32 @@ class Note extends HiveObject {
   @HiveField(5)
   bool labeled;
   @HiveField(6)
-  String label;
+  List<Label> labels;
   @HiveField(7)
   int color;
   @HiveField(8)
-  String background;
-  @HiveField(9)
   String imagePath;
 
-  Note({this.title = '',
+  Note({
+    this.title = '',
     this.note = '',
-    required this.date,
     this.status = NoteStatus.active,
     this.pinned = false,
     this.labeled = false,
-    this.label = '',
-    required this.color,
+    this.labels = const [],
     this.imagePath = '',
-    this.background = ''});
+    required this.date,
+    required this.color,
+  });
+
   bool isEmpty() {
     return title == '' && note == '' && imagePath == '' ? true : false;
   }
+
   void clear() {
-    title='';
-    note='';
-    imagePath='';
+    title = '';
+    note = '';
+    imagePath = '';
   }
 }
 
@@ -54,5 +56,5 @@ enum NoteStatus {
   @HiveField(2)
   archive,
   @HiveField(3)
-  deleted
+  deleted,
 }
