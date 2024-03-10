@@ -14,7 +14,7 @@ part 'add_note_state.dart';
 class AddNoteCubit extends Cubit<AddNoteStates> {
   AddNoteCubit(this._dataSource, {required this.note,required this.noteStatus}) : super(AddNoteInitialState()) {
     isNew=note==null?true:false;
-    note ??= Note(date: DateTime.now().toIso8601String(),color: Colors.transparent.value);
+    note ??= Note(date: DateTime.now().toIso8601String(),color: Colors.transparent.value,labels: []);
     noteStatus??=NoteStatus.active;
     title = TextEditingController(text: note!.title);
     content = TextEditingController(text: note!.note);

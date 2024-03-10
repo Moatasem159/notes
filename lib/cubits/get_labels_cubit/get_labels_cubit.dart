@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
+import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
 import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/sources/labels_data_source.dart';
@@ -25,12 +29,43 @@ class GetLabelsCubit extends Cubit<GetLabelsStates> {
     emit(GetLabelsSuccessState());
   }
 
-  pickLabels() async {
+  pickLabelsForMultipleNotes() async {
     emit(PickLabelsLoadingState());
-    await _dataSource.pickLabel(notes!, labels!);
+    await _dataSource.pickLabelForMultipleNotes(notes!, labels!);
     emit(PickLabelsSuccessState());
   }
+  picLabelsForNote()async{
+    emit(PickLabelsForNoteSuccessState());
+  }
 
+  appbarListener(BuildContext context, GetLabelsStates state) {
+    if (state is PickLabelsSuccessState&&GetLabelsCubit.of(context).noteStatus==NoteStatus.active){
+      GetActiveNotesCubit.of(context).getNotes();
+      context.pop();
+    }
+    if(state is PickLabelsSuccessState&&GetLabelsCubit.of(context).noteStatus==NoteStatus.archive)
+    {
+      context.pop();
+      GetArchivedNotesCubit.of(context).getArchivedNotes();
+
+    }
+    if(state is PickLabelsForNoteSuccessState &&GetLabelsCubit.of(context).inNote)
+    {
+      if(GetLabelsCubit.of(context).labels!.isNotEmpty) {
+        AddNoteCubit.of(context).note!.labels.clear();
+        AddNoteCubit.of(context).note!.labels.addAll(GetLabelsCubit.of(context).labels!);
+        AddNoteCubit.of(context).note!.labeled=true;
+      }
+      if(GetLabelsCubit.of(context).labels!.isEmpty)
+      {
+        AddNoteCubit.of(context).note!.labels.clear();
+        AddNoteCubit.of(context).note!.labeled=false;
+        AddNoteCubit.of(context).note!.save();
+      }
+      AddNoteCubit.of(context).pickLabel();
+      context.pop();
+    }
+  }
   @override
   Future<void> close() {
     notes?.clear();

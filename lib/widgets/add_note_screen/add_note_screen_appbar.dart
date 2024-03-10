@@ -44,7 +44,7 @@ class AddNoteScreenAppbar extends StatelessWidget implements PreferredSizeWidget
                     : Icons.push_pin_outlined),
                 tooltip: context.local.pin,
               ),
-              LabelsButton(noteStatus: noteStatus!),
+              const LabelsButton(),
               CustomIconButton(
                 onTap: () {},
                 icon: const Icon(Icons.notification_add_outlined),

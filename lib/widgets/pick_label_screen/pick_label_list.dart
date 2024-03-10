@@ -22,7 +22,11 @@ class PickLabelsList extends StatelessWidget {
                 onChanged: (checkType){
                   if (checkType==CheckType.all) {
                     cubit.labels!.add(Label(name: cubit.allLabels[index].name, checkType: CheckType.all));
-                  } else if(checkType==CheckType.none) {
+                  } else if(GetLabelsCubit.of(context).inNote&&checkType==CheckType.none){
+                    Label label= cubit.labels!.firstWhere((element) => element.name == cubit.allLabels[index].name);
+                    cubit.labels!.remove(label);
+                  }
+                  else if(checkType==CheckType.none) {
                     cubit.labels!.firstWhere((element) => element.name == cubit.allLabels[index].name).checkType=CheckType.none;
                   }
                 },

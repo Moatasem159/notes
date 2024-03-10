@@ -1,15 +1,11 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
-
 abstract class LabelLocalDataSource {
   Future<int> addLabel(Label label);
-
   List<Label> getLabel();
-
-  Future<void> pickLabel(List<Note> notes, List<Label> labels);
+  Future<void> pickLabelForMultipleNotes(List<Note> notes, List<Label> labels);
 }
-
 class LabelLocalDataSourceImpl implements LabelLocalDataSource {
   final Box<Note> _noteBox;
   final Box<Label> _labelBox;
@@ -26,7 +22,7 @@ class LabelLocalDataSourceImpl implements LabelLocalDataSource {
     return _labelBox.values.toList();
   }
   @override
-  Future<void> pickLabel(List<Note> notes, List<Label> labels) async {
+  Future<void> pickLabelForMultipleNotes(List<Note> notes, List<Label> labels) async {
     for (int i = 0; i < notes.length; i++) {
       for(Label label in labels)
         {

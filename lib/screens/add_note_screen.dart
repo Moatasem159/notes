@@ -14,7 +14,7 @@ class AddNoteScreen extends StatelessWidget {
   final Note? note;
   final NoteStatus? noteStatus;
 
-  const AddNoteScreen({super.key, this.note, this.noteStatus});
+  const AddNoteScreen({super.key, this.note, this.noteStatus=NoteStatus.active});
 
   _absorb(BuildContext context, AddNoteCubit cubit) {
     if (cubit.restored == false) {

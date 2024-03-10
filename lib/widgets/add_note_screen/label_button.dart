@@ -9,8 +9,7 @@ import 'package:notes/models/note.dart';
 import 'package:notes/models/pick_label_params.dart';
 import 'package:notes/widgets/custom_icon_button.dart';
 class LabelsButton extends StatelessWidget {
-  final NoteStatus noteStatus;
-  const LabelsButton({super.key,required this.noteStatus});
+  const LabelsButton({super.key});
   @override
   Widget build(BuildContext context) {
     return CustomIconButton(
@@ -23,7 +22,7 @@ class LabelsButton extends StatelessWidget {
           labels.addAll(AddNoteCubit.of(context).note!.labels);
           notes.add(AddNoteCubit.of(context).note!);
           PickLabelParams params;
-          if (noteStatus == NoteStatus.archive) {
+          if (AddNoteCubit.of(context).noteStatus == NoteStatus.archive) {
             Cubit cubit = GetArchivedNotesCubit.of(context);
             params = PickLabelParams(
                 addNoteCubit: AddNoteCubit.of(context),
@@ -34,7 +33,7 @@ class LabelsButton extends StatelessWidget {
                 extra: params,
                 queryParameters: {
                   "inNote": "true",
-                  "noteStatus": noteStatus.toString(),
+                  "noteStatus": AddNoteCubit.of(context).noteStatus.toString(),
                 });
           } else {
             params = PickLabelParams(
@@ -45,7 +44,7 @@ class LabelsButton extends StatelessWidget {
                 extra: params,
                 queryParameters: {
                   "inNote": "true",
-                  "noteStatus": noteStatus.toString(),
+                  "noteStatus": AddNoteCubit.of(context).noteStatus.toString(),
                 });
           }
         },
