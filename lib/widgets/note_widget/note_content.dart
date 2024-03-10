@@ -1,4 +1,5 @@
-part of'note_widget.dart';
+part of 'note_widget.dart';
+
 class _NoteContent extends StatelessWidget {
   final Note note;
 
@@ -42,7 +43,13 @@ class _NoteContent extends StatelessWidget {
               ],
             ),
           ),
+        if (note.labeled)
+          15.ph,
+        _NoteLabelList(note.labels)
       ],
     );
   }
 }
+
+
+

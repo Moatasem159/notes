@@ -15,15 +15,12 @@ import 'package:notes/widgets/custom_popup_menu/custom_popup_menu.dart';
 import 'package:notes/widgets/custom_popup_menu/custom_popup_menu_item.dart';
 import 'package:notes/widgets/notes_counter.dart';
 import 'package:notes/widgets/custom_icon_button.dart';
-import 'package:notes/widgets/pin_notes_button.dart';
-
+part 'pin_notes_button.dart';
 part 'default_popup_menu.dart';
-
+part 'label_button.dart';
 class DefaultOptionsAppBar extends StatelessWidget {
   final NoteStatus noteStatus;
-
   const DefaultOptionsAppBar({super.key, required this.noteStatus});
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -37,23 +34,13 @@ class DefaultOptionsAppBar extends StatelessWidget {
                 icon: const Icon(Icons.clear)),
             const NotesCounter(),
             const Spacer(),
-            const PinNotesButton(),
+            const _PinNotesButton(),
             CustomIconButton(
                 onTap: () {},
                 icon: const Icon(Icons.notification_add_outlined)),
             CustomIconButton(
                 onTap: () {}, icon: const Icon(Icons.color_lens_outlined)),
-            CustomIconButton(
-                onTap: () {
-                  List<Label> labels=[];
-                  List<Note> notes=[];
-                  labels.addAll(AppBarCubit.of(context).labels);
-                  notes.addAll(AppBarCubit.of(context).selectedNotes);
-                  PickLabelParams params=PickLabelParams(notes: notes, labels: labels);
-                  context.pushNamed(Routes.pickLabelRoute,extra: params);
-                  AppBarCubit.of(context).removeSelection(clearList: true);
-                },
-                icon: const Icon(Icons.label_outline_rounded)),
+            _LabelButton(noteStatus),
             _DefaultPopupMenu(noteStatus)
           ],
         ),

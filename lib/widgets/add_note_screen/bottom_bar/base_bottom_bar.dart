@@ -43,8 +43,6 @@ class BaseBottomBar extends StatelessWidget {
           "${context.local.edited} ${formatCustomDate(AddNoteCubit.of(context).note!.date)}",
           style: AppStyles.styleMedium16(context).copyWith(color: Colors.grey),
         ),
-        const Spacer(),
-        CustomIconButton(onTap: () {}, icon:const Icon(Icons.more_vert_rounded)),
       ],
     );
   }

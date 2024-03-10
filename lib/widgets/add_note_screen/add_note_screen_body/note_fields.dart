@@ -4,7 +4,7 @@ class NoteFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 40,right: 15,left: 15),
+      padding: const EdgeInsets.only(bottom: 15,right: 15,left: 15),
       child: Column(
         children: [
           15.ph,

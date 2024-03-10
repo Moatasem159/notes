@@ -1,11 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes/cubits/app_bar_cubit/app_bar_cubit.dart';
-import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
-import 'package:notes/cubits/notes_actions_bloc/notes_actions_bloc.dart';
-import 'package:notes/widgets/custom_icon_button.dart';
-class PinNotesButton extends StatelessWidget {
-  const PinNotesButton({super.key});
+part of'default_options_appbar.dart';
+class _PinNotesButton extends StatelessWidget {
+  const _PinNotesButton();
   @override
   Widget build(BuildContext context) {
     return BlocListener<NotesActionsBloc, NotesActionsState>(

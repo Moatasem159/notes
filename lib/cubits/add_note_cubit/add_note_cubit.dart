@@ -65,6 +65,9 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
     }
     emit(ChangePinNoteState());
   }
+  pickLabel(){
+    emit(PickLabelState());
+  }
   restoreNote() {
     note!.status = NoteStatus.active;
     restored=true;

@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/core/extension/empty_padding_extension.dart';
 import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:notes/widgets/add_note_screen/add_note_screen_body/note_label_list.dart';
 import 'package:notes/widgets/custom_icon_button.dart';
 import 'package:notes/widgets/custom_text_form_field.dart';
 import 'package:notes/widgets/toast/custom_toast.dart';
@@ -19,6 +20,7 @@ class AddNoteScreenBody extends StatelessWidget {
       children: const [
         ImageWidget(),
         NoteFields(),
+        NoteLabelList()
       ],
     );
   }

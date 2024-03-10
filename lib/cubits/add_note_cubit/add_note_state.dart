@@ -16,3 +16,4 @@ class DeleteNoteState extends AddNoteStates {}
 class ChangeNoteStatusState extends AddNoteStates {}
 class PickImageState extends AddNoteStates {}
 class RemoveImageState extends AddNoteStates {}
+class PickLabelState extends AddNoteStates {}
