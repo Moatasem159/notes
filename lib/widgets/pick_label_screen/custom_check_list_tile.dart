@@ -1,46 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:notes/core/utils/app_text_styles.dart';
+import 'package:notes/models/label.dart';
 import 'package:notes/widgets/custom_check_button.dart';
-
 class CustomCheckListTile extends StatefulWidget {
-  final Function(bool) onChanged;
+  final Function(CheckType checkType) onChanged;
   final String title;
   final CheckType checkType;
-  final bool isChecked;
-
-  const CustomCheckListTile(
-      {super.key,
-      required this.onChanged,
-      required this.title,
-      required this.checkType,
-      required this.isChecked});
-
+  const CustomCheckListTile({
+    super.key,
+    required this.onChanged,
+    required this.title,
+    required this.checkType,
+  });
   @override
   State<CustomCheckListTile> createState() => _CustomCheckListTileState();
 }
 
 class _CustomCheckListTileState extends State<CustomCheckListTile> {
-  late bool _isChecked;
   late CheckType _checkType;
   @override
   void initState() {
     super.initState();
-    _checkType=widget.checkType;
-    _isChecked=widget.isChecked;
+    _checkType = widget.checkType;
   }
-  onTap(){
+
+  onTap() {
     setState(() {
-      _isChecked=!_isChecked;
-      if (_isChecked)
-      {
-        _checkType=CheckType.all;
+      switch (_checkType) {
+        case CheckType.all:
+          _checkType = CheckType.none;
+        case CheckType.semi:
+          _checkType = CheckType.all;
+        case CheckType.none:
+          _checkType = CheckType.all;
       }
-      else{
-        _checkType=CheckType.none;
-      }
-      widget.onChanged.call(_isChecked);
+      widget.onChanged.call(_checkType);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -49,9 +46,8 @@ class _CustomCheckListTileState extends State<CustomCheckListTile> {
       title: Text(widget.title, style: AppStyles.styleRegular24(context)),
       contentPadding: const EdgeInsets.symmetric(horizontal: 17),
       trailing: CustomCheckbox(
-        onTap:onTap,
+        onTap: onTap,
         checkType: _checkType,
-        checked: _isChecked,
       ),
     );
   }

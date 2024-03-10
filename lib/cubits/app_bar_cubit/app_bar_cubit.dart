@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 part 'app_bar_state.dart';
 class AppBarCubit extends Cubit<AppBarStates> {
@@ -7,11 +8,13 @@ class AppBarCubit extends Cubit<AppBarStates> {
     isBase = true;
     isPinned = false;
     selectedNotes = [];
+    labels=[];
   }
   static AppBarCubit of(BuildContext context)=>BlocProvider.of(context);
   late bool isBase;
   late bool isPinned;
   late List<Note> selectedNotes;
+  late List<Label> labels;
   showOptionAppBar(){
     if(selectedNotes.length==1){
       isBase=false;
@@ -24,6 +27,33 @@ class AppBarCubit extends Cubit<AppBarStates> {
   }
   _selectNotes(Note note){
     selectedNotes.add(note);
+    _selectLabel(note);
+  }
+  _selectLabel(Note note){
+    for(int i =0;i<note.labels.length;i++)
+    {
+      Label tmp=note.labels.firstWhere((element) => element.name==note.labels[i].name,orElse: () => Label(name: ""));
+      if(tmp.name!='') {
+        Label tmp2=labels.firstWhere((element) => element.name==tmp.name,orElse: () => Label(name:""));
+        if(tmp2.name=="") {
+          labels.add(Label(name: note.labels[i].name,checkType: CheckType.all));
+        }
+      }
+    }
+    for (Label label in labels) {
+     for(Note note in selectedNotes)
+       {
+         bool fullMarked=true;
+         Label tmp=note.labels.firstWhere((element) => element.name==label.name,orElse: () => Label(name: ""));
+         if(tmp.name==''){
+           fullMarked=false;
+         }
+         if(!fullMarked)
+         {
+           labels.firstWhere((element) => element.name == label.name).checkType=CheckType.semi;
+         }
+       }
+    }
   }
   _unselectNotes(Note note){
     selectedNotes.remove(note);
@@ -45,8 +75,9 @@ class AppBarCubit extends Cubit<AppBarStates> {
     _changeIsPinned();
     emit(SelectNoteState());
   }
-  removeSelection(){
-    selectedNotes.clear();
+  removeSelection({bool clearList=true}){
+    clearList?selectedNotes.clear():null;
+    clearList?labels.clear():null;
     isBase=true;
     isPinned=true;
     emit(RemoveSelectionState());

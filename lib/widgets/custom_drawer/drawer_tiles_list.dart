@@ -69,8 +69,8 @@ class _DrawerTilesListState extends State<_DrawerTilesList> {
       _DrawerTile(item: drawerItems[1], onTap: () => onTap(drawerItems[1])),
        BlocBuilder<GetLabelsCubit, GetLabelsStates>(
         builder: (context, state) {
-          if(state is GetLabelsSuccessState && GetLabelsCubit.of(context).labels.isNotEmpty) {
-           return _LabelsList(labels: GetLabelsCubit.of(context).labels,item: drawerItems[2], onTap: () => onTap(drawerItems[2]));
+          if(state is GetLabelsSuccessState && GetLabelsCubit.of(context).allLabels.isNotEmpty) {
+           return _LabelsList(labels: GetLabelsCubit.of(context).allLabels,item: drawerItems[2], onTap: () => onTap(drawerItems[2]));
           }
           return _DrawerTile(item: drawerItems[2], onTap: () => onTap(drawerItems[2]));
         },

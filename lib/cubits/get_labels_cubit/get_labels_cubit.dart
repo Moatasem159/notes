@@ -6,36 +6,24 @@ import 'package:notes/sources/labels_data_source.dart';
 part 'get_labels_state.dart';
 class GetLabelsCubit extends Cubit<GetLabelsStates> {
   final LabelLocalDataSource _dataSource;
-  GetLabelsCubit(this._dataSource) : super(GetLabelsInitialState());
-  static GetLabelsCubit of(BuildContext context)=>BlocProvider.of(context);
-  late List<Label> labels;
-  late List<Label> markedLabels;
-  late List<Label> semiMarkedLabels;
-   getLabels(){
-     labels=_dataSource.getLabel();
-     emit(GetLabelsSuccessState());
+  final List<Note> ?notes;
+  List<Label> ?labels;
+  GetLabelsCubit(this._dataSource,{this.notes,this.labels}) : super(GetLabelsInitialState());
+  static GetLabelsCubit of(BuildContext context) => BlocProvider.of(context);
+  late List<Label> allLabels;
+  getLabels() {
+    allLabels = _dataSource.getLabel();
+    emit(GetLabelsSuccessState());
   }
-
-  getMarkedLabeled(List<Note> notes){
-     // for(Note note in notes)
-     //   {
-     //     for (Label label in labels) {
-     //       if (note.labels.contains(label)) {
-     //         if (!semiMarkedLabels.contains(label)) {
-     //           semiMarkedLabels.add(label);
-     //         }
-     //       }
-     //     }
-     //   }
-     // if(semiMarkedLabels.length==labels.length)
-     //   {
-     //     markedLabels.addAll(semiMarkedLabels);
-     //     semiMarkedLabels.clear();
-     //   }
-     // else{
-     //   for (Label label in labels) {
-     //
-     //   }
-     // }
+  pickLabels()async {
+    emit(PickLabelsLoadingState());
+    await _dataSource.pickLabel(notes!, labels!);
+    emit(PickLabelsSuccessState());
+  }
+  @override
+  Future<void> close() {
+    notes?.clear();
+    labels?.clear();
+    return super.close();
   }
 }

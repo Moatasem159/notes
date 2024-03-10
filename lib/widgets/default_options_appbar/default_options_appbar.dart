@@ -8,7 +8,9 @@ import 'package:notes/cubits/app_bar_cubit/app_bar_cubit.dart';
 import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
 import 'package:notes/cubits/notes_actions_bloc/notes_actions_bloc.dart';
+import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
+import 'package:notes/models/pick_label_params.dart';
 import 'package:notes/widgets/custom_popup_menu/custom_popup_menu.dart';
 import 'package:notes/widgets/custom_popup_menu/custom_popup_menu_item.dart';
 import 'package:notes/widgets/notes_counter.dart';
@@ -43,9 +45,13 @@ class DefaultOptionsAppBar extends StatelessWidget {
                 onTap: () {}, icon: const Icon(Icons.color_lens_outlined)),
             CustomIconButton(
                 onTap: () {
-                  context.pushNamed(Routes.pickLabelRoute,extra: AppBarCubit.of(context).selectedNotes).then((value){
-                    AppBarCubit.of(context).removeSelection();
-                  });
+                  List<Label> labels=[];
+                  List<Note> notes=[];
+                  labels.addAll(AppBarCubit.of(context).labels);
+                  notes.addAll(AppBarCubit.of(context).selectedNotes);
+                  PickLabelParams params=PickLabelParams(notes: notes, labels: labels);
+                  context.pushNamed(Routes.pickLabelRoute,extra: params);
+                  AppBarCubit.of(context).removeSelection(clearList: true);
                 },
                 icon: const Icon(Icons.label_outline_rounded)),
             _DefaultPopupMenu(noteStatus)

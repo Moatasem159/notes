@@ -4,5 +4,8 @@ part 'label.g.dart';
 class Label extends HiveObject{
   @HiveField(0)
   String name;
-  Label({required this.name});
+  CheckType checkType;
+  Label({required this.name,this.checkType=CheckType.none});
 }
+
+enum CheckType { all, semi, none }

@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:notes/models/note.dart';
+import 'package:notes/models/pick_label_params.dart';
 import 'package:notes/screens/archived_screen.dart';
 import 'package:notes/screens/create_label_screen.dart';
 import 'package:notes/screens/deleted_screen.dart';
@@ -8,7 +8,6 @@ import 'package:notes/screens/label_screen.dart';
 import 'package:notes/screens/pick_label_screen.dart';
 import 'package:notes/screens/reminder_screen.dart';
 import 'package:notes/screens/settings_screen.dart';
-
 abstract class Routes {
   static const String initialRoute = "/";
   static const String homeRoute = "home";
@@ -55,6 +54,7 @@ abstract class AppRoute {
               name: Routes.archivedRoute,
               builder: (__, _) => const ArchivedScreen(),
             ),
+
             GoRoute(
               path: "deleted",
               name: Routes.deletedRoute,
@@ -69,10 +69,10 @@ abstract class AppRoute {
       GoRoute(
         path: '/pickLabel',
         name: Routes.pickLabelRoute,
-        builder: (_, state) => PickLabelScreen(
-          notes: state.extra as List<Note>,
+        builder: (_, state) =>PickLabelScreen(
+          params: state.extra as PickLabelParams,
         ),
-      )
+      ),
     ],
   );
 

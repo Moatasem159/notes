@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:notes/models/label.dart';
 
 class CustomCheckbox extends StatelessWidget {
   final CheckType checkType;
   final VoidCallback onTap;
-  final bool checked;
-  const CustomCheckbox({super.key,required this.onTap, required this.checkType, required this.checked});
-
+  const CustomCheckbox({super.key,required this.onTap, required this.checkType});
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -15,18 +14,18 @@ class CustomCheckbox extends StatelessWidget {
         width: 24.0,
         height: 24.0,
         decoration: BoxDecoration(
-          color: (checked&&checkType==CheckType.all) ?
+          color: (checkType==CheckType.all) ?
           Colors.blue :Colors.transparent,
           border: Border.all(
-            color:checked ? Colors.blue : Colors.grey,
+            color:(checkType==CheckType.all||checkType==CheckType.semi) ? Colors.blue : Colors.grey,
             width: 2.0,
           ),
           borderRadius: BorderRadius.circular(6.0),
         ),
-        child: checked
+        child: (checkType==CheckType.all||checkType==CheckType.semi)
             ?  FittedBox(
                 child: Icon(
-                  checkType==CheckType.all?Icons.done:Icons.remove,
+                  checkType==CheckType.all?Icons.done:checkType==CheckType.semi?Icons.remove:null,
                   color: checkType==CheckType.semi?Colors.blue:null,
                 ),
               )
@@ -36,4 +35,4 @@ class CustomCheckbox extends StatelessWidget {
   }
 }
 
-enum CheckType { all, semi, none }
+
