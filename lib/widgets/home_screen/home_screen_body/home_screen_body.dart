@@ -21,7 +21,7 @@ class HomeScreenBody extends StatelessWidget {
               ListTitle(title: context.local.pinned),
             if (state is GetActiveNotesSuccessState && state.pinnedNotes.isNotEmpty)
               NotesList(notes: state.pinnedNotes,noteStatus: NoteStatus.active),
-            if (state is GetActiveNotesSuccessState && state.notes.isNotEmpty)
+            if (state is GetActiveNotesSuccessState && state.notes.isNotEmpty&&state.pinnedNotes.isNotEmpty)
               ListTitle(title: context.local.others),
             if (state is GetActiveNotesSuccessState && state.notes.isNotEmpty)
             NotesList(notes: state.notes,noteStatus: NoteStatus.active),
