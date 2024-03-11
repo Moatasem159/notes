@@ -1,14 +1,20 @@
 part of'default_options_appbar.dart';
 class _PinNotesButton extends StatelessWidget {
-  const _PinNotesButton();
+  final NoteStatus noteStatus;
+  const _PinNotesButton(this.noteStatus);
   @override
   Widget build(BuildContext context) {
     return BlocListener<NotesActionsBloc, NotesActionsState>(
       listener: (context, state) {
-        if (state is ActionSuccessState) {
+        if (state is PinSuccessState&&noteStatus==NoteStatus.active) {
           AppBarCubit.of(context).removeSelection();
           GetActiveNotesCubit.of(context).getNotes();
         }
+        if(state is PinSuccessState&&noteStatus==NoteStatus.archive)
+          {
+            AppBarCubit.of(context).removeSelection();
+            GetArchivedNotesCubit.of(context).getArchivedNotes();
+          }
       },
      child: BlocBuilder<AppBarCubit, AppBarStates>(
        builder: (context, state) {

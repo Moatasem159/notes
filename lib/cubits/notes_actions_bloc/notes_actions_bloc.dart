@@ -15,37 +15,37 @@ class NotesActionsBloc extends Bloc<NotesActionsEvent, NotesActionsState> {
     on<DeleteNote>(delete);
     on<DeleteForever>(deleteForever);
     on<EmptyBin>(emptyBin);
+    on<ColorsNote>(colorNote);
   }
-
   static NotesActionsBloc of(BuildContext context) => BlocProvider.of(context);
-
   Future<void> archive(ArchiveNote event, Emitter<NotesActionsState> emit) async {
     emit(ActionLoadingState());
     await _dataSource.archiveNotes(event.archivedNotes, event.archive);
-    emit(ActionSuccessState());
+    emit(ArchiveSuccessState());
   }
-
   Future<void> pin(PinNote event, Emitter<NotesActionsState> emit) async {
     emit(ActionLoadingState());
     await _dataSource.pinNotes(event.pinnedNotes, event.pin);
-    emit(ActionSuccessState());
+    emit(PinSuccessState());
   }
-
+  Future<void> colorNote(ColorsNote event, Emitter<NotesActionsState> emit) async {
+    emit(ActionLoadingState());
+    await _dataSource.colorNotes(event.notes, event.color);
+    emit(ColorSuccessState());
+  }
   Future<void> delete(DeleteNote event, Emitter<NotesActionsState> emit) async {
     emit(ActionLoadingState());
     await _dataSource.deleteNotes(event.deletedNotes, event.delete);
-    emit(ActionSuccessState());
+    emit(DeleteSuccessState());
   }
-
   Future<void> deleteForever(DeleteForever event, Emitter<NotesActionsState> emit) async {
     emit(ActionLoadingState());
     await _dataSource.deleteForever(event.deletedNotes);
-    emit(ActionSuccessState());
+    emit(DeleteSuccessState());
   }
-
   Future<void> emptyBin(EmptyBin event, Emitter<NotesActionsState> emit) async {
     emit(ActionLoadingState());
     await _dataSource.emptyBin();
-    emit(ActionSuccessState());
+    emit(DeleteSuccessState());
   }
 }

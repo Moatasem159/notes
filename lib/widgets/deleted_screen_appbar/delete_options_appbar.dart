@@ -5,7 +5,7 @@ class _DeletedOptionsAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<NotesActionsBloc, NotesActionsState>(
       listener: (context, state) {
-        if (state is ActionSuccessState) {
+        if (state is DeleteSuccessState) {
           AppBarCubit.of(context).removeSelection();
           GetDeletedNotesCubit.of(context).getDeletedNotes();
           GetActiveNotesCubit.of(context).getNotes();

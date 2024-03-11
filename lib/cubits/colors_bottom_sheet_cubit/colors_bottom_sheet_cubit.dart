@@ -13,10 +13,14 @@ class ColorsBottomSheetCubit extends Cubit<ColorsBottomSheetStates> {
       const Color(0xff514c8c),
       const Color(0xff571d46),
       const Color(0xff7a203a),
-      const Color(0xff166959),
+      const Color(0xff164959),
+      const Color(0xff1dd959),
+      const Color(0xff412598),
     ];
     chosen=[
       true,
+      false,
+      false,
       false,
       false,
       false,
@@ -32,12 +36,14 @@ class ColorsBottomSheetCubit extends Cubit<ColorsBottomSheetStates> {
   static ColorsBottomSheetCubit of(BuildContext context)=>BlocProvider.of(context);
   late final List<Color> colors;
   late List<bool> chosen;
-  final int value;
-  chooseColor(int index){
+  final int ?value;
+  chooseColor(int index,{bool allFalse=false}){
    for(int i=0;i<chosen.length;i++){
      chosen[i] = false;
    }
-    chosen[index]=true;
+   if(!allFalse) {
+     chosen[index]=true;
+   }
     emit(ChooseColorSuccessState());
   }
   initializeColor(int ?value){
@@ -50,6 +56,9 @@ class ColorsBottomSheetCubit extends Cubit<ColorsBottomSheetStates> {
         }
       }
       chooseColor(index);
+    }
+    else{
+      chooseColor(0,allFalse: true);
     }
   }
   @override

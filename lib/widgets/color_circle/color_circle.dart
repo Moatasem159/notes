@@ -18,7 +18,7 @@ class ColorCircle extends StatelessWidget {
       child: Container(
         height: context.height / 13.38181818181818,
         width: context.width / 6.545454545454545,
-        margin: const EdgeInsets.symmetric(horizontal: 7),
+        margin: const EdgeInsets.symmetric(horizontal: 5),
         decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: color == Colors.transparent.value

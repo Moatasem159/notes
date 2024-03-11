@@ -20,3 +20,8 @@ class DeleteForever extends NotesActionsEvent{
   DeleteForever(this.deletedNotes);
 }
 class EmptyBin extends NotesActionsEvent{}
+class ColorsNote extends NotesActionsEvent{
+  final int color;
+  final List<Note> notes;
+  ColorsNote({required this.color, required this.notes});
+}

@@ -6,11 +6,11 @@ class _DefaultPopupMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<NotesActionsBloc, NotesActionsState>(
       listener: (context, state) {
-        if (state is ActionSuccessState && noteStatus == NoteStatus.active) {
+        if ((state is ArchiveSuccessState ||state is DeleteSuccessState)&& noteStatus == NoteStatus.active) {
           AppBarCubit.of(context).removeSelection();
           GetActiveNotesCubit.of(context).getNotes();
         }
-        if (state is ActionSuccessState && noteStatus == NoteStatus.archive) {
+        if ((state is ArchiveSuccessState ||state is DeleteSuccessState)&& noteStatus == NoteStatus.archive) {
           AppBarCubit.of(context).removeSelection();
           GetArchivedNotesCubit.of(context).getArchivedNotes();
           GetActiveNotesCubit.of(context).getNotes();
