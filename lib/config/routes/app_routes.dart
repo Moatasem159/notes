@@ -48,10 +48,10 @@ abstract class AppRoute {
               ),
             ),
             GoRoute(
-              path: "label/:label",
+              path: "label",
               name: Routes.labelRoute,
               builder: (__, state) => LabelScreen(
-                title: state.pathParameters["label"]!,
+                title: state.uri.queryParameters["label"]!,
               ),
             ),
             GoRoute(
@@ -124,17 +124,20 @@ abstract class AppRoute {
       ),
     ],
   );
-
   static String location() {
-    final RouteMatch lastMatch =
-        router.routerDelegate.currentConfiguration.last;
-    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
-        ? lastMatch.matches
-        : router.routerDelegate.currentConfiguration;
-    String location = matchList.uri.toString().replaceFirst("/", '');
+    String location = _routerLastMatch().uri.toString().replaceFirst("/", '');
     if (location.isEmpty) {
       location = Routes.homeRoute;
     }
     return location;
+  }
+  static String query() {
+    String queryParams = _routerLastMatch().uri.queryParameters.isNotEmpty?_routerLastMatch().uri.queryParameters.values.first:'';
+    return queryParams;
+  }
+  static RouteMatchList _routerLastMatch(){
+    final RouteMatch lastMatch = router.routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch ? lastMatch.matches : router.routerDelegate.currentConfiguration;
+    return matchList;
   }
 }
