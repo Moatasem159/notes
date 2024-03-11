@@ -6,7 +6,6 @@ import 'package:notes/config/routes/app_routes.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/core/extension/empty_padding_extension.dart';
 import 'package:notes/core/utils/app_text_styles.dart';
-import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
 import 'package:notes/cubits/get_labels_cubit/get_labels_cubit.dart';
 import 'package:notes/models/drawer_item_model.dart';
 import 'package:notes/models/label.dart';

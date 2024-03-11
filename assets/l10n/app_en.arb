@@ -37,6 +37,7 @@
   "homeBodyTitle": "Notes you add appear here",
   "archiveBodyTitle": "Your archive notes appear here",
   "deletedBodyTitle": "No notes in Recycle Bin",
+  "labeledBodyTitle": "No notes with this label yet",
   "deleteForEver": "Delete for ever",
   "emptyBin": "Empty Bin"
 }

@@ -10,9 +10,11 @@ class _LabelTile extends StatelessWidget {
         color: (AppRoute.location()==Routes.labelRoute&&AppRoute.query()==label.name)?context.theme.listTileTheme.selectedColor:Colors.transparent,
         borderRadius:BorderRadius.circular(25),
         child: InkWell(
-          onTap: () {
-            context.pop();
-            context.goNamed(Routes.labelRoute,queryParameters:{"label":label.name});
+          onTap: ()async{
+            Scaffold.of(context).closeDrawer();
+            await Future.delayed(const Duration(milliseconds: 200)).then((_){
+              context.goNamed(Routes.labelRoute,queryParameters:{"label":label.name});
+            });
           },
           borderRadius: BorderRadius.circular(25),
           child: Container(

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notes/models/note.dart';
@@ -12,6 +13,7 @@ import 'package:notes/screens/archived_screen.dart';
 import 'package:notes/screens/create_label_screen.dart';
 import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
+import 'package:notes/config/routes/route_animations/slide_from_down_to_up_with_fading.dart';
 abstract class Routes {
   static const String initialRoute = "/";
   static const String homeRoute = "home";
@@ -39,18 +41,20 @@ abstract class AppRoute {
               builder: (__, _) => const ReminderScreen(),
             ),
             GoRoute(
+              path: "label",
+              name: Routes.labelRoute,
+              pageBuilder: (context, state) => SlideFromDownToUpWithFading(
+                  child: LabelScreen(
+                key: ValueKey<String>(state.uri.queryParameters["label"]!),
+                title: state.uri.queryParameters["label"]!,
+              )),
+            ),
+            GoRoute(
               path: "createLabelRoute",
               name: Routes.createLabelRoute,
               builder: (__, state) => CreateLabelScreen(
                 isNew:
                     state.uri.queryParameters["isNew"] == "true" ? true : false,
-              ),
-            ),
-            GoRoute(
-              path: "label",
-              name: Routes.labelRoute,
-              builder: (context, state) => LabelScreen(
-                title: state.uri.queryParameters["label"]!,
               ),
             ),
             GoRoute(

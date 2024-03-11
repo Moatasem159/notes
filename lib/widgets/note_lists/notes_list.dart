@@ -7,7 +7,7 @@ import 'package:notes/widgets/note_lists/note_normal_list.dart';
 class NotesList extends StatelessWidget {
   final List<Note> notes;
   final NoteStatus noteStatus;
-  const NotesList({super.key, required this.notes, required this.noteStatus});
+  const NotesList({super.key, required this.notes,this.noteStatus=NoteStatus.active});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SwitchListViewCubit, ListViewType>(

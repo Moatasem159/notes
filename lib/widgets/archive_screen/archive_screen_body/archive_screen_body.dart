@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
 import 'package:notes/models/note.dart';
-import 'package:notes/widgets/archive_screen_appbar/archive_appbar.dart';
+import 'package:notes/widgets/archive_screen/archive_screen_appbar/archive_appbar.dart';
 import 'package:notes/widgets/custom_scroll_list.dart';
 import 'package:notes/widgets/empty_body.dart';
 import 'package:notes/widgets/note_lists/notes_list.dart';

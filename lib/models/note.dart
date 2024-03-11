@@ -57,4 +57,6 @@ enum NoteStatus {
   archive,
   @HiveField(3)
   deleted,
+  @HiveField(4)
+  labeled,
 }
