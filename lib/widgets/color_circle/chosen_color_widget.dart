@@ -1,6 +1,6 @@
-part of'colors_bottom_sheet.dart';
-class _ChosenColorWidget extends StatelessWidget {
-  const _ChosenColorWidget();
+part of'color_circle.dart';
+class _ChosenColorCircle extends StatelessWidget {
+  const _ChosenColorCircle();
   @override
   Widget build(BuildContext context) {
     return Container(

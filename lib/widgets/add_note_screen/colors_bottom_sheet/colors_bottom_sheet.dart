@@ -4,7 +4,7 @@ import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/core/extension/empty_padding_extension.dart';
 import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes/cubits/colors_bottom_sheet_cubit/colors_bottom_sheet_cubit.dart';
-part 'chosen_color_widget.dart';
+import 'package:notes/widgets/color_circle/color_circle.dart';
 part 'color_container.dart';
 part 'colors_list.dart';
 class ColorsBottomSheet extends StatelessWidget {
