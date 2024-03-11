@@ -7,7 +7,7 @@ class _LabelTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 1),
       child: Material(
-        color: AppRoute.query()==label.name?context.theme.listTileTheme.selectedColor:Colors.transparent,
+        color: (AppRoute.location()==Routes.labelRoute&&AppRoute.query()==label.name)?context.theme.listTileTheme.selectedColor:Colors.transparent,
         borderRadius:BorderRadius.circular(25),
         child: InkWell(
           onTap: () {

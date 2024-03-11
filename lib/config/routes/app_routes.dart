@@ -1,18 +1,17 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
-import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
 import 'package:notes/models/note.dart';
-import 'package:notes/models/pick_label_params.dart';
-import 'package:notes/screens/archived_screen.dart';
-import 'package:notes/screens/create_label_screen.dart';
 import 'package:notes/screens/deleted_screen.dart';
 import 'package:notes/screens/home_screen.dart';
 import 'package:notes/screens/label_screen.dart';
 import 'package:notes/screens/pick_label_screen.dart';
 import 'package:notes/screens/reminder_screen.dart';
 import 'package:notes/screens/settings_screen.dart';
-
+import 'package:notes/models/pick_label_params.dart';
+import 'package:notes/screens/archived_screen.dart';
+import 'package:notes/screens/create_label_screen.dart';
+import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
 abstract class Routes {
   static const String initialRoute = "/";
   static const String homeRoute = "home";
@@ -50,7 +49,7 @@ abstract class AppRoute {
             GoRoute(
               path: "label",
               name: Routes.labelRoute,
-              builder: (__, state) => LabelScreen(
+              builder: (context, state) => LabelScreen(
                 title: state.uri.queryParameters["label"]!,
               ),
             ),
@@ -93,8 +92,7 @@ abstract class AppRoute {
                 ),
               ),
             );
-          }
-          else if (inNote && status != NoteStatus.archive) {
+          } else if (inNote && status != NoteStatus.archive) {
             return BlocProvider.value(
               value: params.addNoteCubit as AddNoteCubit,
               child: PickLabelScreen(
@@ -103,8 +101,7 @@ abstract class AppRoute {
                 params: params,
               ),
             );
-          }
-          else if (!inNote && status == NoteStatus.archive) {
+          } else if (!inNote && status == NoteStatus.archive) {
             return BlocProvider.value(
               value: params.notesCubit as GetArchivedNotesCubit,
               child: PickLabelScreen(
@@ -113,8 +110,7 @@ abstract class AppRoute {
                 params: params,
               ),
             );
-          }
-          else {
+          } else {
             return PickLabelScreen(
               noteStatus: status,
               params: state.extra as PickLabelParams,
@@ -124,20 +120,28 @@ abstract class AppRoute {
       ),
     ],
   );
+
   static String location() {
-    String location = _routerLastMatch().uri.toString().replaceFirst("/", '');
+    String location = _routerLastMatch().uri.path.replaceFirst("/", '');
     if (location.isEmpty) {
       location = Routes.homeRoute;
     }
     return location;
   }
+
   static String query() {
-    String queryParams = _routerLastMatch().uri.queryParameters.isNotEmpty?_routerLastMatch().uri.queryParameters.values.first:'';
+    String queryParams = _routerLastMatch().uri.queryParameters.isNotEmpty
+        ? _routerLastMatch().uri.queryParameters.values.first
+        : '';
     return queryParams;
   }
-  static RouteMatchList _routerLastMatch(){
-    final RouteMatch lastMatch = router.routerDelegate.currentConfiguration.last;
-    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch ? lastMatch.matches : router.routerDelegate.currentConfiguration;
+
+  static RouteMatchList _routerLastMatch() {
+    final RouteMatch lastMatch =
+        router.routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : router.routerDelegate.currentConfiguration;
     return matchList;
   }
 }
