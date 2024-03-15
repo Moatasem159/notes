@@ -1,4 +1,4 @@
-part of'home_appbar.dart';
+part of'home_screen_body.dart';
 class _DefaultHomeAppbar extends StatelessWidget {
   const _DefaultHomeAppbar();
   @override
