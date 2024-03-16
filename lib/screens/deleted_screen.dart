@@ -7,7 +7,7 @@ import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/cubits/app_bar_cubit/app_bar_cubit.dart';
 import 'package:notes/cubits/get_deleted_notes_cubit/get_deleted_notes_cubit.dart';
 import 'package:notes/widgets/custom_drawer/main_drawer.dart';
-import 'package:notes/widgets/deleted_screen/deleted_screen_body/deleted_screen_body.dart';
+import 'package:notes/widgets/deleted_screen/deleted_screen_body.dart';
 class DeleteScreen extends StatelessWidget {
   const DeleteScreen({super.key});
   @override

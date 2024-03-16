@@ -1,4 +1,4 @@
-part of 'deleted_appbar.dart';
+part of 'deleted_screen_body.dart';
 class _DeletedOptionsAppBar extends StatelessWidget {
   const _DeletedOptionsAppBar();
   @override
@@ -22,7 +22,7 @@ class _DeletedOptionsAppBar extends StatelessWidget {
               onTap: () => NotesActionsBloc.of(context).add(
                   DeleteNote(AppBarCubit.of(context).selectedNotes, false)),
               icon: const Icon(Icons.restore)),
-          const DeletePopUpMenu(noteStatus: NoteStatus.deleted)
+          const _DeletePopUpMenu()
         ],
       ),
     );
