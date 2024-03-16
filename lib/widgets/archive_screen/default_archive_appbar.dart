@@ -1,4 +1,4 @@
-part of'archive_appbar.dart';
+part of'archive_screen_body.dart';
 class _DefaultArchiveAppbar extends StatelessWidget {
   const _DefaultArchiveAppbar();
   @override
