@@ -1,13 +1,12 @@
-part of'label_appbar.dart';
+part of'label_screen_body.dart';
 class _DefaultLabelAppbar extends StatelessWidget {
-  final String title;
-  const _DefaultLabelAppbar(this.title);
+  const _DefaultLabelAppbar();
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         CustomIconButton(icon: const Icon(Icons.menu_rounded),onTap: Scaffold.of(context).openDrawer),
-        Text(title,style: AppStyles.styleRegular24(context)),
+        Text(GetLabeledNotesCubit.of(context).label,style: AppStyles.styleRegular24(context)),
         const Spacer(),
         CustomIconButton(onTap: (){}, icon: const Icon(Icons.search)),
         const SwitchListViewButton(),
