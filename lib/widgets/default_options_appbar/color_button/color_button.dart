@@ -6,8 +6,12 @@ class _ColorButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<NotesActionsBloc, NotesActionsState>(
       listener: (context, state) {
-        if (state is ColorSuccessState && noteStatus == NoteStatus.active) {
+        if (state is ColorSuccessState && (noteStatus == NoteStatus.active||noteStatus==NoteStatus.labeled)) {
           GetActiveNotesCubit.of(context).getNotes();
+          if(noteStatus==NoteStatus.labeled)
+          {
+            GetLabeledNotesCubit.of(context).getLabeledNotes();
+          }
           AppBarCubit.of(context).removeSelection();
         }
         if (state is ColorSuccessState && noteStatus == NoteStatus.archive) {

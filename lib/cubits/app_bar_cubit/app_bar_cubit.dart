@@ -7,6 +7,7 @@ class AppBarCubit extends Cubit<AppBarStates> {
   AppBarCubit() : super(AppBarInitialState()) {
     isBase = true;
     isPinned = false;
+    isArchived=false;
     selectedNotes = [];
     labels=[];
     colors=[];
@@ -14,6 +15,7 @@ class AppBarCubit extends Cubit<AppBarStates> {
   static AppBarCubit of(BuildContext context)=>BlocProvider.of(context);
   late bool isBase;
   late bool isPinned;
+  late bool isArchived;
   late List<Note> selectedNotes;
   late List<Label> labels;
   late List<int> colors;
@@ -76,6 +78,13 @@ class AppBarCubit extends Cubit<AppBarStates> {
     }
     else{
       _selectNotes(note);
+      if(note.status==NoteStatus.archive)
+      {
+        isArchived=true;
+      }
+      else{
+        isArchived=false;
+      }
       if(!colors.contains(note.color))
       {
         colors.add(note.color);
@@ -83,6 +92,7 @@ class AppBarCubit extends Cubit<AppBarStates> {
        showOptionAppBar();
     }
     _changeIsPinned();
+    print(isArchived);
     emit(SelectNoteState());
   }
   removeSelection({bool clearList=true}){
@@ -90,11 +100,12 @@ class AppBarCubit extends Cubit<AppBarStates> {
     clearList?labels.clear():null;
     colors.clear();
     isBase=true;
-    isPinned=true;
+    isPinned=false;
+    isArchived=false;
     emit(RemoveSelectionState());
   }
   _changeIsPinned(){
-    for (var element in selectedNotes) {
+    for (Note element in selectedNotes) {
         if(!element.pinned)
         {
           isPinned = false;

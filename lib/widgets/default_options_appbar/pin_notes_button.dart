@@ -6,8 +6,12 @@ class _PinNotesButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<NotesActionsBloc, NotesActionsState>(
       listener: (context, state) {
-        if (state is PinSuccessState&&noteStatus==NoteStatus.active) {
+        if (state is PinSuccessState&&(noteStatus==NoteStatus.active||noteStatus==NoteStatus.labeled)) {
           AppBarCubit.of(context).removeSelection();
+          if(noteStatus==NoteStatus.labeled)
+            {
+              GetLabeledNotesCubit.of(context).getLabeledNotes();
+            }
           GetActiveNotesCubit.of(context).getNotes();
         }
         if(state is PinSuccessState&&noteStatus==NoteStatus.archive)

@@ -77,10 +77,8 @@ abstract class AppRoute {
         path: '/pickLabel',
         name: Routes.pickLabelRoute,
         builder: (context, state) {
-          bool inNote =
-              state.uri.queryParameters["inNote"] == "true" ? true : false;
-          NoteStatus status =
-              state.uri.queryParameters["noteStatus"] == "NoteStatus.active"
+          bool inNote = state.uri.queryParameters["inNote"] == "true" ? true : false;
+          NoteStatus status = state.uri.queryParameters["noteStatus"] == "NoteStatus.active"
                   ? NoteStatus.active
                   : NoteStatus.archive;
           PickLabelParams params = state.extra as PickLabelParams;

@@ -6,6 +6,7 @@ import 'package:notes/config/routes/app_routes.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/core/utils/app_text_styles.dart';
 import 'package:notes/cubits/app_bar_cubit/app_bar_cubit.dart';
+import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
 import 'package:notes/cubits/notes_actions_bloc/notes_actions_bloc.dart';
 import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
