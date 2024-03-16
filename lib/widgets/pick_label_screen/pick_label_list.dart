@@ -15,19 +15,34 @@ class PickLabelsList extends StatelessWidget {
             itemCount: GetLabelsCubit.of(context).allLabels.length,
             itemBuilder: (context, index) {
               Label label = cubit.allLabels[index];
-              Label tempLabel = cubit.labels!.firstWhere((element) => element.name == label.name, orElse: () => Label(name: ""));
+              Label tempLabel = cubit.labels!.firstWhere(
+                  (element) => element.name == label.name,
+                  orElse: () => Label(name: ""));
               return CustomCheckListTile(
                 checkType: tempLabel.checkType,
                 title: GetLabelsCubit.of(context).allLabels[index].name,
-                onChanged: (checkType){
-                  if (checkType==CheckType.all) {
-                    cubit.labels!.add(Label(name: cubit.allLabels[index].name, checkType: CheckType.all));
-                  } else if(GetLabelsCubit.of(context).inNote&&checkType==CheckType.none){
-                    Label label= cubit.labels!.firstWhere((element) => element.name == cubit.allLabels[index].name);
+                onChanged: (checkType) {
+                  if (checkType == CheckType.all) {
+                    Label label = cubit.labels!.firstWhere(
+                        (element) =>
+                            element.name == cubit.allLabels[index].name,
+                        orElse: () => Label(name: ""));
+                    if (cubit.labels!.isNotEmpty) {
+                      cubit.labels!.remove(label);
+                    }
+                    cubit.labels!.add(Label(
+                        name: cubit.allLabels[index].name,
+                        checkType: CheckType.all));
+                  } else if (GetLabelsCubit.of(context).inNote &&
+                      checkType == CheckType.none) {
+                    Label label = cubit.labels!.firstWhere((element) =>
+                        element.name == cubit.allLabels[index].name);
                     cubit.labels!.remove(label);
-                  }
-                  else if(checkType==CheckType.none) {
-                    cubit.labels!.firstWhere((element) => element.name == cubit.allLabels[index].name).checkType=CheckType.none;
+                  } else if (checkType == CheckType.none) {
+                    cubit.labels!
+                        .firstWhere((element) =>
+                            element.name == cubit.allLabels[index].name)
+                        .checkType = CheckType.none;
                   }
                 },
               );
