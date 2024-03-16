@@ -22,7 +22,7 @@ class _LabelButton extends StatelessWidget {
                 });
           }
           else {
-            params = PickLabelParams(notes: notes, labels: labels);
+            params = PickLabelParams(notes: notes, labels: labels,notesCubit: GetLabeledNotesCubit.of(context));
             context.pushNamed(Routes.pickLabelRoute,
                 extra: params,
                 queryParameters: {

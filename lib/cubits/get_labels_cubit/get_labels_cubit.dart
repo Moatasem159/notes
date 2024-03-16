@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
+import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
 import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/sources/labels_data_source.dart';
@@ -41,6 +42,10 @@ class GetLabelsCubit extends Cubit<GetLabelsStates> {
   appbarListener(BuildContext context, GetLabelsStates state) {
     if (state is PickLabelsSuccessState&&GetLabelsCubit.of(context).noteStatus==NoteStatus.active){
       GetActiveNotesCubit.of(context).getNotes();
+      context.pop();
+    }
+    if (state is PickLabelsSuccessState&&GetLabelsCubit.of(context).noteStatus==NoteStatus.labeled){
+      GetLabeledNotesCubit.of(context).getLabeledNotes();
       context.pop();
     }
     if(state is PickLabelsSuccessState&&GetLabelsCubit.of(context).noteStatus==NoteStatus.archive)

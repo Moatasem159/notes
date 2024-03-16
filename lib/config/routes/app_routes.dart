@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/screens/deleted_screen.dart';
 import 'package:notes/screens/home_screen.dart';
@@ -14,6 +15,7 @@ import 'package:notes/screens/create_label_screen.dart';
 import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
 import 'package:notes/config/routes/route_animations/slide_from_down_to_up_with_fading.dart';
+
 abstract class Routes {
   static const String initialRoute = "/";
   static const String homeRoute = "home";
@@ -78,8 +80,10 @@ abstract class AppRoute {
         name: Routes.pickLabelRoute,
         builder: (context, state) {
           bool inNote = state.uri.queryParameters["inNote"] == "true" ? true : false;
-          NoteStatus status = state.uri.queryParameters["noteStatus"] == "NoteStatus.active"
-                  ? NoteStatus.active
+          String noteStatus=state.uri.queryParameters["noteStatus"]!;
+          NoteStatus status = noteStatus == "NoteStatus.active"
+              ? NoteStatus.active : noteStatus == "NoteStatus.labeled"
+                  ? NoteStatus.labeled
                   : NoteStatus.archive;
           PickLabelParams params = state.extra as PickLabelParams;
           if (inNote && status == NoteStatus.archive) {
@@ -112,7 +116,17 @@ abstract class AppRoute {
                 params: params,
               ),
             );
-          } else {
+          } else if (!inNote && status == NoteStatus.labeled) {
+            return BlocProvider.value(
+              value: params.notesCubit as GetLabeledNotesCubit,
+              child: PickLabelScreen(
+                noteStatus: status,
+                inNote: inNote,
+                params: params,
+              ),
+            );
+          }
+          else {
             return PickLabelScreen(
               noteStatus: status,
               params: state.extra as PickLabelParams,
