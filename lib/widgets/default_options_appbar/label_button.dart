@@ -21,8 +21,18 @@ class _LabelButton extends StatelessWidget {
                   "noteStatus": noteStatus.toString(),
                 });
           }
+          else if(noteStatus == NoteStatus.labeled)
+            {
+              params = PickLabelParams(notes: notes, labels: labels,notesCubit: GetLabeledNotesCubit.of(context));
+              context.pushNamed(Routes.pickLabelRoute,
+                  extra: params,
+                  queryParameters: {
+                    "inNote": "false",
+                    "noteStatus": noteStatus.toString(),
+                  });
+            }
           else {
-            params = PickLabelParams(notes: notes, labels: labels,notesCubit: GetLabeledNotesCubit.of(context));
+            params = PickLabelParams(notes: notes, labels: labels);
             context.pushNamed(Routes.pickLabelRoute,
                 extra: params,
                 queryParameters: {

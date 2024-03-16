@@ -98,7 +98,8 @@ abstract class AppRoute {
                 ),
               ),
             );
-          } else if (inNote && status != NoteStatus.archive) {
+          }
+          else if (inNote && status != NoteStatus.archive) {
             return BlocProvider.value(
               value: params.addNoteCubit as AddNoteCubit,
               child: PickLabelScreen(
@@ -107,7 +108,8 @@ abstract class AppRoute {
                 params: params,
               ),
             );
-          } else if (!inNote && status == NoteStatus.archive) {
+          }
+          else if (!inNote && status == NoteStatus.archive) {
             return BlocProvider.value(
               value: params.notesCubit as GetArchivedNotesCubit,
               child: PickLabelScreen(
@@ -116,7 +118,8 @@ abstract class AppRoute {
                 params: params,
               ),
             );
-          } else if (!inNote && status == NoteStatus.labeled) {
+          }
+          else if (!inNote && status == NoteStatus.labeled) {
             return BlocProvider.value(
               value: params.notesCubit as GetLabeledNotesCubit,
               child: PickLabelScreen(
