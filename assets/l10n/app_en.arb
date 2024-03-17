@@ -25,6 +25,8 @@
   "createNewLabel": "Create new label",
   "enterLabelName": "Enter a label name",
   "renameLabel": "Rename label",
+  "rename": "Rename",
+  "cancel": "Cancel",
   "deleteLabel": "Delete label",
   "labelAlreadyExists": "Label already exists",
   "enterShorterLabel": "Enter shorter label name",

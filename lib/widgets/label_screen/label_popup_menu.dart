@@ -8,7 +8,17 @@ class _LabelPopupMenu extends StatelessWidget {
     return CustomPopupMenu(
       items: [
         PopupMenuItem(
-          onTap: () {},
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (_) {
+                return BlocProvider.value(
+                  value: GetLabeledNotesCubit.of(context),
+                  child: const _RenameLabelDialog(),
+                );
+              },
+            );
+          },
           child: CustomPopUpMenuItem(title: context.local.renameLabel),
         ),
         PopupMenuItem(
@@ -19,3 +29,7 @@ class _LabelPopupMenu extends StatelessWidget {
     );
   }
 }
+
+
+
+

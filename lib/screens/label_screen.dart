@@ -27,6 +27,7 @@ class LabelScreen extends StatelessWidget {
                       : context.theme.colorScheme.onSecondary),
               child: SafeArea(
                 child: Scaffold(
+                  resizeToAvoidBottomInset:false,
                   backgroundColor: context.scaffoldBackground,
                   drawer: const MainDrawer(),
                   body: const LabelScreenBody(),

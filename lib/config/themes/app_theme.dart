@@ -7,15 +7,19 @@ import 'package:notes/core/utils/app_fonts.dart';
 abstract class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     fontFamily: AppFonts.englishFontFamily,
-   disabledColor: Colors.black,
-    dividerTheme: const DividerThemeData(
-      color: AppColors.lightActiveDrawerColor
+    disabledColor: Colors.black,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.buttonLightColor,
+        foregroundColor: Colors.white,
+      ),
     ),
+    dividerTheme:
+        const DividerThemeData(color: AppColors.lightActiveDrawerColor),
     iconButtonTheme: IconButtonThemeData(
-      style: ButtonStyle(
-        iconColor: MaterialStateProperty.all(Colors.black),
-      )
-    ),
+        style: ButtonStyle(
+      iconColor: MaterialStateProperty.all(Colors.black),
+    )),
     appBarTheme: const AppBarTheme(
       scrolledUnderElevation: 0,
       elevation: 0,
@@ -39,15 +43,19 @@ abstract class AppTheme {
       elevation: 0,
       scrolledUnderElevation: 0,
     ),
-    dividerTheme: const DividerThemeData(
-        color: AppColors.darkActiveDrawerColor
-    ),
+    dividerTheme:
+        const DividerThemeData(color: AppColors.darkActiveDrawerColor),
     disabledColor: Colors.white,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.buttonDarkColor,
+        foregroundColor: Colors.black
+      ),
+    ),
     iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
-          iconColor: MaterialStateProperty.all(Colors.white),
-        )
-    ),
+      iconColor: MaterialStateProperty.all(Colors.white),
+    )),
     fontFamily: AppFonts.englishFontFamily,
     drawerTheme: const DrawerThemeData(
       backgroundColor: AppColors.darkBackgroundColor,
