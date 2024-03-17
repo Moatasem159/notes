@@ -5,6 +5,7 @@ import 'package:notes/app/injection_container.dart';
 import 'package:notes/config/themes/app_theme.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/widgets/add_note_screen/add_note_screen_appbar.dart';
 import 'package:notes/widgets/add_note_screen/add_note_screen_body/add_note_screen_body.dart';
@@ -12,9 +13,9 @@ import 'package:notes/widgets/add_note_screen/bottom_bar/add_note_bottom_bar.dar
 import 'package:notes/widgets/toast/custom_toast.dart';
 class AddNoteScreen extends StatelessWidget {
   final Note? note;
+  final Label? label;
   final NoteStatus? noteStatus;
-
-  const AddNoteScreen({super.key, this.note, this.noteStatus=NoteStatus.active});
+  const AddNoteScreen({super.key, this.note, this.noteStatus=NoteStatus.active, this.label});
 
   _absorb(BuildContext context, AddNoteCubit cubit) {
     if (cubit.restored == false) {
@@ -26,7 +27,7 @@ class AddNoteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => AddNoteCubit(sl(), note: note,noteStatus: noteStatus),
+      create: (BuildContext context) => AddNoteCubit(sl(), note: note,noteStatus: noteStatus,label: label),
       child: Builder(
         builder: (BuildContext context) {
           return BlocConsumer<AddNoteCubit, AddNoteStates>(

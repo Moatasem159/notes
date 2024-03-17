@@ -92,7 +92,6 @@ class AppBarCubit extends Cubit<AppBarStates> {
        showOptionAppBar();
     }
     _changeIsPinned();
-    print(isArchived);
     emit(SelectNoteState());
   }
   removeSelection({bool clearList=true}){

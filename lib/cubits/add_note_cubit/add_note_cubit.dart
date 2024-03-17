@@ -7,14 +7,20 @@ import 'package:notes/core/image/image_helper.dart';
 import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
 import 'package:notes/cubits/get_deleted_notes_cubit/get_deleted_notes_cubit.dart';
+import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
+import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/sources/notes_data_source.dart';
 import 'package:notes/widgets/toast/custom_toast.dart';
 part 'add_note_state.dart';
 class AddNoteCubit extends Cubit<AddNoteStates> {
-  AddNoteCubit(this._dataSource, {required this.note,required this.noteStatus}) : super(AddNoteInitialState()) {
+  AddNoteCubit(this._dataSource, {required this.note,required this.noteStatus,required this.label}) : super(AddNoteInitialState()) {
     isNew=note==null?true:false;
-    note ??= Note(date: DateTime.now().toIso8601String(),color: Colors.transparent.value,labels: []);
+    note ??= Note(
+        date: DateTime.now().toIso8601String(),
+        color: Colors.transparent.value,
+        labeled: label!=null?true:false,
+        labels: label == null ? [] : [label!]);
     noteStatus??=NoteStatus.active;
     title = TextEditingController(text: note!.title);
     content = TextEditingController(text: note!.note);
@@ -25,6 +31,7 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
   final NoteLocalDataSource _dataSource;
   late final TextEditingController content;
   Note? note;
+  Label ?label;
   NoteStatus? noteStatus;
   late bool restored;
   late bool isNew;
@@ -111,8 +118,11 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
         GetActiveNotesCubit.of(context).getNotes(edit: true);
       }
     }
-    if (state is AddNoteSuccessState && state.isAdded) {
+    if (state is AddNoteSuccessState && state.isAdded){
       GetActiveNotesCubit.of(context).getNotes();
+      if(noteStatus == NoteStatus.labeled){
+        GetLabeledNotesCubit.of(context).getLabeledNotes();
+      }
     }
     if (state is RestoreNoteState) {
       CustomToast.showToast(context, msg: context.local.noteRestored);

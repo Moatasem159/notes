@@ -8,7 +8,7 @@ class _PinnedLabeledNotesList extends StatelessWidget {
       builder: (context, state) {
         if (state is GetLabeledNotesSuccessState &&
             state.pinnedNotes.isNotEmpty) {
-          return NotesList(notes: state.pinnedNotes);
+          return NotesList(notes: state.pinnedNotes,noteStatus: NoteStatus.labeled);
         }
         return const SliverToBoxAdapter();
       },

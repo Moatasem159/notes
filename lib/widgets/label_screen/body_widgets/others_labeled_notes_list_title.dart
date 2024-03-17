@@ -6,7 +6,10 @@ class _OthersLabeledNotesListTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetLabeledNotesCubit, GetLabeledNotesStates>(
       builder: (context, state) {
-        if (state is GetLabeledNotesSuccessState &&state.notes.isNotEmpty&& state.pinnedNotes.isNotEmpty&&state.archivedNotes.isNotEmpty) {
+        if (state is GetLabeledNotesSuccessState &&
+            state.notes.isNotEmpty &&(
+            state.pinnedNotes.isNotEmpty ||
+            state.archivedNotes.isNotEmpty)) {
           return ListTitle(title: context.local.others);
         }
         return const SliverToBoxAdapter();

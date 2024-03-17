@@ -8,7 +8,7 @@ class _ArchivedLabeledNotesList extends StatelessWidget {
       builder: (context, state) {
         if (state is GetLabeledNotesSuccessState &&
             state.archivedNotes.isNotEmpty) {
-          return NotesList(notes: state.archivedNotes);
+          return NotesList(notes: state.archivedNotes,noteStatus: NoteStatus.labeled);
         }
         return const SliverToBoxAdapter();
       },
