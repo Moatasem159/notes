@@ -5,3 +5,7 @@ class AddLabelEvent extends LabelActionsEvents{
   final String label;
   AddLabelEvent(this.label);
 }
+class DeleteLabelEvent extends LabelActionsEvents{
+  final Label label;
+  DeleteLabelEvent(this.label);
+}

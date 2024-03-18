@@ -96,7 +96,7 @@ class _EditLabelFieldState extends State<EditLabelField> {
           }
           return null;
         },
-        deleteLabel: (){},
+        deleteLabel: ()=>LabelActionsBloc.of(context).add(DeleteLabelEvent(widget.label)),
       ),
     );
   }

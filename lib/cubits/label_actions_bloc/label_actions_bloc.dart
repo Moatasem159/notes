@@ -9,6 +9,7 @@ class LabelActionsBloc extends Bloc<LabelActionsEvents,LabelActionsStates> {
     labels=[];
     on<GetLabelsEvent>(getLabels);
     on<AddLabelEvent>(addLabel);
+    on<DeleteLabelEvent>(deleteLabel);
   }
   final LabelLocalDataSource _dataSource;
   static LabelActionsBloc of(BuildContext context)=>BlocProvider.of(context);
@@ -20,6 +21,12 @@ class LabelActionsBloc extends Bloc<LabelActionsEvents,LabelActionsStates> {
     await _dataSource.addLabel(label);
     labels.insert(0,label);
     emit(AddLabelSuccessState());
+  }
+  Future<void> deleteLabel(DeleteLabelEvent event, Emitter<LabelActionsStates>emit)async {
+    emit(DeleteLabelLoadingState());
+    await _dataSource.deleteLabel(event.label);
+    labels.remove(event.label);
+    emit(DeleteLabelSuccessState());
   }
   bool checkFound(String name){
     bool found=false;

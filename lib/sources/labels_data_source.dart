@@ -3,6 +3,7 @@ import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 abstract class LabelLocalDataSource {
   Future<int> addLabel(Label label);
+  Future <void> deleteLabel(Label label);
   List<Label> getLabel();
   Future<void> pickLabelForMultipleNotes(List<Note> notes, List<Label> labels);
 }
@@ -45,5 +46,20 @@ class LabelLocalDataSourceImpl implements LabelLocalDataSource {
       }
       await notes[i].save();
     }
+  }
+  @override
+  Future<void> deleteLabel(Label label) async{
+    List<Note>notes = _noteBox.values.where((element) => element.labeled == true).toList();
+    for(Note note in notes)
+      {
+        Label tmp =note.labels.firstWhere((element) => element.name==label.name,orElse: () => Label(name: ''),);
+        if(tmp.name.isNotEmpty)
+          {
+            note.labels.remove(tmp);
+            note.labels.isEmpty?note.labeled=false:null;
+            await note.save();
+          }
+      }
+     await label.delete();
   }
 }
