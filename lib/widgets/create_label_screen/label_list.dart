@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes/cubits/create_label_cubit/create_label_cubit.dart';
+import 'package:notes/cubits/label_actions_bloc/label_actions_bloc.dart';
 import 'package:notes/widgets/create_label_screen/edit_label_field.dart';
 class LabelsList extends StatelessWidget {
   const LabelsList({super.key});
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreateLabelCubit, CreateLabelStates>(
+    return BlocBuilder<LabelActionsBloc, LabelActionsStates>(
       builder: (context, state) {
-        CreateLabelCubit cubit = CreateLabelCubit.of(context);
+        LabelActionsBloc cubit = LabelActionsBloc.of(context);
         return SliverList.builder(
           itemCount: cubit.labels.length,
           itemBuilder: (_, index) => EditLabelField(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:notes/models/label.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes/core/extension/context_extension.dart';
-import 'package:notes/cubits/create_label_cubit/create_label_cubit.dart';
-import 'package:notes/models/label.dart';
+import 'package:notes/cubits/label_actions_bloc/label_actions_bloc.dart';
 import 'package:notes/widgets/create_label_screen/label_field/label_field.dart';
 class EditLabelField extends StatefulWidget {
   final Label label;
@@ -37,25 +37,25 @@ class _EditLabelFieldState extends State<EditLabelField> {
     super.dispose();
   }
   _edit() {
-    if(text.trim()==widget.controller.text.trim())
-      {
-      _focusNode.unfocus();
-      }
-    else{
-      bool found = CreateLabelCubit.of(context).checkFound(widget.controller.text);
-      _found = found;
-      bool validate = _formKey.currentState!.validate();
-      if (validate) {
-        if (widget.controller.text.isNotEmpty) {
-          CreateLabelCubit.of(context).editLabel(widget.label, widget.controller.text);
-          _edited=true;
-        } else {
-          _focusNode.unfocus();
-        }
-      } else {
-        _focusNode.requestFocus();
-      }
-    }
+    // if(text.trim()==widget.controller.text.trim())
+    //   {
+    //   _focusNode.unfocus();
+    //   }
+    // else{
+    //   bool found = CreateLabelCubit.of(context).checkFound(widget.controller.text);
+    //   _found = found;
+    //   bool validate = _formKey.currentState!.validate();
+    //   if (validate) {
+    //     if (widget.controller.text.isNotEmpty) {
+    //       CreateLabelCubit.of(context).editLabel(widget.label, widget.controller.text);
+    //       _edited=true;
+    //     } else {
+    //       _focusNode.unfocus();
+    //     }
+    //   } else {
+    //     _focusNode.requestFocus();
+    //   }
+    // }
   }
   _listen() {
     setState(() {
@@ -70,7 +70,7 @@ class _EditLabelFieldState extends State<EditLabelField> {
   }
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CreateLabelCubit, CreateLabelStates>(
+    return BlocListener<LabelActionsBloc, LabelActionsStates>(
       listener: (context, state) {
         if (state is EditLabelSuccessState) {
           _focusNode.unfocus();
@@ -96,7 +96,7 @@ class _EditLabelFieldState extends State<EditLabelField> {
           }
           return null;
         },
-        deleteLabel: () => CreateLabelCubit.of(context).deleteLabel(widget.label, widget.index),
+        deleteLabel: (){},
       ),
     );
   }

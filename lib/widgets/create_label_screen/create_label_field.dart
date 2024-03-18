@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes/core/extension/context_extension.dart';
-import 'package:notes/cubits/create_label_cubit/create_label_cubit.dart';
+import 'package:notes/cubits/label_actions_bloc/label_actions_bloc.dart';
 import 'package:notes/widgets/create_label_screen/label_field/label_field.dart';
 class AddLabelField extends StatefulWidget {
   final bool isNew;
@@ -26,12 +26,12 @@ class _AddLabelFieldState extends State<AddLabelField> {
     _controller = TextEditingController();
   }
   void _add() {
-    bool found=CreateLabelCubit.of(context).checkFound(_controller.text);
+    bool found=LabelActionsBloc.of(context).checkFound(_controller.text);
     _found=found;
     bool validate=_formKey.currentState!.validate();
     if(validate){
       if(_controller.text.isNotEmpty) {
-        CreateLabelCubit.of(context).addLabel(_controller.text);
+        LabelActionsBloc.of(context).add(AddLabelEvent(_controller.text));
         _found=false;
       }
       else{
@@ -69,7 +69,7 @@ class _AddLabelFieldState extends State<AddLabelField> {
   }
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CreateLabelCubit, CreateLabelStates>(
+    return BlocListener<LabelActionsBloc, LabelActionsStates>(
       listener: (context, state) {
         if (state is AddLabelSuccessState) {
           _controller.clear();
