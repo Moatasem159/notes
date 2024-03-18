@@ -8,14 +8,18 @@ abstract class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     fontFamily: AppFonts.englishFontFamily,
     disabledColor: Colors.black,
+    dialogTheme:DialogTheme(
+      backgroundColor: AppColors.lightSeconderBackgroundColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      actionsPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.buttonLightColor,
         foregroundColor: Colors.white,
       ),
     ),
-    dividerTheme:
-        const DividerThemeData(color: AppColors.lightActiveDrawerColor),
+    dividerTheme: const DividerThemeData(color: AppColors.lightActiveDrawerColor),
     iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
       iconColor: MaterialStateProperty.all(Colors.black),
@@ -43,8 +47,12 @@ abstract class AppTheme {
       elevation: 0,
       scrolledUnderElevation: 0,
     ),
-    dividerTheme:
-        const DividerThemeData(color: AppColors.darkActiveDrawerColor),
+    dialogTheme:  DialogTheme(
+      backgroundColor: AppColors.darkSeconderBackgroundColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      actionsPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+    ),
+    dividerTheme: const DividerThemeData(color: AppColors.darkActiveDrawerColor),
     disabledColor: Colors.white,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -61,8 +69,7 @@ abstract class AppTheme {
       backgroundColor: AppColors.darkBackgroundColor,
       elevation: 0,
     ),
-    listTileTheme: const ListTileThemeData()
-        .copyWith(selectedColor: AppColors.darkActiveDrawerColor),
+    listTileTheme: const ListTileThemeData().copyWith(selectedColor: AppColors.darkActiveDrawerColor),
     colorScheme: const ColorScheme.dark().copyWith(
       background: AppColors.darkBackgroundColor,
       primary: Colors.white,

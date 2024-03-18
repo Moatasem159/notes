@@ -7,15 +7,14 @@ import 'package:notes/sources/notes_data_source.dart';
 part 'get_labeled_notes_state.dart';
 
 class GetLabeledNotesCubit extends Cubit<GetLabeledNotesStates> {
-  GetLabeledNotesCubit(this._dataSource, this.label)
-      : super(GetLabeledNotesInitialState());
-  final String label;
+  GetLabeledNotesCubit(this._dataSource, this.label) : super(GetLabeledNotesInitialState());
+  final Label label;
   final NoteLocalDataSource _dataSource;
   static GetLabeledNotesCubit of(BuildContext context) => BlocProvider.of(context);
   getLabeledNotes() {
     List<Note> notes = _dataSource.getNotes().where((element) => element.labeled == true && element.status != NoteStatus.deleted).toList();
     notes.removeWhere((Note note) {
-      Label label = note.labels.firstWhere((Label element) => element.name == this.label, orElse: () => Label(name: ''));
+      Label label = note.labels.firstWhere((Label element) => element.name == this.label.name, orElse: () => Label(name: ''));
       return label.name == "";
     });
     List<Note> pinnedNote = notes.where((note) => note.pinned==true).toList();

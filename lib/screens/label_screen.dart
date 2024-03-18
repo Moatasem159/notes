@@ -6,18 +6,19 @@ import 'package:notes/config/themes/app_theme.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/cubits/app_bar_cubit/app_bar_cubit.dart';
 import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
+import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/widgets/add_note_button/add_note_button.dart';
 import 'package:notes/widgets/custom_drawer/main_drawer.dart';
 import 'package:notes/widgets/label_screen/label_screen_body.dart';
 class LabelScreen extends StatelessWidget {
-  final String title;
-  const LabelScreen({super.key, required this.title});
+  final Label label;
+  const LabelScreen({super.key,required this.label});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (_) => GetLabeledNotesCubit(sl(), title)..getLabeledNotes(),
+        create: (_) => GetLabeledNotesCubit(sl(), label)..getLabeledNotes(),
         child: BlocBuilder<AppBarCubit, AppBarStates>(
           builder: (context, state) {
             return AnnotatedRegion<SystemUiOverlayStyle>(

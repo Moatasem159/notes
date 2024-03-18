@@ -13,7 +13,7 @@ class _LabelTile extends StatelessWidget {
           onTap: ()async{
             Scaffold.of(context).closeDrawer();
             await Future.delayed(const Duration(milliseconds: 200)).then((_){
-              context.goNamed(Routes.labelRoute,queryParameters:{"label":label.name});
+              context.goNamed(Routes.labelRoute,queryParameters:{"label":label.name},extra: label);
             });
           },
           borderRadius: BorderRadius.circular(25),

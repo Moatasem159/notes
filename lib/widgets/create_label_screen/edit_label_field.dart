@@ -37,25 +37,25 @@ class _EditLabelFieldState extends State<EditLabelField> {
     super.dispose();
   }
   _edit() {
-    // if(text.trim()==widget.controller.text.trim())
-    //   {
-    //   _focusNode.unfocus();
-    //   }
-    // else{
-    //   bool found = CreateLabelCubit.of(context).checkFound(widget.controller.text);
-    //   _found = found;
-    //   bool validate = _formKey.currentState!.validate();
-    //   if (validate) {
-    //     if (widget.controller.text.isNotEmpty) {
-    //       CreateLabelCubit.of(context).editLabel(widget.label, widget.controller.text);
-    //       _edited=true;
-    //     } else {
-    //       _focusNode.unfocus();
-    //     }
-    //   } else {
-    //     _focusNode.requestFocus();
-    //   }
-    // }
+    if(text.trim()==widget.controller.text.trim())
+      {
+      _focusNode.unfocus();
+      }
+    else{
+      bool found = LabelActionsBloc.of(context).checkFound(widget.controller.text);
+      _found = found;
+      bool validate = _formKey.currentState!.validate();
+      if (validate) {
+        if (widget.controller.text.isNotEmpty) {
+          LabelActionsBloc.of(context).add(EditLabelEvent(widget.label, widget.controller.text));
+          _edited=true;
+        } else {
+          _focusNode.unfocus();
+        }
+      } else {
+        _focusNode.requestFocus();
+      }
+    }
   }
   _listen() {
     setState(() {

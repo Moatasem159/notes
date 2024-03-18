@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/cubits/app_bar_cubit/app_bar_cubit.dart';
 import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
-import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/screens/add_note_screen.dart';
 import 'package:notes/widgets/add_note_button/add_note_button_builder.dart';
@@ -27,7 +26,7 @@ class AddNoteButton extends StatelessWidget {
           return BlocProvider.value(
             value: GetLabeledNotesCubit.of(context),
             child: AddNoteScreen(
-                label: Label(name: GetLabeledNotesCubit.of(context).label),
+                label: GetLabeledNotesCubit.of(context).label,
                 noteStatus:noteStatus),
           );
         }

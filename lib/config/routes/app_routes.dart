@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
+import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/screens/deleted_screen.dart';
 import 'package:notes/screens/home_screen.dart';
@@ -48,7 +49,7 @@ abstract class AppRoute {
               pageBuilder: (context, state) => SlideFromDownToUpWithFading(
                   child: LabelScreen(
                 key: ValueKey<String>(state.uri.queryParameters["label"]!),
-                title: state.uri.queryParameters["label"]!,
+                label: state.extra as Label,
               )),
             ),
             GoRoute(

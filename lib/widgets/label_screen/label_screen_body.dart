@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:notes/app/injection_container.dart';
+import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
+import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
+import 'package:notes/cubits/label_actions_bloc/label_actions_bloc.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/widgets/empty_body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +20,6 @@ import 'package:notes/core/extension/empty_padding_extension.dart';
 import 'package:notes/widgets/custom_popup_menu/custom_popup_menu.dart';
 import 'package:notes/widgets/custom_popup_menu/custom_popup_menu_item.dart';
 import 'package:notes/widgets/default_options_appbar/default_options_appbar.dart';
-import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
 part 'rename_label.dart';
 part 'label_appbar.dart';
 part 'label_popup_menu.dart';

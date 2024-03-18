@@ -12,10 +12,10 @@ class _LabelPopupMenu extends StatelessWidget {
             showDialog(
               context: context,
               builder: (_) {
-                return BlocProvider.value(
-                  value: GetLabeledNotesCubit.of(context),
-                  child: const _RenameLabelDialog(),
-                );
+                return MultiBlocProvider(providers: [
+                  BlocProvider.value(value: GetLabeledNotesCubit.of(context)),
+                  BlocProvider(create:(context) => LabelActionsBloc(sl()))
+                ], child:  const _RenameLabelDialog());
               },
             );
           },
