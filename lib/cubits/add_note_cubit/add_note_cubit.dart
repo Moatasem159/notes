@@ -119,7 +119,10 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
       }
     }
     if (state is AddNoteSuccessState && state.isAdded){
-      GetActiveNotesCubit.of(context).getNotes();
+    if(noteStatus == NoteStatus.active)
+      {
+        GetActiveNotesCubit.of(context).getNotes();
+      }
       if(noteStatus == NoteStatus.labeled){
         GetLabeledNotesCubit.of(context).getLabeledNotes();
       }
@@ -133,9 +136,9 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
     if (state is EditNoteSuccessState && noteStatus == NoteStatus.deleted) {
       GetDeletedNotesCubit.of(context).getDeletedNotes(edit: true);
     }
-    if (state is EditNoteSuccessState) {
-      GetActiveNotesCubit.of(context).getNotes(edit: true);
-    }
+    // if (state is EditNoteSuccessState) {
+    //   GetActiveNotesCubit.of(context).getNotes(edit: true);
+    // }
     if (state is DeleteNoteForeverState) {
       GetDeletedNotesCubit.of(context).getDeletedNotes(edit: true);
       context.pop();

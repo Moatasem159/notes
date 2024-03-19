@@ -7,7 +7,7 @@ class _ColorButton extends StatelessWidget {
     return BlocListener<NotesActionsBloc, NotesActionsState>(
       listener: (context, state) {
         if (state is ColorSuccessState && (noteStatus == NoteStatus.active||noteStatus==NoteStatus.labeled)) {
-          GetActiveNotesCubit.of(context).getNotes();
+          // GetActiveNotesCubit.of(context).getNotes();
           if(noteStatus==NoteStatus.labeled)
           {
             GetLabeledNotesCubit.of(context).getLabeledNotes();

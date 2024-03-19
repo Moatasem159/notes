@@ -8,7 +8,6 @@ class _DeletedOptionsAppBar extends StatelessWidget {
         if (state is DeleteSuccessState) {
           AppBarCubit.of(context).removeSelection();
           GetDeletedNotesCubit.of(context).getDeletedNotes();
-          GetActiveNotesCubit.of(context).getNotes();
         }
       },
       child: Row(

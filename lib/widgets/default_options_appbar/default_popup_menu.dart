@@ -1,28 +1,20 @@
 part of 'default_options_appbar.dart';
-
 class _DefaultPopupMenu extends StatelessWidget {
   final NoteStatus noteStatus;
-
   const _DefaultPopupMenu(this.noteStatus);
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<NotesActionsBloc, NotesActionsState>(
       listener: (context, state) {
-        if ((state is ArchiveSuccessState || state is DeleteSuccessState) &&
-            (noteStatus == NoteStatus.active ||
-                noteStatus == NoteStatus.labeled)) {
-          AppBarCubit.of(context).removeSelection();
+        if (state is ArchiveSuccessState || state is DeleteSuccessState) {
           if (noteStatus == NoteStatus.labeled) {
             GetLabeledNotesCubit.of(context).getLabeledNotes();
+          } else if (noteStatus == NoteStatus.active) {
+            GetActiveNotesCubit.of(context).getNotes();
+          } else if (noteStatus == NoteStatus.archive) {
+            GetArchivedNotesCubit.of(context).getArchivedNotes();
           }
-          GetActiveNotesCubit.of(context).getNotes();
-        }
-        if ((state is ArchiveSuccessState || state is DeleteSuccessState) &&
-            noteStatus == NoteStatus.archive) {
           AppBarCubit.of(context).removeSelection();
-          GetArchivedNotesCubit.of(context).getArchivedNotes();
-          GetActiveNotesCubit.of(context).getNotes();
         }
       },
       child: CustomPopupMenu(items: [

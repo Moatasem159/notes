@@ -13,7 +13,6 @@ import 'package:notes/cubits/app_bar_cubit/app_bar_cubit.dart';
 import 'package:notes/widgets/custom_popup_menu/custom_popup_menu.dart';
 import 'package:notes/cubits/notes_actions_bloc/notes_actions_bloc.dart';
 import 'package:notes/widgets/custom_popup_menu/custom_popup_menu_item.dart';
-import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
 import 'package:notes/cubits/get_deleted_notes_cubit/get_deleted_notes_cubit.dart';
 part 'deleted_appbar.dart';
 part 'delete_popup_menu.dart';

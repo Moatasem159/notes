@@ -36,7 +36,7 @@ abstract class AppRoute {
       GoRoute(
           path: Routes.initialRoute,
           name: Routes.homeRoute,
-          builder: (__, _) => const HomeScreen(),
+          builder: (_, state) => HomeScreen(key:UniqueKey()),
           routes: <GoRoute>[
             GoRoute(
               path: "reminder",
@@ -48,9 +48,71 @@ abstract class AppRoute {
               name: Routes.labelRoute,
               pageBuilder: (context, state) => SlideFromDownToUpWithFading(
                   child: LabelScreen(
-                key: ValueKey<String>(state.uri.queryParameters["label"]!),
+                key: UniqueKey(),
                 label: state.extra as Label,
               )),
+            ),
+            GoRoute(
+              path: 'pickLabel',
+              name: Routes.pickLabelRoute,
+              builder: (context, state) {
+                bool inNote = state.uri.queryParameters["inNote"] == "true" ? true : false;
+                String noteStatus=state.uri.queryParameters["noteStatus"]!;
+                NoteStatus status = noteStatus == "NoteStatus.active"
+                    ? NoteStatus.active : noteStatus == "NoteStatus.labeled"
+                    ? NoteStatus.labeled
+                    : NoteStatus.archive;
+                PickLabelParams params = state.extra as PickLabelParams;
+                if (inNote && status == NoteStatus.archive) {
+                  return BlocProvider.value(
+                    value: params.notesCubit as GetArchivedNotesCubit,
+                    child: BlocProvider.value(
+                      value: params.addNoteCubit as AddNoteCubit,
+                      child: PickLabelScreen(
+                        noteStatus: status,
+                        inNote: inNote,
+                        params: params,
+                      ),
+                    ),
+                  );
+                }
+                else if (inNote && status != NoteStatus.archive) {
+                  return BlocProvider.value(
+                    value: params.addNoteCubit as AddNoteCubit,
+                    child: PickLabelScreen(
+                      noteStatus: status,
+                      inNote: inNote,
+                      params: params,
+                    ),
+                  );
+                }
+                else if (!inNote && status == NoteStatus.archive) {
+                  return BlocProvider.value(
+                    value: params.notesCubit as GetArchivedNotesCubit,
+                    child: PickLabelScreen(
+                      noteStatus: status,
+                      inNote: inNote,
+                      params: params,
+                    ),
+                  );
+                }
+                else if (!inNote && status == NoteStatus.labeled) {
+                  return BlocProvider.value(
+                    value: params.notesCubit as GetLabeledNotesCubit,
+                    child: PickLabelScreen(
+                      noteStatus: status,
+                      inNote: inNote,
+                      params: params,
+                    ),
+                  );
+                }
+                else {
+                  return PickLabelScreen(
+                    noteStatus: status,
+                    params: state.extra as PickLabelParams,
+                  );
+                }
+              },
             ),
             GoRoute(
               path: "createLabelRoute",
@@ -63,7 +125,7 @@ abstract class AppRoute {
             GoRoute(
               path: "archived",
               name: Routes.archivedRoute,
-              builder: (__, _) => const ArchivedScreen(),
+             pageBuilder: (_, __) => SlideFromDownToUpWithFading(child: const ArchivedScreen()),
             ),
             GoRoute(
               path: "deleted",
@@ -76,68 +138,7 @@ abstract class AppRoute {
               builder: (__, _) => const SettingsScreen(),
             ),
           ]),
-      GoRoute(
-        path: '/pickLabel',
-        name: Routes.pickLabelRoute,
-        builder: (context, state) {
-          bool inNote = state.uri.queryParameters["inNote"] == "true" ? true : false;
-          String noteStatus=state.uri.queryParameters["noteStatus"]!;
-          NoteStatus status = noteStatus == "NoteStatus.active"
-              ? NoteStatus.active : noteStatus == "NoteStatus.labeled"
-                  ? NoteStatus.labeled
-                  : NoteStatus.archive;
-          PickLabelParams params = state.extra as PickLabelParams;
-          if (inNote && status == NoteStatus.archive) {
-            return BlocProvider.value(
-              value: params.notesCubit as GetArchivedNotesCubit,
-              child: BlocProvider.value(
-                value: params.addNoteCubit as AddNoteCubit,
-                child: PickLabelScreen(
-                  noteStatus: status,
-                  inNote: inNote,
-                  params: params,
-                ),
-              ),
-            );
-          }
-          else if (inNote && status != NoteStatus.archive) {
-            return BlocProvider.value(
-              value: params.addNoteCubit as AddNoteCubit,
-              child: PickLabelScreen(
-                noteStatus: status,
-                inNote: inNote,
-                params: params,
-              ),
-            );
-          }
-          else if (!inNote && status == NoteStatus.archive) {
-            return BlocProvider.value(
-              value: params.notesCubit as GetArchivedNotesCubit,
-              child: PickLabelScreen(
-                noteStatus: status,
-                inNote: inNote,
-                params: params,
-              ),
-            );
-          }
-          else if (!inNote && status == NoteStatus.labeled) {
-            return BlocProvider.value(
-              value: params.notesCubit as GetLabeledNotesCubit,
-              child: PickLabelScreen(
-                noteStatus: status,
-                inNote: inNote,
-                params: params,
-              ),
-            );
-          }
-          else {
-            return PickLabelScreen(
-              noteStatus: status,
-              params: state.extra as PickLabelParams,
-            );
-          }
-        },
-      ),
+
     ],
   );
 
