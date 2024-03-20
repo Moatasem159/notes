@@ -1,4 +1,5 @@
-part of'home_screen_body.dart';
+part of 'home_screen_body.dart';
+
 class _OthersListTitle extends StatelessWidget {
   const _OthersListTitle();
 
@@ -6,9 +7,8 @@ class _OthersListTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetActiveNotesCubit, GetActiveNotesStates>(
       builder: (context, state) {
-        if (state is GetActiveNotesSuccessState &&
-            state.notes.isNotEmpty &&
-            state.pinnedNotes.isNotEmpty) {
+        (bool, bool) check = GetActiveNotesCubit.of(context).notes.listHasPinnedNotes();
+        if (check.$1 && check.$2) {
           return ListTitle(title: context.local.others);
         }
         return const SliverToBoxAdapter();

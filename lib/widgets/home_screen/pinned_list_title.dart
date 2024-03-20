@@ -6,8 +6,7 @@ class _PinnedListTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetActiveNotesCubit, GetActiveNotesStates>(
       builder: (context, state) {
-        if (state is GetActiveNotesSuccessState &&
-            state.pinnedNotes.isNotEmpty) {
+        if (GetActiveNotesCubit.of(context).notes.listHasPinnedNotes().$1){
           return ListTitle(title: context.local.pinned);
         }
         return const SliverToBoxAdapter();

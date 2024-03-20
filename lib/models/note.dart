@@ -60,3 +60,18 @@ enum NoteStatus {
   @HiveField(4)
   labeled,
 }
+extension GetPinned on List<Note>{
+  (bool,bool) listHasPinnedNotes(){
+    bool has=false;
+    bool allNotesIsNotPinned=false;
+    for (Note note in this) {
+      if(note.pinned) {
+        has =true;
+      }
+      if(note.pinned==false) {
+        allNotesIsNotPinned =true;
+      }
+    }
+    return (has,allNotesIsNotPinned);
+  }
+}

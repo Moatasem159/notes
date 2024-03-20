@@ -4,12 +4,13 @@ import 'package:notes/widgets/note_widget/note_widget.dart';
 class NoteNormalList extends StatelessWidget {
   final List<Note> notes;
   final NoteStatus noteStatus;
-  const NoteNormalList({super.key, required this.notes, required this.noteStatus});
+  final Widget Function(BuildContext context, int index) ?itemBuilder;
+  const NoteNormalList({super.key, required this.notes, required this.noteStatus, this.itemBuilder});
   @override
   Widget build(BuildContext context) {
     return SliverList.builder(
       itemCount: notes.length,
-      itemBuilder: (context, index) => NoteWidget(isGrid: false, note: notes[index],index: index,noteStatus: noteStatus)
+      itemBuilder: itemBuilder??(context, index) =>NoteWidget(isGrid: false, note: notes[index],index: index,noteStatus: noteStatus)
     );
   }
 }

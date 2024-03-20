@@ -5,7 +5,8 @@ import 'package:notes/widgets/note_widget/note_widget.dart';
 class NoteGridList extends StatelessWidget {
   final List<Note> notes;
   final NoteStatus noteStatus;
-  const NoteGridList({super.key, required this.notes, required this.noteStatus});
+  final Widget Function(BuildContext context, int index) ?itemBuilder;
+  const NoteGridList({super.key, required this.notes, required this.noteStatus, this.itemBuilder});
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -15,7 +16,7 @@ class NoteGridList extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         padding: EdgeInsets.zero,
         gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (context, index) => NoteWidget(isGrid: true, note: notes[index],index: index,noteStatus: noteStatus),
+        itemBuilder:itemBuilder?? (context, index) => NoteWidget(isGrid: true, note: notes[index],index: index,noteStatus: noteStatus),
       ),
     );
   }
