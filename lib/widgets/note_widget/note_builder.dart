@@ -17,7 +17,13 @@ class _NoteBuilder extends StatelessWidget {
         closedShape:
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         openBuilder: (_, action) {
-          if (noteStatus== NoteStatus.archive) {
+          if(noteStatus ==NoteStatus.active)
+            {
+              return BlocProvider.value(
+                  value: GetActiveNotesCubit.of(context),
+                  child: AddNoteScreen(note: note,noteStatus: noteStatus));
+            }
+          else if (noteStatus== NoteStatus.archive) {
             return BlocProvider.value(
                 value: GetArchivedNotesCubit.of(context),
                 child: AddNoteScreen(note: note,noteStatus: noteStatus));
