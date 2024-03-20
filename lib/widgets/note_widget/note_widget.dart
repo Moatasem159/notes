@@ -20,13 +20,10 @@ part 'note_closed_builder.dart';
 
 class NoteWidget extends StatefulWidget {
   final Note note;
-  final bool isGrid;
   final int index;
   final NoteStatus noteStatus;
-
   const NoteWidget(
       {super.key,
-      required this.isGrid,
       required this.note,
       required this.index,
       required this.noteStatus});
@@ -65,7 +62,7 @@ class _NoteWidgetState extends State<NoteWidget> {
             opacity = 1 - details.progress;
           });
         },
-        child: _NoteBuilder(widget.note, widget.isGrid, widget.noteStatus),
+        child: _NoteBuilder(widget.note,widget.noteStatus),
       ),
     );
   }

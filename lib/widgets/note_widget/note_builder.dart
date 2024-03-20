@@ -1,9 +1,8 @@
 part of'note_widget.dart';
 class _NoteBuilder extends StatelessWidget {
   final Note note;
-  final bool isGrid;
   final NoteStatus noteStatus;
-  const _NoteBuilder(this.note, this.isGrid, this.noteStatus);
+  const _NoteBuilder(this.note,this.noteStatus);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,7 +37,7 @@ class _NoteBuilder extends StatelessWidget {
           }
         },
         closedBuilder: (_, action) =>
-            _NoteClosedBuilder(note: note, isGrid: isGrid, onTap:action),
+            _NoteClosedBuilder(note: note,onTap:action),
       ),
     );
   }

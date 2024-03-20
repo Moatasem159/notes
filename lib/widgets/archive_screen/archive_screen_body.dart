@@ -6,6 +6,7 @@ import 'package:notes/widgets/custom_icon_button.dart';
 import 'package:notes/widgets/custom_scroll_list.dart';
 import 'package:notes/core/utils/app_text_styles.dart';
 import 'package:notes/widgets/note_lists/notes_list.dart';
+import 'package:notes/widgets/note_widget/note_widget.dart';
 import 'package:notes/widgets/switch_list_view_button.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/cubits/app_bar_cubit/app_bar_cubit.dart';

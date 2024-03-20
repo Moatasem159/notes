@@ -8,8 +8,8 @@ class _DeletedNotesList extends StatelessWidget {
         if (state is GetDeletedNotesSuccessState &&
             state.deletedNotes.isNotEmpty) {
           return NotesList(
-            notes: state.deletedNotes,
-            noteStatus: NoteStatus.deleted,
+            length: state.deletedNotes.length,
+            itemBuilder: (context, index) => NoteWidget(note: state.deletedNotes[index], index: index, noteStatus: NoteStatus.deleted),
           );
         }
         return EmptyBody(

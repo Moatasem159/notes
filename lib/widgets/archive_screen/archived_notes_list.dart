@@ -9,7 +9,8 @@ class _ArchivedNotesList extends StatelessWidget {
         if (state is GetArchivedNotesSuccessState &&
             state.archiveNotes.isNotEmpty) {
           return NotesList(
-              notes: state.archiveNotes, noteStatus: NoteStatus.archive);
+            length: state.archiveNotes.length,
+            itemBuilder: (context, index) => NoteWidget(note: state.archiveNotes[index], index: index, noteStatus: NoteStatus.archive));
         }
         return EmptyBody(
             title: context.local.archiveBodyTitle,

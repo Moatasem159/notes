@@ -6,9 +6,9 @@ class _OthersNotesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetActiveNotesCubit, GetActiveNotesStates>(
       builder: (context, state) {
-        return NotesList(notes: GetActiveNotesCubit.of(context).notes, noteStatus: NoteStatus.active,itemBuilder: (context, index) {
+        return NotesList(length: GetActiveNotesCubit.of(context).notes.length,itemBuilder: (context, index) {
           if(GetActiveNotesCubit.of(context).notes[index].pinned==false){
-            return NoteWidget(isGrid: false, note: GetActiveNotesCubit.of(context).notes[index],index: index,noteStatus: NoteStatus.active);
+            return NoteWidget(note: GetActiveNotesCubit.of(context).notes[index],index: index,noteStatus: NoteStatus.active);
           }
           return const SizedBox();
         });

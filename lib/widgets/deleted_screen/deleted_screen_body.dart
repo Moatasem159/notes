@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/widgets/empty_body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes/widgets/note_widget/note_widget.dart';
 import 'package:notes/widgets/notes_counter.dart';
 import 'package:notes/app/injection_container.dart';
 import 'package:notes/core/utils/app_text_styles.dart';

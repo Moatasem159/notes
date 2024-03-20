@@ -2,9 +2,8 @@ part of 'note_widget.dart';
 
 class _NoteClosedBuilder extends StatelessWidget {
   final Note note;
-  final bool isGrid;
   final VoidCallback onTap;
-  const _NoteClosedBuilder({required this.note, required this.isGrid, required this.onTap});
+  const _NoteClosedBuilder({required this.note,required this.onTap});
   BoxBorder _border(BuildContext context) {
     return Border.all(
       width: AppBarCubit.of(context).selectedNotes.contains(note)
