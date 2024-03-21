@@ -1,8 +1,6 @@
 part of 'home_screen_body.dart';
-
 class _OthersListTitle extends StatelessWidget {
   const _OthersListTitle();
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GetActiveNotesCubit, GetActiveNotesStates>(
