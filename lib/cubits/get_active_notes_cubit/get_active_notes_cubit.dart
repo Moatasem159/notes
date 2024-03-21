@@ -18,4 +18,14 @@ class GetActiveNotesCubit extends Cubit<GetActiveNotesStates> {
     notes=_dataSource.getNotes().where((element)=>element.status==NoteStatus.active).toList();
     emit(GetActiveNotesSuccessState());
   }
+
+  remove(Note note){
+    notes.remove(note);
+    emit(RemoveState());
+  }
+  @override
+  Future<void> close() {
+    notes.clear();
+    return super.close();
+  }
 }

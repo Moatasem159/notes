@@ -13,7 +13,6 @@ class _ArchivedLabeledNotesList extends StatelessWidget {
               length: state.archivedNotes.length,
               itemBuilder: (context, index) => NoteWidget(
                   note: state.archivedNotes[index],
-                  index: index,
                   noteStatus: NoteStatus.labeled));
         }
         return const SliverToBoxAdapter();

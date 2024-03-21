@@ -20,13 +20,8 @@ part 'note_closed_builder.dart';
 
 class NoteWidget extends StatefulWidget {
   final Note note;
-  final int index;
   final NoteStatus noteStatus;
-  const NoteWidget(
-      {super.key,
-      required this.note,
-      required this.index,
-      required this.noteStatus});
+  const NoteWidget({super.key,required this.note,required this.noteStatus});
 
   @override
   State<NoteWidget> createState() => _NoteWidgetState();
@@ -41,16 +36,16 @@ class _NoteWidgetState extends State<NoteWidget> {
       opacity: opacity,
       duration: const Duration(milliseconds: 50),
       child: Dismissible(
-        key: ValueKey<String>("${widget.note.date}${widget.index}"),
+        key: ValueKey(widget.note.key),
         onDismissed: (direction) async {
-          GetActiveNotesCubit.of(context).getNotes();
+          widget.note.status = NoteStatus.archive;
+          widget.note.pinned = false;
+          widget.note.save();
           CustomToast.showToast(context, msg: context.local.noteArchived);
+          GetActiveNotesCubit.of(context).remove(widget.note);
         },
         confirmDismiss: (direction) async {
           if (widget.note.status == NoteStatus.active&&AppBarCubit.of(context).isBase) {
-            widget.note.status = NoteStatus.archive;
-            widget.note.pinned = false;
-            await widget.note.save();
             return true;
           } else {
             return null;

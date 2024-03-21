@@ -1,17 +1,22 @@
-part of'home_screen_body.dart';
+part of 'home_screen_body.dart';
 class _OthersNotesList extends StatelessWidget {
   const _OthersNotesList();
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GetActiveNotesCubit, GetActiveNotesStates>(
+      buildWhen: (previous, current) => current is GetActiveNotesSuccessState,
       builder: (context, state) {
-        return NotesList(length: GetActiveNotesCubit.of(context).notes.length,itemBuilder: (context, index) {
-          if(GetActiveNotesCubit.of(context).notes[index].pinned==false){
-            return NoteWidget(note: GetActiveNotesCubit.of(context).notes[index],index: index,noteStatus: NoteStatus.active);
-          }
-          return const SizedBox();
-        });
+        List<Note> notes = GetActiveNotesCubit.of(context).notes;
+        return NotesList(
+          length: notes.length,
+          itemBuilder: (_, index) {
+            Note note = notes[index];
+            if (!note.pinned) {
+              return NoteWidget(note: note, noteStatus: NoteStatus.active);
+            }
+            return const SizedBox();
+          },
+        );
       },
     );
   }

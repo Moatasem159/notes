@@ -6,7 +6,7 @@ class _EmptyNotes extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetActiveNotesCubit, GetActiveNotesStates>(
       builder: (context, state) {
-        if (state is GetActiveNotesSuccessState && GetActiveNotesCubit.of(context).notes.isEmpty) {
+        if (GetActiveNotesCubit.of(context).notes.isEmpty) {
           return EmptyBody(
               title: context.local.homeBodyTitle,
               icon: Icons.lightbulb_outline_rounded);

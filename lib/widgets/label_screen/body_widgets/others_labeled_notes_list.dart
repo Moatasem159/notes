@@ -9,7 +9,7 @@ class _OthersLabeledNotesList extends StatelessWidget {
         if (state is GetLabeledNotesSuccessState && state.notes.isNotEmpty) {
           return NotesList(
             length: state.notes.length,
-            itemBuilder: (context, index) => NoteWidget(note: state.notes[index], index: index, noteStatus: NoteStatus.labeled));
+            itemBuilder: (context, index) => NoteWidget(note: state.notes[index],noteStatus: NoteStatus.labeled));
         }
         return const SliverToBoxAdapter();
       },

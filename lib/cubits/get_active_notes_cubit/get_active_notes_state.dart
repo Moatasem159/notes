@@ -3,3 +3,4 @@ abstract class GetActiveNotesStates {}
 class GetActiveNotesInitialState extends GetActiveNotesStates {}
 class GetActiveNotesLoadingState extends GetActiveNotesStates {}
 class GetActiveNotesSuccessState extends GetActiveNotesStates {}
+class RemoveState extends GetActiveNotesStates {}

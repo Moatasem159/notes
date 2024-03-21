@@ -13,7 +13,6 @@ class _PinnedLabeledNotesList extends StatelessWidget {
             length: state.pinnedNotes.length,
             itemBuilder: (context, index) => NoteWidget(
                 note: state.pinnedNotes[index],
-                index: index,
                 noteStatus: NoteStatus.labeled),
           );
         }

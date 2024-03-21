@@ -74,4 +74,18 @@ extension GetPinned on List<Note>{
     }
     return (has,allNotesIsNotPinned);
   }
+   (List<Note>,List<Note>) getNotes(){
+    List<Note> notes = [];
+    List<Note> pinned=[];
+    for (Note note in this) {
+      if(note.pinned)
+        {
+          pinned.add(note);
+        }
+      else{
+        notes.add(note);
+      }
+    }
+    return (notes, pinned);
+   }
 }

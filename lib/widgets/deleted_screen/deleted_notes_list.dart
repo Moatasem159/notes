@@ -9,7 +9,7 @@ class _DeletedNotesList extends StatelessWidget {
             state.deletedNotes.isNotEmpty) {
           return NotesList(
             length: state.deletedNotes.length,
-            itemBuilder: (context, index) => NoteWidget(note: state.deletedNotes[index], index: index, noteStatus: NoteStatus.deleted),
+            itemBuilder: (context, index) => NoteWidget(note: state.deletedNotes[index],noteStatus: NoteStatus.deleted),
           );
         }
         return EmptyBody(
