@@ -31,12 +31,13 @@ abstract class Routes {
 
 abstract class AppRoute {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.initialRoute,
+    initialLocation: "/home",
+    debugLogDiagnostics: true,
     routes: [
       GoRoute(
-          path: Routes.initialRoute,
+          path: "/home",
           name: Routes.homeRoute,
-          builder: (_, state) => HomeScreen(key:UniqueKey()),
+          builder: (_, state) => HomeScreen(key: UniqueKey()),
           routes: <GoRoute>[
             GoRoute(
               path: "reminder",
@@ -53,68 +54,6 @@ abstract class AppRoute {
               )),
             ),
             GoRoute(
-              path: 'pickLabel',
-              name: Routes.pickLabelRoute,
-              builder: (context, state) {
-                bool inNote = state.uri.queryParameters["inNote"] == "true" ? true : false;
-                String noteStatus=state.uri.queryParameters["noteStatus"]!;
-                NoteStatus status = noteStatus == "NoteStatus.active"
-                    ? NoteStatus.active : noteStatus == "NoteStatus.labeled"
-                    ? NoteStatus.labeled
-                    : NoteStatus.archive;
-                PickLabelParams params = state.extra as PickLabelParams;
-                if (inNote && status == NoteStatus.archive) {
-                  return BlocProvider.value(
-                    value: params.notesCubit as GetArchivedNotesCubit,
-                    child: BlocProvider.value(
-                      value: params.addNoteCubit as AddNoteCubit,
-                      child: PickLabelScreen(
-                        noteStatus: status,
-                        inNote: inNote,
-                        params: params,
-                      ),
-                    ),
-                  );
-                }
-                else if (inNote && status != NoteStatus.archive) {
-                  return BlocProvider.value(
-                    value: params.addNoteCubit as AddNoteCubit,
-                    child: PickLabelScreen(
-                      noteStatus: status,
-                      inNote: inNote,
-                      params: params,
-                    ),
-                  );
-                }
-                else if (!inNote && status == NoteStatus.archive) {
-                  return BlocProvider.value(
-                    value: params.notesCubit as GetArchivedNotesCubit,
-                    child: PickLabelScreen(
-                      noteStatus: status,
-                      inNote: inNote,
-                      params: params,
-                    ),
-                  );
-                }
-                else if (!inNote && status == NoteStatus.labeled) {
-                  return BlocProvider.value(
-                    value: params.notesCubit as GetLabeledNotesCubit,
-                    child: PickLabelScreen(
-                      noteStatus: status,
-                      inNote: inNote,
-                      params: params,
-                    ),
-                  );
-                }
-                else {
-                  return PickLabelScreen(
-                    noteStatus: status,
-                    params: state.extra as PickLabelParams,
-                  );
-                }
-              },
-            ),
-            GoRoute(
               path: "createLabelRoute",
               name: Routes.createLabelRoute,
               builder: (__, state) => CreateLabelScreen(
@@ -125,7 +64,8 @@ abstract class AppRoute {
             GoRoute(
               path: "archived",
               name: Routes.archivedRoute,
-             pageBuilder: (_, __) => SlideFromDownToUpWithFading(child: const ArchivedScreen()),
+              pageBuilder: (_, __) =>
+                  SlideFromDownToUpWithFading(child: const ArchivedScreen()),
             ),
             GoRoute(
               path: "deleted",
@@ -138,15 +78,71 @@ abstract class AppRoute {
               builder: (__, _) => const SettingsScreen(),
             ),
           ]),
-
+      GoRoute(
+        path: '/pickLabel',
+        name: Routes.pickLabelRoute,
+        builder: (context, state) {
+          bool inNote =
+              state.uri.queryParameters["inNote"] == "true" ? true : false;
+          String noteStatus = state.uri.queryParameters["noteStatus"]!;
+          NoteStatus status = noteStatus == "NoteStatus.active"
+              ? NoteStatus.active
+              : noteStatus == "NoteStatus.labeled"
+                  ? NoteStatus.labeled
+                  : NoteStatus.archive;
+          PickLabelParams params = state.extra as PickLabelParams;
+          if (inNote && status == NoteStatus.archive) {
+            return BlocProvider.value(
+              value: params.notesCubit as GetArchivedNotesCubit,
+              child: BlocProvider.value(
+                value: params.addNoteCubit as AddNoteCubit,
+                child: PickLabelScreen(
+                  noteStatus: status,
+                  inNote: inNote,
+                  params: params,
+                ),
+              ),
+            );
+          } else if (inNote && status != NoteStatus.archive) {
+            return BlocProvider.value(
+              value: params.addNoteCubit as AddNoteCubit,
+              child: PickLabelScreen(
+                noteStatus: status,
+                inNote: inNote,
+                params: params,
+              ),
+            );
+          } else if (!inNote && status == NoteStatus.archive) {
+            return BlocProvider.value(
+              value: params.notesCubit as GetArchivedNotesCubit,
+              child: PickLabelScreen(
+                noteStatus: status,
+                inNote: inNote,
+                params: params,
+              ),
+            );
+          } else if (!inNote && status == NoteStatus.labeled) {
+            return BlocProvider.value(
+              value: params.notesCubit as GetLabeledNotesCubit,
+              child: PickLabelScreen(
+                noteStatus: status,
+                inNote: inNote,
+                params: params,
+              ),
+            );
+          } else {
+            return PickLabelScreen(
+              noteStatus: status,
+              params: state.extra as PickLabelParams,
+            );
+          }
+        },
+      ),
     ],
   );
 
   static String location() {
     String location = _routerLastMatch().uri.path.replaceFirst("/", '');
-    if (location.isEmpty) {
-      location = Routes.homeRoute;
-    }
     return location;
   }
 
