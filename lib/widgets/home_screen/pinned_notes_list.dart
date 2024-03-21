@@ -10,8 +10,8 @@ class _PinnedNotesList extends StatelessWidget {
         return NotesList(
           length: notes.length,
           itemBuilder: (_, index) {
-            Note note = notes[index];
-            if (note.pinned) {
+            Note ?note = notes.isNotEmpty?notes[index]:null;
+            if (note!=null&&note.pinned) {
               return NoteWidget(note: note, noteStatus: NoteStatus.active);
             }
             return const SizedBox();
