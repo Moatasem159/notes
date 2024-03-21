@@ -31,11 +31,11 @@ abstract class Routes {
 
 abstract class AppRoute {
   static final GoRouter router = GoRouter(
-    initialLocation: "/home",
+    initialLocation: Routes.initialRoute,
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
-          path: "/home",
+          path: Routes.initialRoute,
           name: Routes.homeRoute,
           builder: (_, state) => HomeScreen(key: UniqueKey()),
           routes: <GoRoute>[
@@ -147,6 +147,9 @@ abstract class AppRoute {
 
   static String location() {
     String location = _routerLastMatch().uri.path.replaceFirst("/", '');
+    if (location.isEmpty) {
+      location = Routes.homeRoute;
+    }
     return location;
   }
 
