@@ -7,12 +7,14 @@ part 'label_actions_event.dart';
 class LabelActionsBloc extends Bloc<LabelActionsEvents,LabelActionsStates> {
   LabelActionsBloc(this._dataSource) : super(LabelActionsInitialState()){
     labels=[];
+    actionHappened=false;
     on<GetLabelsEvent>(getLabels);
     on<AddLabelEvent>(addLabel);
     on<DeleteLabelEvent>(deleteLabel);
     on<EditLabelEvent>(editLabel);
   }
   final LabelLocalDataSource _dataSource;
+  late bool actionHappened;
   static LabelActionsBloc of(BuildContext context)=>BlocProvider.of(context);
   late List<Label> labels;
   Future<void> addLabel(AddLabelEvent event, Emitter<LabelActionsStates>emit)async {
@@ -26,12 +28,14 @@ class LabelActionsBloc extends Bloc<LabelActionsEvents,LabelActionsStates> {
   Future<void> deleteLabel(DeleteLabelEvent event, Emitter<LabelActionsStates>emit)async {
     emit(DeleteLabelLoadingState());
     await _dataSource.deleteLabel(event.label);
+    actionHappened=true;
     labels.remove(event.label);
     emit(DeleteLabelSuccessState());
   }
   Future<void> editLabel(EditLabelEvent event, Emitter<LabelActionsStates>emit)async {
     emit(EditLabelLoadingState());
     await _dataSource.renameLabel(event.label,event.newName);
+    actionHappened=true;
     emit(EditLabelSuccessState());
   }
   bool checkFound(String name){

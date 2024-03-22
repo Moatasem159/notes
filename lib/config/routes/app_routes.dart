@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
+import 'package:notes/cubits/get_deleted_notes_cubit/get_deleted_notes_cubit.dart';
 import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
+import 'package:notes/models/create_label_params.dart';
 import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/screens/deleted_screen.dart';
@@ -41,7 +43,10 @@ class AppRouter {
       case Routes.createLabelRoute:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => CreateLabelScreen(isNew: settings.arguments as bool),
+          builder: (_) {
+            CreateLabelParams params = settings.arguments as CreateLabelParams;
+            return _getCreateLabelScreen(params);
+          },
         );
       case Routes.pickLabelRoute:
         return MaterialPageRoute(
@@ -78,7 +83,30 @@ class AppRouter {
         );
     }
   }
-   Widget _getPickLabelScreen(PickLabelParams params){
+  Widget _getCreateLabelScreen(CreateLabelParams params) {
+    if (params.notesStatus == NoteStatus.active) {
+      return BlocProvider.value(
+          value: params.notesCubit as GetActiveNotesCubit,
+          child: CreateLabelScreen(params: params));
+    }
+    if (params.notesStatus == NoteStatus.archive) {
+      return BlocProvider.value(
+          value: params.notesCubit as GetArchivedNotesCubit,
+          child: CreateLabelScreen(params: params));
+    }
+    if (params.notesStatus == NoteStatus.labeled) {
+      return BlocProvider.value(
+          value: params.notesCubit as GetLabeledNotesCubit,
+          child: CreateLabelScreen(params: params));
+    }
+    if (params.notesStatus == NoteStatus.deleted) {
+      return BlocProvider.value(
+          value: params.notesCubit as GetDeletedNotesCubit,
+          child: CreateLabelScreen(params: params));
+    }
+    return CreateLabelScreen(params: params);
+  }
+  Widget _getPickLabelScreen(PickLabelParams params) {
     switch (params.noteStatus) {
       case NoteStatus.archive:
         if (params.inNote) {
@@ -86,15 +114,13 @@ class AppRouter {
             value: params.notesCubit as GetArchivedNotesCubit,
             child: BlocProvider.value(
               value: params.addNoteCubit as AddNoteCubit,
-              child: PickLabelScreen(
-                  params: params),
+              child: PickLabelScreen(params: params),
             ),
           );
         } else {
           return BlocProvider.value(
             value: params.notesCubit as GetArchivedNotesCubit,
-            child: PickLabelScreen(
-                params: params),
+            child: PickLabelScreen(params: params),
           );
         }
       case NoteStatus.labeled:
@@ -103,16 +129,13 @@ class AppRouter {
             value: params.notesCubit as GetLabeledNotesCubit,
             child: BlocProvider.value(
               value: params.addNoteCubit as AddNoteCubit,
-              child: PickLabelScreen(
-                  params: params),
+              child: PickLabelScreen(params: params),
             ),
           );
-        }
-        else {
+        } else {
           return BlocProvider.value(
             value: params.notesCubit as GetLabeledNotesCubit,
-            child: PickLabelScreen(
-                params: params),
+            child: PickLabelScreen(params: params),
           );
         }
       default:
@@ -121,16 +144,13 @@ class AppRouter {
             value: params.notesCubit as GetActiveNotesCubit,
             child: BlocProvider.value(
               value: params.addNoteCubit as AddNoteCubit,
-              child: PickLabelScreen(
-                  params: params),
+              child: PickLabelScreen(params: params),
             ),
           );
-        }
-        else {
+        } else {
           return BlocProvider.value(
             value: params.notesCubit as GetActiveNotesCubit,
-            child: PickLabelScreen(
-                params: params),
+            child: PickLabelScreen(params: params),
           );
         }
     }
