@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes/models/note.dart';
@@ -19,15 +18,7 @@ class AddNoteScreenAppbar extends StatelessWidget implements PreferredSizeWidget
           backgroundColor: cubit.note!.color == Colors.transparent.value
               ? context.scaffoldBackground
               : Color(cubit.note!.color),
-          leading: CustomIconButton(
-              onTap: () {
-                if (note == null) {
-                  AddNoteCubit.of(context).addNote();
-                } else {
-                  AddNoteCubit.of(context).editNote();
-                }
-                context.pop();
-              },
+          leading: CustomIconButton(onTap:context.pop,
               icon: const Icon(Icons.arrow_back_outlined)),
           actions: [
             if ((noteStatus != NoteStatus.deleted) ||

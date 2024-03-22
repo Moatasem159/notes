@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:notes/app/injection_container.dart';
 import 'package:notes/config/routes/app_routes.dart';
 import 'package:notes/core/extension/context_extension.dart';

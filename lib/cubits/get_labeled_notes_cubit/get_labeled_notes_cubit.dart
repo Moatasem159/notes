@@ -11,7 +11,12 @@ class GetLabeledNotesCubit extends Cubit<GetLabeledNotesStates> {
   final Label label;
   final NoteLocalDataSource _dataSource;
   static GetLabeledNotesCubit of(BuildContext context) => BlocProvider.of(context);
-  getLabeledNotes() {
+  getLabeledNotes({bool edit=false}) async{
+    if(edit)
+    {
+
+      await Future.delayed(const Duration(milliseconds: 500));
+    }
     List<Note> notes = _dataSource.getNotes().where((element) => element.labeled == true && element.status != NoteStatus.deleted).toList();
     notes.removeWhere((Note note) {
       Label label = note.labels.firstWhere((Label element) => element.name == this.label.name, orElse: () => Label(name: ''));

@@ -9,9 +9,9 @@ class _LabelsTile extends StatelessWidget {
       location: Routes.createLabelRoute,
     );
     onTap() {
-      if (AppRoute.location() != Routes.createLabelRoute) {
+      if (context.route.name!= Routes.createLabelRoute) {
         context.pop();
-        context.pushNamed(Routes.createLabelRoute,queryParameters: {"isNew": "true"});
+        context.pushNamed(Routes.createLabelRoute,arguments: true);
       } else {
         context.pop();
       }

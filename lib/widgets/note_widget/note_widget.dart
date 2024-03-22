@@ -4,6 +4,7 @@ import 'package:notes/cubits/app_bar_cubit/app_bar_cubit.dart';
 import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
 import 'package:notes/cubits/get_deleted_notes_cubit/get_deleted_notes_cubit.dart';
+import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
 import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:animations/animations.dart';
@@ -45,7 +46,7 @@ class _NoteWidgetState extends State<NoteWidget> {
           GetActiveNotesCubit.of(context).remove(widget.note);
         },
         confirmDismiss: (direction) async {
-          if (widget.note.status == NoteStatus.active&&AppBarCubit.of(context).isBase) {
+          if (widget.noteStatus == NoteStatus.active&&AppBarCubit.of(context).isBase) {
             return true;
           } else {
             return null;

@@ -7,14 +7,17 @@ class _LabelTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 1),
       child: Material(
-        color: (AppRoute.location()==Routes.labelRoute&&AppRoute.query()==label.name)?context.theme.listTileTheme.selectedColor:Colors.transparent,
+        color: (context.route.name==Routes.labelRoute&&(context.route.arguments as Label).name==label.name)?context.theme.listTileTheme.selectedColor:Colors.transparent,
         borderRadius:BorderRadius.circular(25),
         child: InkWell(
           onTap: ()async{
             Scaffold.of(context).closeDrawer();
-            await Future.delayed(const Duration(milliseconds: 200)).then((_){
-              context.goNamed(Routes.labelRoute,queryParameters:{"label":label.name},extra: label);
-            });
+            if(context.route.name==Routes.labelRoute&&(context.route.arguments as Label).name!=label.name){
+              context.pushReplacementNamed(Routes.labelRoute,arguments:label);
+            }
+            else if(context.route.name!=Routes.labelRoute) {
+              context.pushReplacementNamed(Routes.labelRoute,arguments:label);
+            }
           },
           borderRadius: BorderRadius.circular(25),
           child: Container(

@@ -12,12 +12,12 @@ class _DrawerTilesList extends StatelessWidget {
             location: Routes.homeRoute,
           ),
           onTap: () {
-            if (AppRoute.location() != Routes.homeRoute) {
-              context.pop();
-              GoRouter.of(context).pushReplacementNamed(Routes.homeRoute);
+            if (context.route.name != Routes.homeRoute) {
+              Scaffold.of(context).closeDrawer();
+              context.pushReplacementNamed(Routes.homeRoute);
             }
             else {
-              context.pop();
+              Scaffold.of(context).closeDrawer();
             }
           },
         ),
@@ -28,12 +28,12 @@ class _DrawerTilesList extends StatelessWidget {
             location: Routes.reminderRoute,
           ),
           onTap: () {
-            if (AppRoute.location() != Routes.reminderRoute) {
-              context.pop();
-              GoRouter.of(context).pushReplacementNamed(Routes.reminderRoute);
+            if (context.route.name!= Routes.reminderRoute) {
+              Scaffold.of(context).closeDrawer();
+              context.pushReplacementNamed(Routes.reminderRoute);
             }
             else {
-              context.pop();
+              Scaffold.of(context).closeDrawer();
             }
           },
         ),
@@ -45,12 +45,12 @@ class _DrawerTilesList extends StatelessWidget {
             location: Routes.archivedRoute,
           ),
           onTap: () {
-            if (AppRoute.location() != Routes.archivedRoute) {
-              context.pop();
-            context.goNamed(Routes.archivedRoute);
+            if (context.route.name!= Routes.archivedRoute) {
+              Scaffold.of(context).closeDrawer();
+            context.pushReplacementNamed(Routes.archivedRoute);
             }
             else {
-              context.pop();
+              Scaffold.of(context).closeDrawer();
             }
           },
         ),
@@ -61,11 +61,11 @@ class _DrawerTilesList extends StatelessWidget {
             location: Routes.deletedRoute,
           ),
           onTap: () {
-            if (AppRoute.location() != Routes.deletedRoute) {
-              context.pop();
-            context.goNamed(Routes.deletedRoute);
+            if (context.route.name!= Routes.deletedRoute) {
+              Scaffold.of(context).closeDrawer();
+            context.pushReplacementNamed(Routes.deletedRoute);
             } else {
-              context.pop();
+              Scaffold.of(context).closeDrawer();
             }
           },
         ),
@@ -76,11 +76,11 @@ class _DrawerTilesList extends StatelessWidget {
             location: Routes.settingsRoute,
           ),
           onTap: () {
-            if (AppRoute.location() != Routes.settingsRoute) {
-              context.pop();
+            if (context.route.name!= Routes.settingsRoute) {
+              Scaffold.of(context).closeDrawer();
               context.pushNamed(Routes.settingsRoute);
             } else {
-              context.pop();
+              Scaffold.of(context).closeDrawer();
             }
           },
         ),

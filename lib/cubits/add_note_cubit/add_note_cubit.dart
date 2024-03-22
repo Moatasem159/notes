@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/core/image/image_helper.dart';
@@ -125,7 +124,7 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
 
   listen(BuildContext context, AddNoteStates state) {
     if (state is DeleteNoteState) {
-      context.pop();
+      Navigator.of(context).pop();
       if (noteStatus == NoteStatus.archive) {
         GetArchivedNotesCubit.of(context).getArchivedNotes(edit: true);
       } else {
@@ -133,7 +132,7 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
       }
     }
     if (state is ChangeNoteStatusState) {
-      context.pop();
+      Navigator.of(context).pop();
       if (noteStatus == NoteStatus.archive) {
         GetArchivedNotesCubit.of(context).getArchivedNotes(edit: true);
       } else {
@@ -154,7 +153,10 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
     if (state is EditNoteSuccessState && noteStatus == NoteStatus.archive) {
       GetArchivedNotesCubit.of(context).getArchivedNotes(edit: true);
     }
-    if (state is EditNoteSuccessState) {
+    if (state is EditNoteSuccessState&&noteStatus == NoteStatus.labeled) {
+      GetLabeledNotesCubit.of(context).getLabeledNotes(edit: true);
+    }
+    if (state is EditNoteSuccessState&&noteStatus == NoteStatus.active) {
       GetActiveNotesCubit.of(context).getNotes(edit: true);
     }
     if (state is EditNoteSuccessState && noteStatus == NoteStatus.deleted) {
@@ -162,7 +164,7 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
     }
     if (state is DeleteNoteForeverState) {
       GetDeletedNotesCubit.of(context).getDeletedNotes(edit: true);
-      context.pop();
+      Navigator.of(context).pop();
     }
   }
 }

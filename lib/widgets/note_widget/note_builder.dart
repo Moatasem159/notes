@@ -16,18 +16,22 @@ class _NoteBuilder extends StatelessWidget {
         closedShape:
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         openBuilder: (_, action) {
-          if(noteStatus ==NoteStatus.active)
-            {
+          if(noteStatus ==NoteStatus.active) {
               return BlocProvider.value(
                   value: GetActiveNotesCubit.of(context),
+                  child: AddNoteScreen(note: note,noteStatus: noteStatus));
+            }
+          if(noteStatus ==NoteStatus.labeled) {
+              return BlocProvider.value(
+                  value: GetLabeledNotesCubit.of(context),
                   child: AddNoteScreen(note: note,noteStatus: noteStatus));
             }
           else if (noteStatus== NoteStatus.archive) {
             return BlocProvider.value(
                 value: GetArchivedNotesCubit.of(context),
                 child: AddNoteScreen(note: note,noteStatus: noteStatus));
-          } else if (noteStatus== NoteStatus.deleted)
-            {
+          }
+          else if (noteStatus== NoteStatus.deleted) {
               return BlocProvider.value(
                   value: GetDeletedNotesCubit.of(context),
                   child: AddNoteScreen(note: note,noteStatus: noteStatus));

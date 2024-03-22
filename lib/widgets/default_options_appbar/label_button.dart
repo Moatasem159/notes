@@ -12,34 +12,23 @@ class _LabelButton extends StatelessWidget {
           notes.addAll(AppBarCubit.of(context).selectedNotes);
           PickLabelParams params;
           if (noteStatus == NoteStatus.archive) {
-            params = PickLabelParams(
-                notes: notes, labels: labels, notesCubit:  GetArchivedNotesCubit.of(context));
-            context.pushNamed(Routes.pickLabelRoute,
-                extra: params,
-                queryParameters: {
-                  "inNote": "false",
-                  "noteStatus": noteStatus.toString(),
-                });
+            params = PickLabelParams(notes: notes, labels: labels,noteStatus: noteStatus,notesCubit: GetArchivedNotesCubit.of(context));
+            context.pushNamed(Routes.pickLabelRoute,arguments: params);
           }
           else if(noteStatus == NoteStatus.labeled)
             {
-              params = PickLabelParams(notes: notes, labels: labels,notesCubit: GetLabeledNotesCubit.of(context));
-              context.pushNamed(Routes.pickLabelRoute,
-                  extra: params,
-                  queryParameters: {
-                    "inNote": "false",
-                    "noteStatus": noteStatus.toString(),
-                  });
+              params = PickLabelParams(noteStatus: noteStatus,notes: notes, labels: labels,notesCubit: GetLabeledNotesCubit.of(context));
+              context.pushNamed(Routes.pickLabelRoute, arguments: params,);
             }
-          else {
-            params = PickLabelParams(notes: notes, labels: labels);
-            context.pushNamed(Routes.pickLabelRoute,
-                extra: params,
-                queryParameters: {
-                  "inNote": "false",
-                  "noteStatus": noteStatus.toString(),
-                });
-          }
+          // else {
+          //   params = PickLabelParams(notes: notes, labels: labels);
+          //   context.pushNamed(Routes.pickLabelRoute,
+          //       extra: params,
+          //       queryParameters: {
+          //         "inNote": "false",
+          //         "noteStatus": noteStatus.toString(),
+          //       });
+          // }
           AppBarCubit.of(context).removeSelection(clearList: true);
         },
         icon: const Icon(Icons.label_outline_rounded));

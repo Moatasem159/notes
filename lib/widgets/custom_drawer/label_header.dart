@@ -13,7 +13,7 @@ class _LabelsHeader extends StatelessWidget {
           InkWell(
             onTap: (){
               context.pop();
-              context.pushNamed(Routes.createLabelRoute,queryParameters: {"isNew":"false"});
+              context.pushNamed(Routes.createLabelRoute,arguments: false);
             },
             borderRadius: BorderRadius.circular(15),
             child: Padding(

@@ -48,9 +48,11 @@ class AddNoteScreen extends StatelessWidget {
                   onPopInvoked: (_) {
                     if (note == null) {
                       cubit.addNote();
-                    } else if (note!.status != NoteStatus.deleted) {
-                      cubit.editNote();
                     }
+                    else if (note!.status != NoteStatus.deleted) {
+                    cubit.editNote();
+                    }
+
                   },
                   child: SafeArea(
                     child: Scaffold(

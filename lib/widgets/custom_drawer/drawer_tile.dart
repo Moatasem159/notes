@@ -9,7 +9,7 @@ class _DrawerTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 1),
       child: Material(
         borderRadius:BorderRadius.circular(25),
-        color: item.location==AppRoute.location()?context.theme.listTileTheme.selectedColor:Colors.transparent,
+        color: item.location==context.route.name?context.theme.listTileTheme.selectedColor:Colors.transparent,
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(25),
