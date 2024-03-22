@@ -61,7 +61,6 @@ class GetLabelsCubit extends Cubit<GetLabelsStates> {
       {
         AddNoteCubit.of(context).note!.labels.clear();
         AddNoteCubit.of(context).note!.labeled=false;
-        AddNoteCubit.of(context).note!.save();
       }
       AddNoteCubit.of(context).pickLabel();
     }
