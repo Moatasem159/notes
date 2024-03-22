@@ -13,13 +13,9 @@ class LabelLocalDataSourceImpl implements LabelLocalDataSource {
   final Box<Label> _labelBox;
   LabelLocalDataSourceImpl(this._noteBox, this._labelBox);
   @override
-  Future<int> addLabel(Label label) async {
-    return await _labelBox.add(label);
-  }
+  Future<int> addLabel(Label label) async =>await _labelBox.add(label);
   @override
-  List<Label> getLabel() {
-    return _labelBox.values.toList();
-  }
+  List<Label> getLabel() =>_labelBox.values.toList();
   @override
   Future<void> pickLabelForMultipleNotes(List<Note> notes, List<Label> labels) async {
     for (int i = 0; i < notes.length; i++) {
@@ -60,7 +56,7 @@ class LabelLocalDataSourceImpl implements LabelLocalDataSource {
             await note.save();
           }
       }
-     await label.delete();
+      await label.delete();
   }
   @override
   Future<void> renameLabel(Label label, String newName)async{
