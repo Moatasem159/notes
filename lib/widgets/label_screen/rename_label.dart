@@ -41,7 +41,6 @@ class _RenameLabelDialogState extends State<_RenameLabelDialog> {
       listener: (context, state) {
         if (state is EditLabelSuccessState) {
           GetLabeledNotesCubit.of(context).label.name = controller.text;
-          // GetActiveNotesCubit.of(context).getNotes();
           GetLabeledNotesCubit.of(context).getLabeledNotes();
           context.pop();
         }

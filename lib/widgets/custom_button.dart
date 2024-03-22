@@ -4,15 +4,17 @@ import 'package:notes/core/utils/app_text_styles.dart';
 class CustomButton extends StatelessWidget {
   final String title;
   final VoidCallback ?onTap;
+  final MaterialStateProperty<EdgeInsets?>? padding;
   final MaterialStateProperty<Color?>?  backgroundColor;
   final MaterialStateProperty<Color?>?  foregroundColor;
-  const CustomButton({super.key, required this.title, this.backgroundColor, this.onTap, this.foregroundColor});
+  const CustomButton({super.key, required this.title, this.backgroundColor, this.onTap, this.foregroundColor, this.padding});
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onTap,
       style: ButtonStyle(
         elevation: MaterialStateProperty.all(0),
+        padding: padding,
         backgroundColor: backgroundColor,
         foregroundColor: foregroundColor,
       ),

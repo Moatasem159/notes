@@ -28,6 +28,7 @@
   "rename": "Rename",
   "cancel": "Cancel",
   "deleteLabel": "Delete label",
+  "deleteLabelDialog": "We 'll delete this label and remove it from all of your keep notes. Your notes won't be deleted",
   "labelAlreadyExists": "Label already exists",
   "enterShorterLabel": "Enter shorter label name",
   "editLabel": "Edit labels",
