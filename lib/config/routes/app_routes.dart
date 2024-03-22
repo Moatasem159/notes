@@ -17,6 +17,7 @@ import 'package:notes/screens/settings_screen.dart';
 import 'package:notes/models/pick_label_params.dart';
 import 'package:notes/screens/archived_screen.dart';
 import 'package:notes/screens/create_label_screen.dart';
+part 'slide_from_down_to_up_with_fading.dart';
 abstract class Routes {
   static const String homeRoute = "home";
   static const String reminderRoute = "reminder";
@@ -27,6 +28,7 @@ abstract class Routes {
   static const String deletedRoute = "deleted";
   static const String settingsRoute = "settings";
 }
+
 class AppRouter {
   Route router(RouteSettings settings) {
     switch (settings.name) {
@@ -41,17 +43,17 @@ class AppRouter {
           builder: (_) => const ReminderScreen(),
         );
       case Routes.createLabelRoute:
-        return MaterialPageRoute(
+        return SlideFromDownToUpWithFading(
           settings: settings,
-          builder: (_) {
+          pageBuilder: (context, animation, secondaryAnimation) {
             CreateLabelParams params = settings.arguments as CreateLabelParams;
             return _getCreateLabelScreen(params);
           },
         );
       case Routes.pickLabelRoute:
-        return MaterialPageRoute(
+        return SlideFromDownToUpWithFading(
           settings: settings,
-          builder: (_) {
+          pageBuilder: (context, animation, secondaryAnimation) {
             PickLabelParams params = settings.arguments as PickLabelParams;
             return _getPickLabelScreen(params);
           },
@@ -62,20 +64,17 @@ class AppRouter {
           builder: (_) => LabelScreen(label: settings.arguments as Label),
         );
       case Routes.archivedRoute:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => const ArchivedScreen(),
-        );
+        return SlideFromDownToUpWithFading(
+            settings: settings,
+            pageBuilder: (_, __, ___) => const ArchivedScreen());
       case Routes.deletedRoute:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => const DeleteScreen(),
-        );
+        return SlideFromDownToUpWithFading(
+            settings: settings,
+            pageBuilder: (_, __, ___) => const DeleteScreen());
       case Routes.settingsRoute:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => const SettingsScreen(),
-        );
+        return SlideFromDownToUpWithFading(
+            settings: settings,
+            pageBuilder: (_, __, ___) => const SettingsScreen());
       default:
         return MaterialPageRoute(
           settings: settings,
@@ -83,6 +82,7 @@ class AppRouter {
         );
     }
   }
+
   Widget _getCreateLabelScreen(CreateLabelParams params) {
     if (params.notesStatus == NoteStatus.active) {
       return BlocProvider.value(
@@ -106,6 +106,7 @@ class AppRouter {
     }
     return CreateLabelScreen(params: params);
   }
+
   Widget _getPickLabelScreen(PickLabelParams params) {
     switch (params.noteStatus) {
       case NoteStatus.archive:
