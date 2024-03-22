@@ -18,18 +18,13 @@ class _LabelButton extends StatelessWidget {
           else if(noteStatus == NoteStatus.labeled)
             {
               params = PickLabelParams(noteStatus: noteStatus,notes: notes, labels: labels,notesCubit: GetLabeledNotesCubit.of(context));
-              context.pushNamed(Routes.pickLabelRoute, arguments: params,);
+              context.pushNamed(Routes.pickLabelRoute, arguments: params);
             }
-          // else {
-          //   params = PickLabelParams(notes: notes, labels: labels);
-          //   context.pushNamed(Routes.pickLabelRoute,
-          //       extra: params,
-          //       queryParameters: {
-          //         "inNote": "false",
-          //         "noteStatus": noteStatus.toString(),
-          //       });
-          // }
-          AppBarCubit.of(context).removeSelection(clearList: true);
+          else {
+            params = PickLabelParams(notes: notes, labels: labels,noteStatus: noteStatus,notesCubit: GetActiveNotesCubit.of(context));
+            context.pushNamed(Routes.pickLabelRoute, arguments: params);
+          }
+          AppBarCubit.of(context).removeSelection();
         },
         icon: const Icon(Icons.label_outline_rounded));
   }

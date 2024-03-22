@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
 import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
 import 'package:notes/models/label.dart';
@@ -44,6 +45,10 @@ class GetLabelsCubit extends Cubit<GetLabelsStates> {
     if(state is PickLabelsSuccessState&&GetLabelsCubit.of(context).noteStatus==NoteStatus.archive)
     {
       GetArchivedNotesCubit.of(context).getArchivedNotes();
+    }
+    if(state is PickLabelsSuccessState&&GetLabelsCubit.of(context).noteStatus==NoteStatus.active)
+    {
+      GetActiveNotesCubit.of(context).getNotes();
     }
     if(state is PickLabelsForNoteSuccessState &&GetLabelsCubit.of(context).inNote)
     {

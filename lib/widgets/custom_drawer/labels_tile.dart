@@ -10,10 +10,10 @@ class _LabelsTile extends StatelessWidget {
     );
     onTap() {
       if (context.route.name!= Routes.createLabelRoute) {
-        context.pop();
+        Scaffold.of(context).closeDrawer();
         context.pushNamed(Routes.createLabelRoute,arguments: true);
       } else {
-        context.pop();
+        Scaffold.of(context).closeDrawer();
       }
     }
     return BlocBuilder<GetLabelsCubit, GetLabelsStates>(

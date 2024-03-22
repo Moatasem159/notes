@@ -94,9 +94,9 @@ class AppBarCubit extends Cubit<AppBarStates> {
     _changeIsPinned();
     emit(SelectNoteState());
   }
-  removeSelection({bool clearList=true}){
-    clearList?selectedNotes.clear():null;
-    clearList?labels.clear():null;
+  removeSelection(){
+   selectedNotes.clear();
+   labels.clear();
     colors.clear();
     isBase=true;
     isPinned=false;

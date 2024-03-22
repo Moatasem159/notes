@@ -10,7 +10,7 @@ class CreateLabelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LabelActionsBloc(sl())..add(GetLabelsEvent()),
+      create: (_) => LabelActionsBloc(sl())..add(GetLabelsEvent()),
       child: Scaffold(
         backgroundColor: context.scaffoldBackground,
         body: CreateLabelScreenBody(isNew: isNew),
