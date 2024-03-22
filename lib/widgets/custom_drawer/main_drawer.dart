@@ -10,12 +10,13 @@ import 'package:notes/cubits/get_labels_cubit/get_labels_cubit.dart';
 import 'package:notes/models/drawer_item_model.dart';
 import 'package:notes/models/label.dart';
 part 'drawer_builder.dart';
+part 'labels_tile.dart';
 part 'drawer_title.dart';
-part 'drawer_tiles_list.dart';
 part 'label_header.dart';
 part 'drawer_tile.dart';
 part 'labels_list.dart';
 part 'label_tile.dart';
+part 'drawer_tiles_list.dart';
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
   @override
