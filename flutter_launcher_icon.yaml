@@ -1,0 +1,7 @@
+flutter_launcher_icons:
+  ios: true
+  android: true
+  remove_alpha_ios: true
+  image_path: assets/images/nota.png
+  adaptive_icon_background: "#000000"
+  adaptive_icon_forground: assets/images/nota.png
