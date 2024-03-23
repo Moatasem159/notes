@@ -16,7 +16,10 @@ class ArchivedScreen extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (_) {
-        context.pushReplacementNamed(Routes.homeRoute);
+          if(!AppBarCubit.of(context).isBase){
+            AppBarCubit.of(context).removeSelection();
+          }
+          context.pushReplacementNamed(Routes.homeRoute);
       },
       child: BlocProvider(
         create: (context) => GetArchivedNotesCubit(sl())..getArchivedNotes(),

@@ -21,6 +21,9 @@ class LabelScreen extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (_) {
+        if(!AppBarCubit.of(context).isBase){
+          AppBarCubit.of(context).removeSelection();
+        }
         context.pushReplacementNamed(Routes.homeRoute);
       },
       child: BlocProvider(
