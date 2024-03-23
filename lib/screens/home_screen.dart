@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => GetActiveNotesCubit(sl())..getNotes(),
       child: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: AppTheme.systemUiOverlayStyle(),
+        value: AppTheme.systemUiOverlayStyle(context),
         child: Scaffold(
           backgroundColor: context.scaffoldBackground,
           drawer: const MainDrawer(),

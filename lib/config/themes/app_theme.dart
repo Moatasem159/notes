@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:notes/core/utils/app_colors.dart';
 import 'package:notes/core/utils/app_fonts.dart';
-
 abstract class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     fontFamily: AppFonts.englishFontFamily,
     disabledColor: Colors.black,
-    dialogTheme:DialogTheme(
+    dialogTheme: DialogTheme(
       backgroundColor: AppColors.lightSeconderBackgroundColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       actionsPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -19,7 +17,8 @@ abstract class AppTheme {
         foregroundColor: Colors.white,
       ),
     ),
-    dividerTheme: const DividerThemeData(color: AppColors.lightActiveDrawerColor),
+    dividerTheme:
+        const DividerThemeData(color: AppColors.lightActiveDrawerColor),
     iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
       iconColor: MaterialStateProperty.all(Colors.black),
@@ -47,18 +46,18 @@ abstract class AppTheme {
       elevation: 0,
       scrolledUnderElevation: 0,
     ),
-    dialogTheme:  DialogTheme(
+    dialogTheme: DialogTheme(
       backgroundColor: AppColors.darkSeconderBackgroundColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       actionsPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
     ),
-    dividerTheme: const DividerThemeData(color: AppColors.darkActiveDrawerColor),
+    dividerTheme:
+        const DividerThemeData(color: AppColors.darkActiveDrawerColor),
     disabledColor: Colors.white,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.buttonDarkColor,
-        foregroundColor: Colors.black
-      ),
+          backgroundColor: AppColors.buttonDarkColor,
+          foregroundColor: Colors.black),
     ),
     iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
@@ -69,7 +68,8 @@ abstract class AppTheme {
       backgroundColor: AppColors.darkBackgroundColor,
       elevation: 0,
     ),
-    listTileTheme: const ListTileThemeData().copyWith(selectedColor: AppColors.darkActiveDrawerColor),
+    listTileTheme: const ListTileThemeData()
+        .copyWith(selectedColor: AppColors.darkActiveDrawerColor),
     colorScheme: const ColorScheme.dark().copyWith(
       background: AppColors.darkBackgroundColor,
       primary: Colors.white,
@@ -79,19 +79,18 @@ abstract class AppTheme {
     inputDecorationTheme: const InputDecorationTheme(border: InputBorder.none),
   );
 
-  static SystemUiOverlayStyle systemUiOverlayStyle() =>
-      SchedulerBinding.instance.platformDispatcher.platformBrightness ==
-              Brightness.dark
+  static SystemUiOverlayStyle systemUiOverlayStyle(BuildContext context) =>
+      MediaQuery.of(context).platformBrightness == Brightness.dark
           ? _darkSystemUiOverlayStyle
           : _whiteSystemUiOverlayStyle;
   static final SystemUiOverlayStyle _whiteSystemUiOverlayStyle =
-      SystemUiOverlayStyle(
+      SystemUiOverlayStyle.light.copyWith(
           statusBarColor: AppColors.lightBackgroundColor.withOpacity(0.85),
           statusBarBrightness: Brightness.dark,
           statusBarIconBrightness: Brightness.dark,
           systemNavigationBarColor: AppColors.lightBackgroundColor);
   static final SystemUiOverlayStyle _darkSystemUiOverlayStyle =
-      SystemUiOverlayStyle(
+      SystemUiOverlayStyle.dark.copyWith(
     statusBarColor: AppColors.darkBackgroundColor.withOpacity(0.85),
     statusBarBrightness: Brightness.light,
     statusBarIconBrightness: Brightness.light,

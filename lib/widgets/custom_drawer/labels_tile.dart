@@ -17,9 +17,10 @@ class _LabelsTile extends StatelessWidget {
           context.pushNamed(Routes.createLabelRoute,
               arguments: CreateLabelParams(
                   isNew: true,
+                  notesStatus: NoteStatus.active,
                   notesCubit: GetActiveNotesCubit.of(context)));
         }
-        if (context.route.name == Routes.labelRoute) {
+        else if (context.route.name == Routes.labelRoute) {
           context.pushNamed(Routes.createLabelRoute,
               arguments: CreateLabelParams(
                   isNew: true,
@@ -27,21 +28,25 @@ class _LabelsTile extends StatelessWidget {
                   notesStatus: NoteStatus.labeled,
                   notesCubit: GetLabeledNotesCubit.of(context)));
         }
-        if (context.route.name == Routes.archivedRoute) {
+        else if (context.route.name == Routes.archivedRoute) {
           context.pushNamed(Routes.createLabelRoute,
               arguments: CreateLabelParams(
                   isNew: true,
                   notesStatus: NoteStatus.archive,
                   notesCubit: GetArchivedNotesCubit.of(context)));
         }
-        if (context.route.name == Routes.deletedRoute) {
+        else if (context.route.name == Routes.deletedRoute) {
           context.pushNamed(Routes.createLabelRoute,
               arguments: CreateLabelParams(
                   isNew: true,
                   notesStatus: NoteStatus.deleted,
                   notesCubit: GetDeletedNotesCubit.of(context)));
         }
-      } else {
+        else{
+          context.pushNamed(Routes.createLabelRoute, arguments: CreateLabelParams(isNew: true));
+        }
+      }
+      else {
         Scaffold.of(context).closeDrawer();
       }
     }

@@ -4,7 +4,7 @@ import 'package:notes/models/note.dart';
 class CreateLabelParams{
   final bool isNew;
   final Cubit? notesCubit;
-  final NoteStatus notesStatus;
+  final NoteStatus ?notesStatus;
   final Label? label;
-  CreateLabelParams({this.label,required this.isNew,this.notesCubit, this.notesStatus=NoteStatus.active});
+  CreateLabelParams({this.label,required this.isNew,this.notesCubit, this.notesStatus});
 }

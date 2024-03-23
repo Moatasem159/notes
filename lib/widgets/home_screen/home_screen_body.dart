@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/config/themes/app_theme.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/widgets/empty_body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

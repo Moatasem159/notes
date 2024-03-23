@@ -7,6 +7,7 @@ class _HomeAppBar extends StatelessWidget {
       builder: (context, state) {
         return  SliverAppBar(
           expandedHeight: 65,
+          systemOverlayStyle: AppTheme.systemUiOverlayStyle(context),
           pinned:!AppBarCubit.of(context).isBase,
           collapsedHeight: 65,
           automaticallyImplyLeading: false,

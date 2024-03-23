@@ -18,7 +18,7 @@ class PickLabelScreen extends StatelessWidget {
           GetLabelsCubit(sl(), noteStatus: params.noteStatus,notes: params.notes, labels: params.labels,inNote: params.inNote)
             ..getLabels(),
       child: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: AppTheme.systemUiOverlayStyle(),
+        value: AppTheme.systemUiOverlayStyle(context),
         child: Builder(
           builder: (context) {
             return PopScope(

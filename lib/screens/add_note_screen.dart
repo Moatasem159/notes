@@ -35,7 +35,7 @@ class AddNoteScreen extends StatelessWidget {
             builder:(BuildContext context,AddNoteStates state) {
               AddNoteCubit cubit = AddNoteCubit.of(context);
               return AnnotatedRegion<SystemUiOverlayStyle>(
-                value: AppTheme.systemUiOverlayStyle().copyWith(
+                value: AppTheme.systemUiOverlayStyle(context).copyWith(
                     statusBarColor: cubit.note!.color == Colors.transparent.value
                         ? context.scaffoldBackground
                         : Color(cubit.note!.color),

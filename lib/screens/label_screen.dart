@@ -28,7 +28,7 @@ class LabelScreen extends StatelessWidget {
           child: BlocBuilder<AppBarCubit, AppBarStates>(
             builder: (context, state) {
               return AnnotatedRegion<SystemUiOverlayStyle>(
-                value: AppTheme.systemUiOverlayStyle().copyWith(
+                value: AppTheme.systemUiOverlayStyle(context).copyWith(
                     statusBarColor: AppBarCubit.of(context).isBase
                         ? context.scaffoldBackground
                         : context.theme.colorScheme.onSecondary),
