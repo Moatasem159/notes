@@ -4,7 +4,8 @@ import 'package:notes/cubits/get_labels_cubit/get_labels_cubit.dart';
 import 'package:notes/models/label.dart';
 import 'package:notes/widgets/pick_label_screen/custom_check_list_tile.dart';
 class PickLabelsList extends StatelessWidget {
-  const PickLabelsList({super.key});
+  final bool inNote;
+  const PickLabelsList({super.key, required this.inNote});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GetLabelsCubit, GetLabelsStates>(
@@ -23,26 +24,23 @@ class PickLabelsList extends StatelessWidget {
                 title: GetLabelsCubit.of(context).allLabels[index].name,
                 onChanged: (checkType) {
                   if (checkType == CheckType.all) {
-                    Label label = cubit.labels!.firstWhere(
-                        (element) =>
-                            element.name == cubit.allLabels[index].name,
-                        orElse: () => Label(name: ""));
+                    Label label = cubit.labels!.firstWhere((element) =>
+                            element.name == cubit.allLabels[index].name, orElse: () => Label(name: ""));
                     if (cubit.labels!.isNotEmpty) {
                       cubit.labels!.remove(label);
                     }
                     cubit.labels!.add(Label(
                         name: cubit.allLabels[index].name,
                         checkType: CheckType.all));
-                  } else if (GetLabelsCubit.of(context).inNote &&
-                      checkType == CheckType.none) {
+                  }
+                  else if (!inNote && checkType == CheckType.none) {
+                    cubit.labels!.firstWhere((element) =>
+                    element.name == cubit.allLabels[index].name).checkType = CheckType.none;
+                  }
+                  else if (inNote && checkType == CheckType.none){
                     Label label = cubit.labels!.firstWhere((element) =>
                         element.name == cubit.allLabels[index].name);
                     cubit.labels!.remove(label);
-                  } else if (checkType == CheckType.none) {
-                    cubit.labels!
-                        .firstWhere((element) =>
-                            element.name == cubit.allLabels[index].name)
-                        .checkType = CheckType.none;
                   }
                 },
               );

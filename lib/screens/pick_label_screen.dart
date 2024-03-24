@@ -14,16 +14,14 @@ class PickLabelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) =>
-          GetLabelsCubit(sl(), noteStatus: params.noteStatus,notes: params.notes, labels: params.labels,inNote: params.inNote)
-            ..getLabels(),
+      create: (_) => GetLabelsCubit(sl(), noteStatus: params.noteStatus,notes: params.notes, labels: params.labels)..getLabels(),
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: AppTheme.systemUiOverlayStyle(context),
         child: Builder(
           builder: (context) {
             return PopScope(
               onPopInvoked: (didPop) {
-                if(!GetLabelsCubit.of(context).inNote) {
+                if(!params.inNote) {
                   GetLabelsCubit.of(context).pickLabelsForMultipleNotes();
                 }
                 else{
@@ -34,7 +32,7 @@ class PickLabelScreen extends StatelessWidget {
                 child: Scaffold(
                     appBar: const PickLabelAppbar(),
                     backgroundColor: context.scaffoldBackground,
-                    body: const PickLabelsList()),
+                    body: PickLabelsList(inNote: params.inNote)),
               ),
             );
           }

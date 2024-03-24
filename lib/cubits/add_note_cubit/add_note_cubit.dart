@@ -82,7 +82,16 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
     emit(ChangePinNoteState());
   }
 
-  pickLabel() {
+  pickLabel(List<Label> labels) {
+    if(labels.isNotEmpty) {
+     note!.labels.clear();
+     note!.labels.addAll(labels);
+     note!.labeled=true;
+    }
+    if(labels.isEmpty) {
+      note!.labels.clear();
+      note!.labeled=false;
+    }
     emit(PickLabelState());
   }
 
