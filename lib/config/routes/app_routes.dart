@@ -53,6 +53,8 @@ class AppRouter {
       case Routes.pickLabelRoute:
         return SlideFromDownToUpWithFading(
           settings: settings,
+          transitionDuration: const Duration(milliseconds: 500),
+          reverseTransitionDuration: const Duration(milliseconds:100),
           pageBuilder: (context, animation, secondaryAnimation) {
             PickLabelParams params = settings.arguments as PickLabelParams;
             return _getPickLabelScreen(params);

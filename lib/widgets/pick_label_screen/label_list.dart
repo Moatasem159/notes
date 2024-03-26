@@ -7,12 +7,12 @@ class _LabelsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverList.builder(
       key: GlobalKey(),
-      itemCount: PickLabelsCubit.of(context).filteredLabels.length,
+      itemCount: labels.length,
       itemBuilder: (context, index) {
         PickLabelsCubit cubit=PickLabelsCubit.of(context);
         return CustomCheckListTile(
-          title: cubit.filteredLabels[index].name,
-          checkType: cubit.filteredLabels[index].checkType,
+          title: labels[index].name,
+          checkType: labels[index].checkType,
           onChanged: (checkType) {
             if (checkType == CheckType.all) {
               Label label = cubit.labels.firstWhere((element) => element.name == labels[index].name, orElse: () => Label(name: ""));

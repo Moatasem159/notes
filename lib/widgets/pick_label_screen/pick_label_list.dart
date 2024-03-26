@@ -19,7 +19,8 @@ class PickLabelsList extends StatelessWidget {
           slivers: [
             if(PickLabelsCubit.of(context).notFound)
             const _CreateLabelTile(),
-            _LabelsList(inNote, PickLabelsCubit.of(context).filteredLabels),
+            if(state is GetLabelsSuccessState )
+            _LabelsList(inNote, state.labels),
           ],
         );
       },

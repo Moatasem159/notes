@@ -15,13 +15,12 @@ class PickLabelsCubit extends Cubit<PickLabelsStates> {
   final NoteStatus noteStatus;
   bool notFound=false;
   PickLabelsCubit(this._dataSource, {this.noteStatus = NoteStatus.active, required this.notes,required this.labels}):super(GetLabelsInitialState()) {
-    filteredLabels=[];
     controller=TextEditingController();
     controller.addListener(getLabels);
   }
   static PickLabelsCubit of(BuildContext context) => BlocProvider.of(context);
   late final TextEditingController controller;
-  late List<Label> filteredLabels;
+
   pickLabelsForMultipleNotes() async {
     emit(PickLabelsLoadingState());
     await _dataSource.pickLabelForMultipleNotes(notes, labels);
@@ -31,6 +30,7 @@ class PickLabelsCubit extends Cubit<PickLabelsStates> {
     emit(PickLabelsForNoteSuccessState());
   }
   void getLabels() {
+    List<Label> filteredLabels=[];
     String searchText = controller.text.toLowerCase();
     if (searchText.isEmpty) {
       notFound=false;
@@ -49,7 +49,7 @@ class PickLabelsCubit extends Cubit<PickLabelsStates> {
         notFound=false;
       }
     }
-    emit(GetLabelsSuccessState());
+    emit(GetLabelsSuccessState(filteredLabels));
   }
   void createNewLabel()async{
     String name=controller.text.trim();
@@ -92,7 +92,6 @@ class PickLabelsCubit extends Cubit<PickLabelsStates> {
   Future<void> close() {
     notes.clear();
     labels.clear();
-    filteredLabels.clear();
     controller.removeListener(getLabels);
     controller.dispose();
     return super.close();
