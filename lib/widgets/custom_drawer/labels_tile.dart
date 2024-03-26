@@ -1,8 +1,6 @@
 part of 'main_drawer.dart';
-
 class _LabelsTile extends StatelessWidget {
   const _LabelsTile();
-
   @override
   Widget build(BuildContext context) {
     DrawerItemModel createLabelItem = DrawerItemModel(
@@ -50,17 +48,14 @@ class _LabelsTile extends StatelessWidget {
         Scaffold.of(context).closeDrawer();
       }
     }
-
-    return BlocBuilder<GetLabelsCubit, GetLabelsStates>(
+    return BlocBuilder<DrawerCubit, DrawerStates>(
       builder: (context, state) {
-        if (state is GetLabelsSuccessState &&
-            GetLabelsCubit.of(context).allLabels.isNotEmpty) {
-          return _LabelsList(
-              labels: GetLabelsCubit.of(context).allLabels,
-              item: createLabelItem,
-              onTap: onTap);
+        switch (state) {
+          case GetLabelsSuccessState():
+            return _LabelsList(labels: state.labels,item: createLabelItem,onTap: onTap);
+          case EmptyLabelsState():
+            return _DrawerTile(item: createLabelItem, onTap: onTap);
         }
-        return _DrawerTile(item: createLabelItem, onTap: onTap);
       },
     );
   }
