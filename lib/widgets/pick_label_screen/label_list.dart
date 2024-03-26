@@ -5,28 +5,28 @@ class _LabelsList extends StatelessWidget {
   const _LabelsList(this.inNote,this.labels);
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return SliverList.builder(
       key: GlobalKey(),
       itemCount: PickLabelsCubit.of(context).filteredLabels.length,
-      itemBuilder: (context, index,) {
+      itemBuilder: (context, index) {
+        PickLabelsCubit cubit=PickLabelsCubit.of(context);
         return CustomCheckListTile(
-          title: PickLabelsCubit.of(context).filteredLabels[index].name,
-          checkType: PickLabelsCubit.of(context).filteredLabels[index].checkType,
+          title: cubit.filteredLabels[index].name,
+          checkType: cubit.filteredLabels[index].checkType,
           onChanged: (checkType) {
-            PickLabelsCubit cubit=PickLabelsCubit.of(context);
             if (checkType == CheckType.all) {
-              Label label = cubit.labels!.firstWhere((element) => element.name == labels[index].name, orElse: () => Label(name: ""));
-              if (cubit.labels!.isNotEmpty) {
-                cubit.labels!.remove(label);
+              Label label = cubit.labels.firstWhere((element) => element.name == labels[index].name, orElse: () => Label(name: ""));
+              if (cubit.labels.isNotEmpty) {
+                cubit.labels.remove(label);
               }
-              cubit.labels!.add(Label(name: labels[index].name,checkType: CheckType.all));
+              cubit.labels.add(Label(name: labels[index].name,checkType: CheckType.all));
             }
             else if (!inNote && checkType == CheckType.none) {
-              cubit.labels!.firstWhere((element) => element.name == labels[index].name).checkType = CheckType.none;
+              cubit.labels.firstWhere((element) => element.name == labels[index].name).checkType = CheckType.none;
             }
             else if (inNote && checkType == CheckType.none){
-              Label label = cubit.labels!.firstWhere((element) => element.name == labels[index].name);
-              cubit.labels!.remove(label);
+              Label label = cubit.labels.firstWhere((element) => element.name == labels[index].name);
+              cubit.labels.remove(label);
             }
           },
         );

@@ -10,10 +10,11 @@ import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.d
 part 'pick_labels_state.dart';
 class PickLabelsCubit extends Cubit<PickLabelsStates> {
   final LabelLocalDataSource _dataSource;
-  final List<Note>? notes;
-  List<Label>? labels;
+  final List<Note> notes;
+  List<Label> labels;
   final NoteStatus noteStatus;
-  PickLabelsCubit(this._dataSource, {this.noteStatus = NoteStatus.active, this.notes, this.labels}):super(GetLabelsInitialState()) {
+  bool notFound=false;
+  PickLabelsCubit(this._dataSource, {this.noteStatus = NoteStatus.active, required this.notes,required this.labels}):super(GetLabelsInitialState()) {
     filteredLabels=[];
     controller=TextEditingController();
     controller.addListener(getLabels);
@@ -23,7 +24,7 @@ class PickLabelsCubit extends Cubit<PickLabelsStates> {
   late List<Label> filteredLabels;
   pickLabelsForMultipleNotes() async {
     emit(PickLabelsLoadingState());
-    await _dataSource.pickLabelForMultipleNotes(notes!, labels!);
+    await _dataSource.pickLabelForMultipleNotes(notes, labels);
     emit(PickLabelsSuccessState());
   }
   picLabelsForNote() async {
@@ -32,11 +33,32 @@ class PickLabelsCubit extends Cubit<PickLabelsStates> {
   void getLabels() {
     String searchText = controller.text.toLowerCase();
     if (searchText.isEmpty) {
+      notFound=false;
       filteredLabels=_markLabel(_dataSource.getLabel());
     } else {
-      filteredLabels = _markLabel(_dataSource.getLabel().where((label) => label.name.toLowerCase().contains(searchText)).toList());
+      filteredLabels = _markLabel(_dataSource
+          .getLabel()
+          .where((label) => label.name.toLowerCase().contains(searchText))
+          .toList());
+      Label tmp=filteredLabels.firstWhere((element) => element.name.toLowerCase()==searchText,orElse: () => Label(name: ""));
+      if(tmp.name.isEmpty)
+        {
+          notFound=true;
+        }
+      else{
+        notFound=false;
+      }
     }
     emit(GetLabelsSuccessState());
+  }
+  void createNewLabel()async{
+    String name=controller.text.trim();
+    Label label=Label(name:name,checkType: CheckType.all);
+    await _dataSource.addLabel(label);
+    labels.insert(0,label);
+    controller.clear();
+    FocusManager.instance.primaryFocus!.unfocus();
+    getLabels();
   }
   appbarListener(BuildContext context, PickLabelsStates state) {
     if (state is PickLabelsSuccessState &&
@@ -51,13 +73,13 @@ class PickLabelsCubit extends Cubit<PickLabelsStates> {
       GetActiveNotesCubit.of(context).getNotes();
     }
     if (state is PickLabelsForNoteSuccessState) {
-      AddNoteCubit.of(context).pickLabel(labels!);
+      AddNoteCubit.of(context).pickLabel(labels);
     }
   }
   List<Label> _markLabel(List<Label> unMarkedLabels) {
-    if (labels != null && unMarkedLabels.isNotEmpty) {
+    if (unMarkedLabels.isNotEmpty) {
       for (Label unMarkedLabel in unMarkedLabels) {
-        Label? tmp = labels!.firstWhere(
+        Label? tmp = labels.firstWhere(
             (label) => label.name == unMarkedLabel.name,
             orElse: () => Label(name: ''));
         unMarkedLabel.checkType =
@@ -68,8 +90,8 @@ class PickLabelsCubit extends Cubit<PickLabelsStates> {
   }
   @override
   Future<void> close() {
-    notes?.clear();
-    labels?.clear();
+    notes.clear();
+    labels.clear();
     filteredLabels.clear();
     controller.removeListener(getLabels);
     controller.dispose();
