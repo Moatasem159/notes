@@ -14,7 +14,7 @@ class PickLabelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => PickLabelsCubit(sl(), noteStatus: params.noteStatus,notes: params.notes, labels: params.labels)..getLabels(),
+      create: (_) => PickLabelsCubit(sl(),inNote: params.inNote,noteStatus: params.noteStatus,notes: params.notes, labels: params.labels)..getLabels(),
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: AppTheme.systemUiOverlayStyle(context),
         child: Builder(
@@ -32,7 +32,7 @@ class PickLabelScreen extends StatelessWidget {
                 child: Scaffold(
                     appBar: const PickLabelAppbar(),
                     backgroundColor: context.scaffoldBackground,
-                    body: PickLabelsList(inNote: params.inNote),
+                    body: const PickLabelsList(),
                 ),
               ),
             );
