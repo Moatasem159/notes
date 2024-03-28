@@ -4,7 +4,7 @@ flutter_native_splash:
   image_dark: assets/images/nota_logo_white.png
   color_dark: "#131215"
   android_12:
-    image: assets/images/nota_logo_black.png
+    image: assets/images/nota_android12_black_logo.png
     color: "#ffffff"
-    image_dark: assets/images/nota_logo_white.png
+    image_dark: assets/images/nota_android12_white_logo.png
     color_dark: "#131215"
