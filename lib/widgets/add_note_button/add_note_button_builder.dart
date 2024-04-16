@@ -8,7 +8,7 @@ class AddNoteButtonBuilder extends StatelessWidget {
       borderRadius: BorderRadius.circular(15),
       onTap:onTap,
       child: CustomPaint(
-        size: const Size(60, 60),
+        size: const Size(60, 58),
         painter: _AddIconPainter(),
       ),
     );
