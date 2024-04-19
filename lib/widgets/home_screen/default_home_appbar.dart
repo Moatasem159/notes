@@ -10,7 +10,9 @@ class _DefaultHomeAppbar extends StatelessWidget {
         color: context.theme.colorScheme.onSecondary,
         borderRadius: BorderRadius.circular(25),
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            context.pushNamed(Routes.searchRoute);
+          },
           borderRadius: BorderRadius.circular(25),
           child: SizedBox(
             child: Row(

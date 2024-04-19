@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes/config/routes/no_animation.dart';
 import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
@@ -13,11 +14,14 @@ import 'package:notes/screens/home_screen.dart';
 import 'package:notes/screens/label_screen.dart';
 import 'package:notes/screens/pick_label_screen.dart';
 import 'package:notes/screens/reminder_screen.dart';
+import 'package:notes/screens/search_screen.dart';
 import 'package:notes/screens/settings_screen.dart';
 import 'package:notes/models/pick_label_params.dart';
 import 'package:notes/screens/archived_screen.dart';
 import 'package:notes/screens/create_label_screen.dart';
+
 part 'slide_from_down_to_up_with_fading.dart';
+
 abstract class Routes {
   static const String homeRoute = "home";
   static const String reminderRoute = "reminder";
@@ -27,6 +31,7 @@ abstract class Routes {
   static const String archivedRoute = "archived";
   static const String deletedRoute = "deleted";
   static const String settingsRoute = "settings";
+  static const String searchRoute = "search";
 }
 
 class AppRouter {
@@ -54,7 +59,7 @@ class AppRouter {
         return SlideFromDownToUpWithFading(
           settings: settings,
           transitionDuration: const Duration(milliseconds: 500),
-          reverseTransitionDuration: const Duration(milliseconds:100),
+          reverseTransitionDuration: const Duration(milliseconds: 100),
           pageBuilder: (context, animation, secondaryAnimation) {
             PickLabelParams params = settings.arguments as PickLabelParams;
             return _getPickLabelScreen(params);
@@ -77,6 +82,13 @@ class AppRouter {
         return SlideFromDownToUpWithFading(
             settings: settings,
             pageBuilder: (_, __, ___) => const SettingsScreen());
+      case Routes.searchRoute:
+        return NoAnimationRoute(
+            pageBuilder: (
+          context,
+          _,
+          __,
+        ) => const SearchScreen());
       default:
         return MaterialPageRoute(
           settings: settings,
