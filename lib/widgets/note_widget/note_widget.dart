@@ -5,6 +5,7 @@ import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart'
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
 import 'package:notes/cubits/get_deleted_notes_cubit/get_deleted_notes_cubit.dart';
 import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
+import 'package:notes/cubits/search_cubit/search_cubit.dart';
 import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:animations/animations.dart';
@@ -22,7 +23,8 @@ part 'note_closed_builder.dart';
 class NoteWidget extends StatefulWidget {
   final Note note;
   final NoteStatus noteStatus;
-  const NoteWidget({super.key,required this.note,required this.noteStatus});
+  final bool isSearch;
+  const NoteWidget({super.key,required this.note,required this.noteStatus,this.isSearch=false});
 
   @override
   State<NoteWidget> createState() => _NoteWidgetState();
@@ -46,7 +48,7 @@ class _NoteWidgetState extends State<NoteWidget> {
           GetActiveNotesCubit.of(context).remove(widget.note);
         },
         confirmDismiss: (direction) async {
-          if (widget.noteStatus == NoteStatus.active&&AppBarCubit.of(context).isBase) {
+          if (widget.noteStatus == NoteStatus.active&&AppBarCubit.of(context).isBase&&!widget.isSearch) {
             return true;
           } else {
             return null;
@@ -58,7 +60,7 @@ class _NoteWidgetState extends State<NoteWidget> {
             opacity = 1 - details.progress;
           });
         },
-        child: _NoteBuilder(widget.note,widget.noteStatus),
+        child: _NoteBuilder(widget.note,widget.noteStatus,widget.isSearch),
       ),
     );
   }

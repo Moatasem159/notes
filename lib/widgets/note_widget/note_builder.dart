@@ -1,8 +1,12 @@
 part of'note_widget.dart';
+
 class _NoteBuilder extends StatelessWidget {
   final Note note;
   final NoteStatus noteStatus;
-  const _NoteBuilder(this.note,this.noteStatus);
+  final bool isSearch;
+
+  const _NoteBuilder(this.note, this.noteStatus, this.isSearch);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,32 +20,52 @@ class _NoteBuilder extends StatelessWidget {
         closedShape:
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         openBuilder: (_, action) {
-          if(noteStatus ==NoteStatus.active) {
+          if (noteStatus == NoteStatus.active) {
+            if (isSearch) {
+              return BlocProvider.value(
+                value: SearchCubit.of(context),
+                child: BlocProvider.value(
+                    value: GetActiveNotesCubit.of(context),
+                    child: AddNoteScreen(note: note, noteStatus: noteStatus,isSearch: isSearch)),
+              );
+            }
+            else {
               return BlocProvider.value(
                   value: GetActiveNotesCubit.of(context),
-                  child: AddNoteScreen(note: note,noteStatus: noteStatus));
+                  child: AddNoteScreen(note: note, noteStatus: noteStatus));
             }
-          if(noteStatus ==NoteStatus.labeled) {
-              return BlocProvider.value(
-                  value: GetLabeledNotesCubit.of(context),
-                  child: AddNoteScreen(note: note,noteStatus: noteStatus));
-            }
-          else if (noteStatus== NoteStatus.archive) {
-            return BlocProvider.value(
-                value: GetArchivedNotesCubit.of(context),
-                child: AddNoteScreen(note: note,noteStatus: noteStatus));
           }
-          else if (noteStatus== NoteStatus.deleted) {
+          else if (noteStatus == NoteStatus.labeled) {
+            return BlocProvider.value(
+                value: GetLabeledNotesCubit.of(context),
+                child: AddNoteScreen(note: note, noteStatus: noteStatus));
+          }
+          else if (noteStatus == NoteStatus.archive) {
+            if (isSearch) {
               return BlocProvider.value(
-                  value: GetDeletedNotesCubit.of(context),
-                  child: AddNoteScreen(note: note,noteStatus: noteStatus));
+               value: SearchCubit.of(context),
+                child: BlocProvider.value(
+                    value: GetArchivedNotesCubit.of(context),
+                    child: AddNoteScreen(note: note, noteStatus: noteStatus,isSearch: isSearch)),
+              );
             }
+            else{
+              return BlocProvider.value(
+                  value: GetArchivedNotesCubit.of(context),
+                  child: AddNoteScreen(note: note, noteStatus: noteStatus));
+            }
+          }
+          else if (noteStatus == NoteStatus.deleted) {
+            return BlocProvider.value(
+                value: GetDeletedNotesCubit.of(context),
+                child: AddNoteScreen(note: note, noteStatus: noteStatus));
+          }
           else {
-            return AddNoteScreen(note: note,noteStatus: noteStatus);
+            return AddNoteScreen(note: note, noteStatus: noteStatus);
           }
         },
         closedBuilder: (_, action) =>
-            _NoteClosedBuilder(note: note,onTap:action),
+            _NoteClosedBuilder(note: note, onTap: action,isSearch: isSearch),
       ),
     );
   }

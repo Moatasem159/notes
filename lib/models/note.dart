@@ -59,6 +59,8 @@ enum NoteStatus {
   deleted,
   @HiveField(4)
   labeled,
+  @HiveField(5)
+  searched,
 }
 extension GetPinned on List<Note>{
   (bool,bool) listHasPinnedNotes(){

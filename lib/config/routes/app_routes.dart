@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes/config/routes/no_animation.dart';
 import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
@@ -9,6 +8,7 @@ import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dar
 import 'package:notes/models/create_label_params.dart';
 import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
+import 'package:notes/models/search_screen_params.dart';
 import 'package:notes/screens/deleted_screen.dart';
 import 'package:notes/screens/home_screen.dart';
 import 'package:notes/screens/label_screen.dart';
@@ -19,9 +19,8 @@ import 'package:notes/screens/settings_screen.dart';
 import 'package:notes/models/pick_label_params.dart';
 import 'package:notes/screens/archived_screen.dart';
 import 'package:notes/screens/create_label_screen.dart';
-
 part 'slide_from_down_to_up_with_fading.dart';
-
+part 'no_animation.dart';
 abstract class Routes {
   static const String homeRoute = "home";
   static const String reminderRoute = "reminder";
@@ -85,17 +84,41 @@ class AppRouter {
       case Routes.searchRoute:
         return NoAnimationRoute(
           settings: settings,
-            pageBuilder: (
-          context,
-          _,
-          __,
-        ) => const SearchScreen());
+          pageBuilder: (
+            _,
+            __,
+            ___,
+          ) {
+            SearchScreenParams params = settings.arguments as SearchScreenParams;
+            return _getSearchScreen(params);
+          },
+        );
       default:
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => const Scaffold(),
         );
     }
+  }
+
+  Widget _getSearchScreen(SearchScreenParams params) {
+    if (params.noteStatus == NoteStatus.active) {
+      return BlocProvider.value(
+        value: params.cubit as GetActiveNotesCubit,
+        child: SearchScreen(params: params),
+      );
+    } else if (params.noteStatus == NoteStatus.archive) {
+      return BlocProvider.value(
+        value: params.cubit as GetArchivedNotesCubit,
+        child: SearchScreen(params: params),
+      );
+    } else if (params.noteStatus == NoteStatus.labeled) {
+      return BlocProvider.value(
+        value: params.cubit as GetLabeledNotesCubit,
+        child: SearchScreen(params: params),
+      );
+    }
+    return SearchScreen(params: params);
   }
 
   Widget _getCreateLabelScreen(CreateLabelParams params) {

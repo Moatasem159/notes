@@ -4,6 +4,7 @@ import 'package:notes/config/routes/app_routes.dart';
 import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
 import 'package:notes/cubits/label_actions_bloc/label_actions_bloc.dart';
 import 'package:notes/models/note.dart';
+import 'package:notes/models/search_screen_params.dart';
 import 'package:notes/widgets/empty_body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes/widgets/custom_button.dart';

@@ -5,6 +5,7 @@ import 'package:notes/app/injection_container.dart';
 import 'package:notes/config/themes/app_theme.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:notes/cubits/search_cubit/search_cubit.dart';
 import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/widgets/add_note_screen/add_note_screen_appbar.dart';
@@ -15,7 +16,8 @@ class AddNoteScreen extends StatelessWidget {
   final Note? note;
   final Label? label;
   final NoteStatus? noteStatus;
-  const AddNoteScreen({super.key, this.note, this.noteStatus=NoteStatus.active, this.label});
+  final bool isSearch;
+  const AddNoteScreen({super.key, this.note, this.noteStatus=NoteStatus.active, this.label,this.isSearch=false});
 
   _absorb(BuildContext context, AddNoteCubit cubit) {
     if (cubit.restored == false) {
@@ -27,7 +29,7 @@ class AddNoteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => AddNoteCubit(sl(), note: note,noteStatus: noteStatus,label: label),
+      create: (BuildContext context) => AddNoteCubit(sl(), note: note,noteStatus: noteStatus,label: label, isSearch: isSearch),
       child: Builder(
         builder: (BuildContext context) {
           return BlocConsumer<AddNoteCubit, AddNoteStates>(
@@ -52,7 +54,10 @@ class AddNoteScreen extends StatelessWidget {
                     else if (note!.status != NoteStatus.deleted) {
                     cubit.editNote();
                     }
-
+                    if(isSearch)
+                      {
+                        SearchCubit.of(context).search(edit: true);
+                      }
                   },
                   child: SafeArea(
                     child: Scaffold(

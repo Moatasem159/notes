@@ -11,7 +11,8 @@ class _DefaultHomeAppbar extends StatelessWidget {
         borderRadius: BorderRadius.circular(25),
         child: InkWell(
           onTap: () {
-            context.pushNamed(Routes.searchRoute);
+            SearchScreenParams params =SearchScreenParams(noteStatus: NoteStatus.active, cubit: GetActiveNotesCubit.of(context));
+            context.pushNamed(Routes.searchRoute,arguments: params);
           },
           borderRadius: BorderRadius.circular(25),
           child: SizedBox(

@@ -7,6 +7,7 @@ import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart'
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
 import 'package:notes/cubits/get_deleted_notes_cubit/get_deleted_notes_cubit.dart';
 import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dart';
+import 'package:notes/cubits/search_cubit/search_cubit.dart';
 import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/sources/notes_data_source.dart';
@@ -16,7 +17,7 @@ part 'add_note_state.dart';
 
 class AddNoteCubit extends Cubit<AddNoteStates> {
   AddNoteCubit(this._dataSource,
-      {required this.note, required this.noteStatus, required this.label})
+      {required this.note, required this.noteStatus, required this.label,required this.isSearch})
       : super(AddNoteInitialState()) {
     isNew = note == null ? true : false;
     note ??= Note(
@@ -39,6 +40,7 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
   NoteStatus? noteStatus;
   late bool restored;
   late bool isNew;
+  final bool isSearch;
 
   Future<void> addNote() async {
     emit(AddNoteLoadingState());
@@ -141,10 +143,20 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
       }
     }
     if (state is ChangeNoteStatusState) {
-      Navigator.of(context).pop();
+      context.pop();
       if (noteStatus == NoteStatus.archive) {
+        if(isSearch)
+          {
+            SearchCubit.of(context).search(edit: true);
+          }
         GetArchivedNotesCubit.of(context).getArchivedNotes(edit: true);
-      } else {
+      }
+      else if (noteStatus==NoteStatus.active){
+        if(isSearch)
+        {
+
+          SearchCubit.of(context).search(edit: true);
+        }
         GetActiveNotesCubit.of(context).getNotes(edit: true);
       }
     }

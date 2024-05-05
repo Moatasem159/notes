@@ -17,7 +17,10 @@ class _DefaultLabelAppbar extends StatelessWidget {
           },
         ),
         const Spacer(),
-        CustomIconButton(onTap: () {}, icon: const Icon(Icons.search)),
+        CustomIconButton(onTap: () {
+          SearchScreenParams params =SearchScreenParams(noteStatus: NoteStatus.labeled, cubit: GetLabeledNotesCubit.of(context));
+          context.pushNamed(Routes.searchRoute,arguments: params);
+        }, icon: const Icon(Icons.search)),
         const SwitchListViewButton(),
         const _LabelPopupMenu()
       ],

@@ -1,7 +1,7 @@
 name: notes
 description: "A new Flutter project."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.7.3
+version: 1.8.0
 environment:
   sdk: '>=3.3.4 <4.0.0'
 dependencies:
@@ -56,4 +56,4 @@ flutter:
          - asset: assets/fonts/sans/DMSans-Black.ttf
            weight: 900
 flutter_assets_generator:
-  path_ignore: ["assets"]
+  path_ignore: ["assets", "lib"]

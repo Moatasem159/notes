@@ -81,6 +81,8 @@ class NoteStatusAdapter extends TypeAdapter<NoteStatus> {
         return NoteStatus.deleted;
       case 4:
         return NoteStatus.labeled;
+      case 5:
+        return NoteStatus.searched;
       default:
         return NoteStatus.active;
     }
@@ -103,6 +105,9 @@ class NoteStatusAdapter extends TypeAdapter<NoteStatus> {
         break;
       case NoteStatus.labeled:
         writer.writeByte(4);
+        break;
+      case NoteStatus.searched:
+        writer.writeByte(5);
         break;
     }
   }

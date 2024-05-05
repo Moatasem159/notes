@@ -3,7 +3,8 @@ part of 'note_widget.dart';
 class _NoteClosedBuilder extends StatelessWidget {
   final Note note;
   final VoidCallback onTap;
-  const _NoteClosedBuilder({required this.note,required this.onTap});
+  final bool isSearch;
+  const _NoteClosedBuilder({required this.note,required this.onTap, required this.isSearch});
   BoxBorder _border(BuildContext context) {
     return Border.all(
       width: AppBarCubit.of(context).selectedNotes.contains(note)
@@ -35,7 +36,9 @@ class _NoteClosedBuilder extends StatelessWidget {
               }
             },
             onLongPress: () {
-              AppBarCubit.of(context).selectNote(note);
+              if(!isSearch) {
+                AppBarCubit.of(context).selectNote(note);
+              }
             },
             borderRadius: BorderRadius.circular(10),
             child: Container(

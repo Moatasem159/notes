@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-
+part of'app_routes.dart';
 class NoAnimationRoute extends PageRouteBuilder {
   NoAnimationRoute({
     super.settings,

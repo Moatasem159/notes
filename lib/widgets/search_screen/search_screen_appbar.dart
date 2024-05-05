@@ -1,5 +1,8 @@
-part of 'search_screen_body.dart';
-
+import 'package:flutter/material.dart';
+import 'package:notes/core/extension/context_extension.dart';
+import 'package:notes/core/utils/app_text_styles.dart';
+import 'package:notes/cubits/search_cubit/search_cubit.dart';
+import 'package:notes/widgets/custom_icon_button.dart';
 class SearchScreenAppBar extends StatefulWidget implements PreferredSizeWidget {
   const SearchScreenAppBar({super.key});
 
@@ -9,7 +12,6 @@ class SearchScreenAppBar extends StatefulWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size(double.infinity, 70);
 }
-
 class _SearchScreenAppBarState extends State<SearchScreenAppBar> {
   late double radius;
   late double vMargin;
@@ -76,7 +78,11 @@ class _SearchScreenAppBarState extends State<SearchScreenAppBar> {
             ),
             Expanded(
               child: TextFormField(
+                controller: SearchCubit.of(context).controller,
                 autofocus: true,
+                onChanged: (value) {
+                  SearchCubit.of(context).search();
+                },
                 decoration: InputDecoration(
                   hintText: context.local.searchYourNotes,
                   hintStyle: AppStyles.styleRegular20(context),

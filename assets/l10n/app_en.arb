@@ -44,5 +44,6 @@
   "labeledBodyTitle": "No notes with this label yet",
   "deleteForEver": "Delete for ever",
   "emptyBin": "Empty Bin",
-  "searchYourNotes": "Search your notes"
+  "searchYourNotes": "Search your notes",
+  "emptySearch": "No matching notes"
 }

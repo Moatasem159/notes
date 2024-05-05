@@ -14,7 +14,6 @@ class GetLabeledNotesCubit extends Cubit<GetLabeledNotesStates> {
   getLabeledNotes({bool edit=false}) async{
     if(edit)
     {
-
       await Future.delayed(const Duration(milliseconds: 500));
     }
     List<Note> notes = _dataSource.getNotes().where((element) => element.labeled == true && element.status != NoteStatus.deleted).toList();
