@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/core/utils/app_text_styles.dart';
+import 'package:notes/widgets/custom_icon_button.dart';
 import 'package:notes/widgets/custom_scroll_list.dart';
 part 'search_screen_appbar.dart';
 class SearchScreenBody extends StatelessWidget {
@@ -8,9 +9,7 @@ class SearchScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CustomScrollList(
-      slivers: [
-        _SearchScreenAppBar(),
-      ],
+      slivers: [],
     );
   }
 }

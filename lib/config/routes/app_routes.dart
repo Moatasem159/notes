@@ -84,6 +84,7 @@ class AppRouter {
             pageBuilder: (_, __, ___) => const SettingsScreen());
       case Routes.searchRoute:
         return NoAnimationRoute(
+          settings: settings,
             pageBuilder: (
           context,
           _,

@@ -1,5 +1,4 @@
 part of 'app_routes.dart';
-
 class SlideFromDownToUpWithFading extends PageRouteBuilder {
   SlideFromDownToUpWithFading({
     super.settings,
@@ -25,5 +24,3 @@ class SlideFromDownToUpWithFading extends PageRouteBuilder {
           },
         );
 }
-
-
