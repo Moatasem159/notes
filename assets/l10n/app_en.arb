@@ -45,5 +45,10 @@
   "deleteForEver": "Delete for ever",
   "emptyBin": "Empty Bin",
   "searchYourNotes": "Search your notes",
-  "emptySearch": "No matching notes"
+  "emptySearch": "No matching notes",
+  "theme": "Theme",
+  "systemDefault": "System default",
+  "dark": "Dark",
+  "light": "Light",
+  "chooseTheme": "Choose theme"
 }

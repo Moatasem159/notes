@@ -50,6 +50,14 @@ abstract class AppStyles {
       letterSpacing: 0,
     );
   }
+  static TextStyle styleBold24(BuildContext context) {
+    return TextStyle(
+      fontSize: _getResponsiveFontSize(context, fontSize:24),
+      fontFamily: AppFonts.englishFontFamily,
+      fontWeight: FontWeight.bold,
+      letterSpacing: 0.8,
+    );
+  }
   static TextStyle styleSemiBold16(BuildContext context) {
     return TextStyle(
       fontSize: _getResponsiveFontSize(context, fontSize: 16),
