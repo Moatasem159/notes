@@ -5,5 +5,5 @@ import 'package:notes/config/routes/app_routes.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
-  runApp(MyApp(appRouter: AppRouter()));
+  runApp(Nota(appRouter: AppRouter()));
 }

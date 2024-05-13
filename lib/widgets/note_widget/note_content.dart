@@ -1,10 +1,7 @@
 part of 'note_widget.dart';
-
 class _NoteContent extends StatelessWidget {
   final Note note;
-
   const _NoteContent(this.note);
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,11 +42,14 @@ class _NoteContent extends StatelessWidget {
           ),
         if (note.labeled)
           15.ph,
-        _NoteLabelList(note.labels)
+        if(note.imagePath.isNotEmpty)
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: _NoteLabelList(note.labels),
+        ),
+        if(note.imagePath.isEmpty)
+        _NoteLabelList(note.labels),
       ],
     );
   }
 }
-
-
-
