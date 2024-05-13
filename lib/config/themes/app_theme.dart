@@ -80,7 +80,7 @@ abstract class AppTheme {
   );
 
   static SystemUiOverlayStyle systemUiOverlayStyle(BuildContext context) =>
-      MediaQuery.of(context).platformBrightness == Brightness.dark
+      Theme.of(context).brightness == Brightness.dark
           ? _darkSystemUiOverlayStyle
           : _whiteSystemUiOverlayStyle;
   static final SystemUiOverlayStyle _whiteSystemUiOverlayStyle =

@@ -15,6 +15,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(Theme.of(context).brightness);
     return BlocProvider(
       create: (_) => GetActiveNotesCubit(sl())..getNotes(),
       child: AnnotatedRegion<SystemUiOverlayStyle>(
