@@ -22,16 +22,16 @@ class DeleteDialog extends StatelessWidget {
           CustomButton(
             title: context.local.cancel,
             onTap: context.pop,
-            padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 5)),
+            padding: WidgetStateProperty.all(const EdgeInsets.symmetric(horizontal: 5)),
             foregroundColor: context.theme.elevatedButtonTheme.style!.backgroundColor,
-            backgroundColor: MaterialStateProperty.all(Colors.transparent),
+            backgroundColor: WidgetStateProperty.all(Colors.transparent),
           ),
           CustomButton(
               title: context.local.delete,
               onTap: delete,
-              padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 20)),
+              padding: WidgetStateProperty.all(const EdgeInsets.symmetric(horizontal: 20)),
               foregroundColor: context.theme.elevatedButtonTheme.style!.backgroundColor,
-              backgroundColor:MaterialStateProperty.all(Colors.transparent)),
+              backgroundColor:WidgetStateProperty.all(Colors.transparent)),
         ],
       ),
     );

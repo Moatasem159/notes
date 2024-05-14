@@ -10,7 +10,6 @@ import 'package:notes/cubits/get_labeled_notes_cubit/get_labeled_notes_cubit.dar
 import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/models/pick_label_params.dart';
-
 class LabelWidget extends StatelessWidget {
   final Label ?label;
   final bool tapped;

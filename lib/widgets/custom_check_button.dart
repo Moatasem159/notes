@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:notes/models/label.dart';
-
 class CustomCheckbox extends StatelessWidget {
   final CheckType checkType;
   final VoidCallback onTap;
@@ -34,5 +33,3 @@ class CustomCheckbox extends StatelessWidget {
     );
   }
 }
-
-

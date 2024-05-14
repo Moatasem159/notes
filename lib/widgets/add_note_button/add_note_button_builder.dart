@@ -14,4 +14,3 @@ class AddNoteButtonBuilder extends StatelessWidget {
     );
   }
 }
-

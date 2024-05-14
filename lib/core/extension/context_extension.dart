@@ -11,7 +11,7 @@ extension ContextExtension on BuildContext{
 }
 extension ThemeExtension on BuildContext{
   ThemeData get theme=>Theme.of(this);
-  Color get scaffoldBackground=>Theme.of(this).colorScheme.background;
+  Color get scaffoldBackground=>Theme.of(this).colorScheme.surface;
   Color get textPrimaryColor=>Theme.of(this).colorScheme.primary;
   Color get textSecondaryColor=>Theme.of(this).colorScheme.secondary;
 }

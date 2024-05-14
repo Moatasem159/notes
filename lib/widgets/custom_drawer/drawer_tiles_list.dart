@@ -21,22 +21,22 @@ class _DrawerTilesList extends StatelessWidget {
             }
           },
         ),
-        // _DrawerTile(
-        //   item: DrawerItemModel(
-        //     title: context.local.reminder,
-        //     icon: Icons.notifications_none_outlined,
-        //     location: Routes.reminderRoute,
-        //   ),
-        //   onTap: () {
-        //     if (context.route.name!= Routes.reminderRoute) {
-        //       Scaffold.of(context).closeDrawer();
-        //       context.pushReplacementNamed(Routes.reminderRoute);
-        //     }
-        //     else {
-        //       Scaffold.of(context).closeDrawer();
-        //     }
-        //   },
-        // ),
+        _DrawerTile(
+          item: DrawerItemModel(
+            title: context.local.reminder,
+            icon: Icons.notifications_none_outlined,
+            location: Routes.reminderRoute,
+          ),
+          onTap: () {
+            if (context.route.name!= Routes.reminderRoute) {
+              Scaffold.of(context).closeDrawer();
+              context.pushReplacementNamed(Routes.reminderRoute);
+            }
+            else {
+              Scaffold.of(context).closeDrawer();
+            }
+          },
+        ),
         const _LabelsTile(),
         _DrawerTile(
           item: DrawerItemModel(

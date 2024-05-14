@@ -6,14 +6,14 @@ class CustomPopupMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Material(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       color: Colors.transparent,
       child: PopupMenuButton(
+        color: context.theme.colorScheme.onSecondary,
         clipBehavior: Clip.hardEdge,
         padding: EdgeInsets.zero,
         icon: const Icon(Icons.more_vert_outlined),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         splashRadius: 20,
         constraints:
         BoxConstraints(maxWidth: context.width / 1.894736842105263),

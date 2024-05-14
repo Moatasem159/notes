@@ -19,7 +19,7 @@ class Nota extends StatelessWidget {
         BlocProvider(create: (context) => SwitchListViewCubit()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(
-        builder: (context, state) {
+        builder: (BuildContext context,ThemeMode state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: AppTheme.lightTheme,

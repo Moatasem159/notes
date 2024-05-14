@@ -43,11 +43,11 @@ class AddNoteScreenAppbar extends StatelessWidget implements PreferredSizeWidget
                 tooltip: context.local.pin,
               ),
               const LabelsButton(),
-              // CustomIconButton(
-              //   onTap: () {},
-              //   icon: const Icon(Icons.notification_add_outlined),
-              //   tooltip: context.local.reminder,
-              // ),
+              CustomIconButton(
+                onTap: () {},
+                icon: const Icon(Icons.notification_add_outlined),
+                tooltip: context.local.reminder,
+              ),
               CustomIconButton(
                 onTap: cubit.changeArchiveNote,
                 icon: Icon(cubit.note!.status == NoteStatus.archive

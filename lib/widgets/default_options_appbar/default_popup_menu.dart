@@ -17,7 +17,8 @@ class _DefaultPopupMenu extends StatelessWidget {
           AppBarCubit.of(context).removeSelection();
         }
       },
-      child: CustomPopupMenu(items: [
+      child: CustomPopupMenu(
+          items: [
         PopupMenuItem(
           onTap: () => NotesActionsBloc.of(context).add(ArchiveNote(
               AppBarCubit.of(context).selectedNotes,

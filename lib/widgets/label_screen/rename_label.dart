@@ -86,7 +86,7 @@ class _RenameLabelDialogState extends State<_RenameLabelDialog> {
             onTap: context.pop,
             foregroundColor:
                 context.theme.elevatedButtonTheme.style!.backgroundColor,
-            backgroundColor: MaterialStateProperty.all(Colors.transparent),
+            backgroundColor: WidgetStateProperty.all(Colors.transparent),
           ),
           CustomButton(
             title: context.local.rename,

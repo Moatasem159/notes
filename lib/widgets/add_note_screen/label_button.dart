@@ -10,10 +10,8 @@ import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/models/pick_label_params.dart';
 import 'package:notes/widgets/custom_icon_button.dart';
-
 class LabelsButton extends StatelessWidget {
   const LabelsButton({super.key});
-
   @override
   Widget build(BuildContext context) {
     return CustomIconButton(

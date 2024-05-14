@@ -21,7 +21,7 @@ abstract class AppTheme {
         const DividerThemeData(color: AppColors.lightActiveDrawerColor),
     iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
-      iconColor: MaterialStateProperty.all(Colors.black),
+      iconColor: WidgetStateProperty.all(Colors.black),
     )),
     appBarTheme: const AppBarTheme(
       scrolledUnderElevation: 0,
@@ -34,7 +34,7 @@ abstract class AppTheme {
     listTileTheme: const ListTileThemeData()
         .copyWith(selectedColor: AppColors.lightActiveDrawerColor),
     colorScheme: const ColorScheme.light().copyWith(
-      background: AppColors.lightBackgroundColor,
+      surface: AppColors.lightBackgroundColor,
       primary: Colors.black,
       secondary: Colors.grey,
       onSecondary: AppColors.lightSeconderBackgroundColor,
@@ -61,7 +61,7 @@ abstract class AppTheme {
     ),
     iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
-      iconColor: MaterialStateProperty.all(Colors.white),
+      iconColor: WidgetStateProperty.all(Colors.white),
     )),
     fontFamily: AppFonts.englishFontFamily,
     drawerTheme: const DrawerThemeData(
@@ -71,7 +71,7 @@ abstract class AppTheme {
     listTileTheme: const ListTileThemeData()
         .copyWith(selectedColor: AppColors.darkActiveDrawerColor),
     colorScheme: const ColorScheme.dark().copyWith(
-      background: AppColors.darkBackgroundColor,
+      surface: AppColors.darkBackgroundColor,
       primary: Colors.white,
       secondary: Colors.white,
       onSecondary: AppColors.darkSeconderBackgroundColor,

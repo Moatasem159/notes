@@ -18,9 +18,9 @@ class AddNoteButton extends StatelessWidget {
       openElevation: 10,
       closedElevation: 10,
       transitionDuration: const Duration(milliseconds: 300),
-      openColor: context.theme.colorScheme.background,
+      openColor: context.theme.colorScheme.surface,
       closedColor: context.theme.colorScheme.onSecondary,
-      middleColor: context.theme.colorScheme.background,
+      middleColor: context.theme.colorScheme.surface,
       closedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       openBuilder: (_, action) {
         if (noteStatus == NoteStatus.active) {

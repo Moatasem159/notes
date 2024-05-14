@@ -17,7 +17,7 @@ class ColorsBottomSheet extends StatelessWidget {
         builder: (context, state) {
           return Container(
             color: AddNoteCubit.of(context).note!.color == Colors.transparent.value
-                ? Theme.of(context).colorScheme.background
+                ? context.theme.colorScheme.surface
                 : Color(AddNoteCubit.of(context).note!.color),
             height: context.height/5.257142857142857,
             child: Column(
