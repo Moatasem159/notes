@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/cubits/label_actions_bloc/label_actions_bloc.dart';
 import 'package:notes/widgets/create_label_screen/label_field/label_field.dart';
@@ -31,21 +30,18 @@ class _AddLabelFieldState extends State<AddLabelField> {
     bool validate=_formKey.currentState!.validate();
     if(validate){
       if(_controller.text.isNotEmpty) {
-        LabelActionsBloc.of(context).add(AddLabelEvent(_controller.text));
         _found=false;
-      }
-      else{
+        LabelActionsBloc.of(context).add(AddLabelEvent(_controller.text));
+        _controller.clear();
         _focusNode.unfocus();
       }
-    }
-    else{
-      _focusNode.requestFocus();
     }
   }
   _listen() {
     setState(() {
       _isFocused = _focusNode.hasFocus;
       _formKey.currentState!.reset();
+      _found=false;
       _controller.clear();
     });
   }
@@ -69,33 +65,25 @@ class _AddLabelFieldState extends State<AddLabelField> {
   }
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LabelActionsBloc, LabelActionsStates>(
-      listener: (context, state) {
-        if (state is AddLabelSuccessState) {
-          _controller.clear();
-          _focusNode.unfocus();
+    return LabelField(
+      formKey: _formKey,
+      focusNode: _focusNode,
+      toggleFocus: _toggleFocus,
+      isNew: widget.isNew,
+      adding: true,
+      controller: _controller,
+      isFocused: _isFocused,
+      addLabel:_add,
+      onSubmit:_add,
+      validate: (value) {
+        if (value!.length >= 50) {
+          return context.local.enterShorterLabel;
         }
+        if (_found) {
+          return context.local.labelAlreadyExists;
+        }
+        return null;
       },
-        child:LabelField(
-          formKey: _formKey,
-          focusNode: _focusNode,
-          toggleFocus: _toggleFocus,
-          isNew: widget.isNew,
-          adding: true,
-          controller: _controller,
-          isFocused: _isFocused,
-          addLabel:_add,
-          onSubmit:_add,
-          validate: (value) {
-            if (value!.length >= 50) {
-              return context.local.enterShorterLabel;
-            }
-            if (_found) {
-              return context.local.labelAlreadyExists;
-            }
-            return null;
-          },
-        )
     );
   }
 }

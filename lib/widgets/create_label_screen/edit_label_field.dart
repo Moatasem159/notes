@@ -5,18 +5,17 @@ import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/cubits/label_actions_bloc/label_actions_bloc.dart';
 import 'package:notes/widgets/create_label_screen/label_field/label_field.dart';
 import 'package:notes/widgets/label_screen/delete_dialog.dart';
-
 class EditLabelField extends StatefulWidget {
   final Label label;
-  final TextEditingController controller;
-  const EditLabelField({super.key,
-    required this.label,
-    required this.controller});
+  final int index;
+  final Animation<double> animation;
+  const EditLabelField({super.key,required this.label,required this.index, required this.animation});
   @override
   State<EditLabelField> createState() => _EditLabelFieldState();
 }
 class _EditLabelFieldState extends State<EditLabelField> {
-  late GlobalKey<FormState> _formKey;
+  late final  GlobalKey<FormState> _formKey;
+  late final TextEditingController _controller;
   late FocusNode _focusNode;
   late bool _found;
   late bool _isFocused;
@@ -30,10 +29,10 @@ class _EditLabelFieldState extends State<EditLabelField> {
     _isFocused = false;
     _formKey = GlobalKey<FormState>();
     _found = false;
-    text = widget.controller.text;
+    _controller =TextEditingController(text:widget.label.name);
+    text = _controller.text;
     _edited = false;
   }
-
   @override
   void dispose() {
     _focusNode.dispose();
@@ -42,22 +41,18 @@ class _EditLabelFieldState extends State<EditLabelField> {
   }
 
   _edit() {
-    if (text.trim() == widget.controller.text.trim()) {
+    if (text.trim() == _controller.text.trim()) {
       _focusNode.unfocus();
     } else {
-      bool found =
-      LabelActionsBloc.of(context).checkFound(widget.controller.text);
+      bool found = LabelActionsBloc.of(context).checkFound(_controller.text);
       _found = found;
       bool validate = _formKey.currentState!.validate();
       if (validate) {
-        if (widget.controller.text.isNotEmpty) {
-          LabelActionsBloc.of(context).add(EditLabelEvent(widget.label, widget.controller.text));
+        if (_controller.text.isNotEmpty) {
+          LabelActionsBloc.of(context).add(EditLabelEvent(widget.label, _controller.text));
           _edited = true;
-        } else {
           _focusNode.unfocus();
         }
-      } else {
-        _focusNode.requestFocus();
       }
     }
   }
@@ -66,7 +61,7 @@ class _EditLabelFieldState extends State<EditLabelField> {
     setState(() {
       _isFocused = _focusNode.hasFocus;
       if (!_isFocused && !_edited) {
-        widget.controller.text = text;
+        _controller.text = text;
         _formKey.currentState!.reset();
         _edited = false;
         _found = false;
@@ -76,57 +71,47 @@ class _EditLabelFieldState extends State<EditLabelField> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LabelActionsBloc, LabelActionsStates>(
-      listener: (context, state) {
-        if (state is EditLabelSuccessState) {
-          _focusNode.unfocus();
-        }
-      },
-      child: LabelField(
-          focusNode: _focusNode,
-          formKey: _formKey,
-          isFocused: _isFocused,
-          requestFocus: _focusNode.requestFocus,
-          controller: widget.controller,
-          editLabel: _edit,
-          onSubmit: _edit,
-          validate: (value) {
-            if (value!.isEmpty) {
-              return context.local.enterLabelName;
-            }
-            if (value.length >= 50) {
-              return context.local.enterShorterLabel;
-            }
-            if (_found) {
-              return context.local.labelAlreadyExists;
-            }
-            return null;
-          },
-          deleteLabel: () {
-            _focusNode.unfocus();
-            showDialog(
-              context: context,
-              builder: (_) {
-                return BlocProvider.value(
-                  value: LabelActionsBloc.of(context),
-                  child: BlocListener<LabelActionsBloc, LabelActionsStates>(
-                    listener: (context, state) {
-                      if(state is DeleteLabelSuccessState)
-                        {
-                          FocusManager.instance.primaryFocus!.unfocus();
-                        }
-                    },
+    return SizeTransition(
+      sizeFactor: widget.animation,
+      child: FadeTransition(
+        opacity: widget.animation,
+        child: LabelField(
+            focusNode: _focusNode,
+            formKey: _formKey,
+            isFocused: _isFocused,
+            requestFocus: _focusNode.requestFocus,
+            controller: _controller,
+            editLabel: _edit,
+            onSubmit: _edit,
+            validate: (value) {
+              if (value!.isEmpty) {
+                return context.local.enterLabelName;
+              }
+              if (value.length >= 50) {
+                return context.local.enterShorterLabel;
+              }
+              if (_found) {
+                return context.local.labelAlreadyExists;
+              }
+              return null;
+            },
+            deleteLabel: () {
+              _focusNode.unfocus();
+              showDialog(
+                context: context,
+                builder: (_) {
+                  return BlocProvider.value(
+                    value: LabelActionsBloc.of(context),
                     child: DeleteDialog(
                         delete: () {
-                          LabelActionsBloc.of(context)
-                              .add(DeleteLabelEvent(widget.label));
+                          LabelActionsBloc.of(context).add(DeleteLabelEvent(widget.label,index:widget.index));
                           context.pop();
                         }),
-                  ),
-                );
-              },
-            );
-          }),
+                  );
+                },
+              );
+            }),
+      ),
     );
   }
 }

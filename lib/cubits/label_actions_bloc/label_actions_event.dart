@@ -7,7 +7,8 @@ class AddLabelEvent extends LabelActionsEvents{
 }
 class DeleteLabelEvent extends LabelActionsEvents{
   final Label label;
-  DeleteLabelEvent(this.label);
+  final int ?index;
+  DeleteLabelEvent(this.label, {this.index});
 }
 class EditLabelEvent extends LabelActionsEvents{
   final Label label;
