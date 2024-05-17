@@ -13,10 +13,10 @@ class _LabelFieldPrefixIcons extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if(isNew)
-            CustomIconButton(iconSize: 30,onTap: toggleFocus, icon: Icon(isFocused ? Icons.clear : Icons.add),),
+            CustomIconButton(iconSize: 25,onTap: toggleFocus, icon: Icon(isFocused ? Icons.clear : Icons.add),),
           if(!isNew)
-            CustomIconButton(onTap: isFocused ? deleteLabel : null, icon: Icon(isFocused
-                ? Icons.delete_outline_rounded
+            CustomIconButton(iconSize:22,onTap: isFocused ? deleteLabel : null, icon: Icon(isFocused
+                ? Icons.delete_forever
                 : Icons.label_outline_rounded)),
         ],
       ),

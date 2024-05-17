@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/core/extension/empty_padding_extension.dart';
 import 'package:notes/core/utils/app_text_styles.dart';
 import 'package:notes/widgets/custom_icon_button.dart';
 import 'package:notes/core/extension/context_extension.dart';
@@ -47,6 +48,7 @@ class LabelField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
         border: Border(
           top: _getBorder(),
@@ -60,6 +62,7 @@ class LabelField extends StatelessWidget {
               toggleFocus: toggleFocus,
               isFocused: isFocused,
               deleteLabel: deleteLabel),
+          10.pw,
           Expanded(
             flex: 2,
             child: Form(
@@ -80,11 +83,12 @@ class LabelField extends StatelessWidget {
                   counterText: '',
                   errorStyle: AppStyles.styleRegular16(context),
                   hintText: adding ? context.local.createNewLabel : null,
-                  hintStyle: AppStyles.styleSemiBold20(context),
+                  hintStyle: AppStyles.styleRegular20(context),
                 ),
               ),
             ),
           ),
+          10.pw,
           _LabelSuffixIcon(
               addLabel: addLabel,
               editLabel: editLabel,

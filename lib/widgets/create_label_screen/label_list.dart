@@ -14,7 +14,6 @@ class LabelsList extends StatelessWidget {
           itemBuilder: (_, index) => EditLabelField(
             controller: TextEditingController(text: cubit.labels[index].name),
             label: cubit.labels[index],
-            index: index,
           ),
         );
       },

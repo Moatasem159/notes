@@ -8,18 +8,13 @@ import 'package:notes/widgets/label_screen/delete_dialog.dart';
 
 class EditLabelField extends StatefulWidget {
   final Label label;
-  final int index;
   final TextEditingController controller;
-
   const EditLabelField({super.key,
     required this.label,
-    required this.index,
     required this.controller});
-
   @override
   State<EditLabelField> createState() => _EditLabelFieldState();
 }
-
 class _EditLabelFieldState extends State<EditLabelField> {
   late GlobalKey<FormState> _formKey;
   late FocusNode _focusNode;
@@ -27,7 +22,6 @@ class _EditLabelFieldState extends State<EditLabelField> {
   late bool _isFocused;
   late String text;
   late bool _edited;
-
   @override
   void initState() {
     super.initState();
@@ -57,8 +51,7 @@ class _EditLabelFieldState extends State<EditLabelField> {
       bool validate = _formKey.currentState!.validate();
       if (validate) {
         if (widget.controller.text.isNotEmpty) {
-          LabelActionsBloc.of(context)
-              .add(EditLabelEvent(widget.label, widget.controller.text));
+          LabelActionsBloc.of(context).add(EditLabelEvent(widget.label, widget.controller.text));
           _edited = true;
         } else {
           _focusNode.unfocus();
@@ -110,6 +103,7 @@ class _EditLabelFieldState extends State<EditLabelField> {
             return null;
           },
           deleteLabel: () {
+            _focusNode.unfocus();
             showDialog(
               context: context,
               builder: (_) {

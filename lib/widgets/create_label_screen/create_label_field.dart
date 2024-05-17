@@ -13,8 +13,8 @@ class _AddLabelFieldState extends State<AddLabelField> {
   late final TextEditingController _controller;
   late GlobalKey<FormState> _formKey;
   late FocusNode _focusNode;
-  late bool _found;
   late bool _isFocused;
+  late bool _found;
   @override
   void initState() {
     super.initState();
