@@ -1,6 +1,8 @@
 part of 'main_drawer.dart';
+
 class _DrawerTilesList extends StatelessWidget {
   const _DrawerTilesList();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -15,8 +17,7 @@ class _DrawerTilesList extends StatelessWidget {
             if (context.route.name != Routes.homeRoute) {
               Scaffold.of(context).closeDrawer();
               context.pushReplacementNamed(Routes.homeRoute);
-            }
-            else {
+            } else {
               Scaffold.of(context).closeDrawer();
             }
           },
@@ -45,11 +46,10 @@ class _DrawerTilesList extends StatelessWidget {
             location: Routes.archivedRoute,
           ),
           onTap: () {
-            if (context.route.name!= Routes.archivedRoute) {
+            if (context.route.name != Routes.archivedRoute) {
               Scaffold.of(context).closeDrawer();
-            context.pushReplacementNamed(Routes.archivedRoute);
-            }
-            else {
+              context.pushReplacementNamed(Routes.archivedRoute);
+            } else {
               Scaffold.of(context).closeDrawer();
             }
           },
@@ -61,9 +61,9 @@ class _DrawerTilesList extends StatelessWidget {
             location: Routes.deletedRoute,
           ),
           onTap: () {
-            if (context.route.name!= Routes.deletedRoute) {
+            if (context.route.name != Routes.deletedRoute) {
               Scaffold.of(context).closeDrawer();
-            context.pushReplacementNamed(Routes.deletedRoute);
+              context.pushReplacementNamed(Routes.deletedRoute);
             } else {
               Scaffold.of(context).closeDrawer();
             }
@@ -76,7 +76,7 @@ class _DrawerTilesList extends StatelessWidget {
             location: Routes.settingsRoute,
           ),
           onTap: () {
-            if (context.route.name!= Routes.settingsRoute) {
+            if (context.route.name != Routes.settingsRoute) {
               Scaffold.of(context).closeDrawer();
               context.pushNamed(Routes.settingsRoute);
             } else {

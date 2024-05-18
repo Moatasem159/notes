@@ -21,6 +21,7 @@ class Nota extends StatelessWidget {
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (BuildContext context,ThemeMode state) {
           return MaterialApp(
+            navigatorKey: AppRouter.navigatorKey,
             debugShowCheckedModeBanner: false,
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,

@@ -34,6 +34,7 @@ abstract class Routes {
 }
 
 class AppRouter {
+  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   Route router(RouteSettings settings) {
     switch (settings.name) {
       case Routes.homeRoute:

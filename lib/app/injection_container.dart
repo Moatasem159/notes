@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:notes/core/notification/app_notification.dart';
 import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/app/bloc_observer.dart';
@@ -12,6 +13,7 @@ final GetIt sl = GetIt.instance;
 init()async{
   Bloc.observer=AppBlocObserver();
   await _iniHive();
+  await _initializeNotification();
   HydratedBloc.storage = await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
   sl.registerLazySingleton<NoteLocalDataSource>(() => NoteLocalDataSourceImpl(sl()));
   sl.registerLazySingleton<LabelLocalDataSource>(() => LabelLocalDataSourceImpl(sl(),sl()));
@@ -25,4 +27,8 @@ _iniHive()async{
   Box<Label> labelBox=await Hive.openBox<Label>(AppConstants.labelBox);
   sl.registerLazySingleton<Box<Note>>(() =>noteBox);
   sl.registerLazySingleton<Box<Label>>(() =>labelBox);
+}
+_initializeNotification()async{
+  await NotificationManager.initializeNotifications();
+  await NotificationManager.handleNotificationAction();
 }
