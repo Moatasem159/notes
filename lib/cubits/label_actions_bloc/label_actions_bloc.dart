@@ -27,7 +27,7 @@ class LabelActionsBloc extends Bloc<LabelActionsEvents, LabelActionsStates> {
     Label label = Label(name: name);
     await _dataSource.addLabel(label);
     labels.insert(0, label);
-    listKey.currentState?.insertItem(0,duration: const Duration(milliseconds: 350));
+    listKey.currentState?.insertItem(0,duration: const Duration(milliseconds: 300));
     emit(AddLabelSuccessState());
   }
 
@@ -39,7 +39,7 @@ class LabelActionsBloc extends Bloc<LabelActionsEvents, LabelActionsStates> {
     if (event.index != null) {
       final Label removedItem = labels.removeAt(event.index!);
       listKey.currentState?.removeItem(
-        event.index!,duration: const Duration(milliseconds: 350),
+        event.index!,duration: const Duration(milliseconds: 300),
         (context, animation) {
           return EditLabelField(
             animation: animation,
@@ -70,7 +70,7 @@ class LabelActionsBloc extends Bloc<LabelActionsEvents, LabelActionsStates> {
   }
   Future<void> getLabels(GetLabelsEvent event, Emitter<LabelActionsStates> emit) async {
     labels = _dataSource.getLabel();
-    listKey.currentState!.insertAllItems(0, labels.length);
+    listKey.currentState!.insertAllItems(0, labels.length,duration: Duration.zero);
     emit(GetLabelsState());
   }
 }

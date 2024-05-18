@@ -6,15 +6,14 @@ import 'package:notes/config/themes/app_theme.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/cubits/pick_labels_cubit/pick_labels_cubit.dart';
 import 'package:notes/models/pick_label_params.dart';
-import 'package:notes/widgets/pick_label_screen/pick_label_appbar.dart';
-import 'package:notes/widgets/pick_label_screen/pick_label_list.dart';
+import 'package:notes/widgets/pick_label_screen/pick_label_screen_body.dart';
 class PickLabelScreen extends StatelessWidget {
   final PickLabelParams params;
   const PickLabelScreen({super.key, required this.params});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => PickLabelsCubit(sl(),inNote: params.inNote,noteStatus: params.noteStatus,notes: params.notes, labels: params.labels)..getLabels(),
+      create: (_) => PickLabelsCubit(sl(),inNote: params.inNote,noteStatus: params.noteStatus,notes: params.notes, labels: params.labels)..getInitialLabels(),
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: AppTheme.systemUiOverlayStyle(context),
         child: Builder(
@@ -30,9 +29,8 @@ class PickLabelScreen extends StatelessWidget {
               },
               child: SafeArea(
                 child: Scaffold(
-                    appBar: const PickLabelAppbar(),
                     backgroundColor: context.scaffoldBackground,
-                    body: const PickLabelsList(),
+                    body: const PickLabelsScreenBody(),
                 ),
               ),
             );
