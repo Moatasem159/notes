@@ -18,11 +18,11 @@ class _ThemeDialogState extends State<ThemeDialog> {
   }
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
+    return AlertDialog.adaptive(
       actionsPadding: const EdgeInsets.symmetric(horizontal: 10),
       contentPadding:const EdgeInsets.only(bottom: 20),
-      titlePadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-      title: Text(context.local.chooseTheme,style: AppStyles.styleBold24(context)),
+      titlePadding: const EdgeInsets.symmetric(horizontal: 18,vertical: 10),
+      title: Text(context.local.chooseTheme,style: AppStyles.styleRegular24(context)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children:[
