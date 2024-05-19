@@ -1,11 +1,9 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes/app/injection_container.dart';
 import 'package:notes/config/routes/app_routes.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/core/extension/empty_padding_extension.dart';
-import 'package:notes/core/notification/app_notification.dart';
 import 'package:notes/core/utils/app_text_styles.dart';
 import 'package:notes/cubits/drawer_cubit/drawer_cubit.dart';
 import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
