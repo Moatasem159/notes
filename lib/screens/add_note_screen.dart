@@ -11,7 +11,6 @@ import 'package:notes/models/note.dart';
 import 'package:notes/widgets/add_note_screen/add_note_screen_appbar.dart';
 import 'package:notes/widgets/add_note_screen/add_note_screen_body/add_note_screen_body.dart';
 import 'package:notes/widgets/add_note_screen/bottom_bar/add_note_bottom_bar.dart';
-import 'package:notes/widgets/toast/custom_toast.dart';
 class AddNoteScreen extends StatelessWidget {
   final Note? note;
   final Label? label;
@@ -19,13 +18,6 @@ class AddNoteScreen extends StatelessWidget {
   final bool isSearch;
   const AddNoteScreen({super.key, this.note, this.noteStatus=NoteStatus.active, this.label,this.isSearch=false});
 
-  _absorb(BuildContext context, AddNoteCubit cubit) {
-    if (cubit.restored == false) {
-      CustomToast.showToast(context, msg: context.local.canNotEdit);
-    } else {
-      null;
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -66,14 +58,14 @@ class AddNoteScreen extends StatelessWidget {
                           : Color(cubit.note!.color),
                       appBar:AddNoteScreenAppbar(note: note,noteStatus: noteStatus),
                       body:GestureDetector(
-                        onTap: () => _absorb(context, cubit),
+                        onTap: () => cubit.absorb(context),
                         child: AbsorbPointer(
                           absorbing: !cubit.restored,
                           child: const AddNoteScreenBody(),
                         ),
                       ),
                       bottomNavigationBar: GestureDetector(
-                        onTap: () => _absorb(context, cubit),
+                        onTap: () => cubit.absorb(context),
                         child: AbsorbPointer(
                           absorbing: !cubit.restored,
                           child: const AddNoteBottomNavBar(),

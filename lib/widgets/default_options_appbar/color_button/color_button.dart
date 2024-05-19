@@ -21,7 +21,7 @@ class _ColorButton extends StatelessWidget {
       },
       child: CustomIconButton(
           onTap: () {
-            showDialog(
+            showAdaptiveDialog(
                 context: context,
                 builder: (_) {
                   return BlocProvider.value(

@@ -4,6 +4,7 @@ import 'package:notes/core/utils/app_colors.dart';
 import 'package:notes/core/utils/app_fonts.dart';
 abstract class AppTheme {
   static final ThemeData lightTheme = ThemeData(
+
     fontFamily: AppFonts.englishFontFamily,
     disabledColor: Colors.black,
     dialogTheme: DialogTheme(
@@ -11,14 +12,32 @@ abstract class AppTheme {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       actionsPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
     ),
+    buttonTheme: const ButtonThemeData(alignedDropdown: true),
+    dropdownMenuTheme: DropdownMenuThemeData(
+        menuStyle: MenuStyle(
+          backgroundColor: const WidgetStatePropertyAll(AppColors.lightBackgroundColor),
+          padding: const WidgetStatePropertyAll(EdgeInsets.zero),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          alignment: Alignment.topLeft,
+          elevation: const WidgetStatePropertyAll(8),
+          shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5))),
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          isCollapsed: true,
+          isDense: true,
+          constraints: BoxConstraints(maxHeight: 40, maxWidth: 250),
+          contentPadding: EdgeInsets.symmetric(horizontal: 5),
+          border: UnderlineInputBorder(),
+        )
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.buttonLightColor,
         foregroundColor: Colors.white,
       ),
     ),
-    dividerTheme:
-        const DividerThemeData(color: AppColors.lightActiveDrawerColor),
+    dividerTheme:const DividerThemeData(color: AppColors.lightActiveDrawerColor),
     iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
       iconColor: WidgetStateProperty.all(Colors.black),
@@ -31,8 +50,11 @@ abstract class AppTheme {
       backgroundColor: AppColors.lightBackgroundColor,
       elevation: 0,
     ),
-    listTileTheme: const ListTileThemeData()
-        .copyWith(selectedColor: AppColors.lightActiveDrawerColor),
+    listTileTheme: const ListTileThemeData().copyWith(selectedColor: AppColors.lightActiveDrawerColor),
+    timePickerTheme: const TimePickerThemeData(
+        dayPeriodColor:  AppColors.lightActiveDrawerColor,
+        dayPeriodTextColor: Colors.black
+    ),
     colorScheme: const ColorScheme.light().copyWith(
       surface: AppColors.lightBackgroundColor,
       primary: Colors.black,
@@ -42,6 +64,7 @@ abstract class AppTheme {
     inputDecorationTheme: const InputDecorationTheme(border: InputBorder.none),
   );
   static final ThemeData darkTheme = ThemeData(
+    useMaterial3: true,
     appBarTheme: const AppBarTheme(
       elevation: 0,
       scrolledUnderElevation: 0,
@@ -51,8 +74,26 @@ abstract class AppTheme {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       actionsPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
     ),
-    dividerTheme:
-        const DividerThemeData(color: AppColors.darkActiveDrawerColor),
+    buttonTheme: const ButtonThemeData(alignedDropdown: true),
+    dropdownMenuTheme: DropdownMenuThemeData(
+      menuStyle: MenuStyle(
+        backgroundColor: const WidgetStatePropertyAll(AppColors.darkBackgroundColor),
+        padding: const WidgetStatePropertyAll(EdgeInsets.zero),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        alignment: Alignment.topLeft,
+        elevation: const WidgetStatePropertyAll(8),
+        shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5))),
+      ),
+      inputDecorationTheme: const InputDecorationTheme(
+        isCollapsed: true,
+        isDense: true,
+        constraints: BoxConstraints(maxHeight: 40, maxWidth: 250),
+        contentPadding: EdgeInsets.symmetric(horizontal: 5),
+        border: UnderlineInputBorder(),
+      )
+    ),
+    dividerTheme: const DividerThemeData(color: AppColors.darkActiveDrawerColor),
     disabledColor: Colors.white,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -68,12 +109,16 @@ abstract class AppTheme {
       backgroundColor: AppColors.darkBackgroundColor,
       elevation: 0,
     ),
-    listTileTheme: const ListTileThemeData()
-        .copyWith(selectedColor: AppColors.darkActiveDrawerColor),
+    listTileTheme: const ListTileThemeData().copyWith(selectedColor: AppColors.darkActiveDrawerColor),
+    timePickerTheme: const TimePickerThemeData(
+      dayPeriodColor:  AppColors.darkActiveDrawerColor,
+      dayPeriodTextColor: Colors.white
+    ),
     colorScheme: const ColorScheme.dark().copyWith(
       surface: AppColors.darkBackgroundColor,
       primary: Colors.white,
       secondary: Colors.white,
+
       onSecondary: AppColors.darkSeconderBackgroundColor,
     ),
     inputDecorationTheme: const InputDecorationTheme(border: InputBorder.none),

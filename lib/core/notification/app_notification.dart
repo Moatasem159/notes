@@ -65,7 +65,7 @@ class NotificationManager {
         if(value){
           AwesomeNotifications().createNotification(
             content: content,
-            schedule: schedule,
+            schedule:schedule
           );
         }
         else{

@@ -5,6 +5,7 @@ import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes/cubits/search_cubit/search_cubit.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/widgets/add_note_screen/label_button.dart';
+import 'package:notes/widgets/add_note_screen/reminder_button.dart';
 import 'package:notes/widgets/custom_icon_button.dart';
 class AddNoteScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
   final Note? note;
@@ -43,11 +44,7 @@ class AddNoteScreenAppbar extends StatelessWidget implements PreferredSizeWidget
                 tooltip: context.local.pin,
               ),
               const LabelsButton(),
-              CustomIconButton(
-                onTap: () {},
-                icon: const Icon(Icons.notification_add_outlined),
-                tooltip: context.local.reminder,
-              ),
+              const ReminderButton(),
               CustomIconButton(
                 onTap: cubit.changeArchiveNote,
                 icon: Icon(cubit.note!.status == NoteStatus.archive
@@ -75,3 +72,4 @@ class AddNoteScreenAppbar extends StatelessWidget implements PreferredSizeWidget
   @override
   Size get preferredSize => const Size(double.infinity, 60);
 }
+

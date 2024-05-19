@@ -23,6 +23,10 @@ class Note extends HiveObject {
   int color;
   @HiveField(8)
   String imagePath;
+  @HiveField(9)
+  String reminderDate;
+  @HiveField(10)
+  String reminderTime;
 
   Note({
     this.title = '',
@@ -33,6 +37,8 @@ class Note extends HiveObject {
     this.labels = const [],
     this.imagePath = '',
     required this.date,
+    this.reminderDate ='',
+    this.reminderTime ='',
     required this.color,
   });
 

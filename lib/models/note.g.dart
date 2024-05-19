@@ -25,6 +25,8 @@ class NoteAdapter extends TypeAdapter<Note> {
       labels: (fields[6] as List).cast<Label>(),
       imagePath: fields[8] as String,
       date: fields[2] as String,
+      reminderDate: fields[9] as String,
+      reminderTime: fields[10] as String,
       color: fields[7] as int,
     );
   }
@@ -32,7 +34,7 @@ class NoteAdapter extends TypeAdapter<Note> {
   @override
   void write(BinaryWriter writer, Note obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -50,7 +52,11 @@ class NoteAdapter extends TypeAdapter<Note> {
       ..writeByte(7)
       ..write(obj.color)
       ..writeByte(8)
-      ..write(obj.imagePath);
+      ..write(obj.imagePath)
+      ..writeByte(9)
+      ..write(obj.reminderDate)
+      ..writeByte(10)
+      ..write(obj.reminderTime);
   }
 
   @override

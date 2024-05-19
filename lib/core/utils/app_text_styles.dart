@@ -80,6 +80,7 @@ abstract class AppStyles {
       fontFamily: AppFonts.englishFontFamily,
       fontWeight: FontWeight.w400,
       letterSpacing: 0,
+      height: 0
     );
   }
   static TextStyle styleSemiBold24(BuildContext context) {

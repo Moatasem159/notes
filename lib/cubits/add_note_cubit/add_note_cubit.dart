@@ -76,6 +76,9 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
     emit(ChangeNoteStatusState());
   }
 
+  setReminder(){
+    emit(SetReminderState());
+  }
   changePinNote() {
     note!.pinned = !note!.pinned;
     if (note!.pinned) {
@@ -132,7 +135,13 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
     note!.imagePath = '';
     emit(RemoveImageState());
   }
-
+  absorb(BuildContext context) {
+    if (restored == false) {
+      CustomToast.showToast(context, msg: context.local.canNotEdit);
+    } else {
+      null;
+    }
+  }
   listen(BuildContext context, AddNoteStates state) {
     if (state is DeleteNoteState) {
       Navigator.of(context).pop();

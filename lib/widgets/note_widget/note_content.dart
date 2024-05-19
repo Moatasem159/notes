@@ -40,15 +40,15 @@ class _NoteContent extends StatelessWidget {
               ],
             ),
           ),
-        if (note.labeled)
+        if (note.labeled||note.reminderTime!='')
           15.ph,
         if(note.imagePath.isNotEmpty)
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: _NoteLabelList(note.labels),
+          child: _NoteLabelList(note.labels,note.reminderDate,note.reminderTime),
         ),
         if(note.imagePath.isEmpty)
-        _NoteLabelList(note.labels),
+        _NoteLabelList(note.labels,note.reminderDate,note.reminderTime),
       ],
     );
   }

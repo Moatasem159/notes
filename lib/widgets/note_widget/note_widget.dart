@@ -14,6 +14,7 @@ import 'package:notes/screens/add_note_screen.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/core/extension/empty_padding_extension.dart';
 import 'package:notes/widgets/label_widget.dart';
+import 'package:notes/widgets/reminder_widget.dart';
 import 'package:notes/widgets/toast/custom_toast.dart';
 part 'note_content.dart';
 part 'note_label_list.dart';

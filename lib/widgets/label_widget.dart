@@ -47,24 +47,30 @@ class LabelWidget extends StatelessWidget {
         );
         context.pushNamed(Routes.pickLabelRoute, arguments: params);
       },
-      child: _Label(label: label, count: count),
-    ): _Label(label: label, count: count);
+      child: _Label(label: label, count: count,tapped: tapped),
+    ): _Label(label: label, count: count,tapped: tapped);
   }
 }
 
 class _Label extends StatelessWidget {
   final Label? label;
   final int count;
-  const _Label({required this.label, required this.count});
+  final bool tapped;
+  const _Label({required this.label, required this.count, required this.tapped});
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
       decoration: BoxDecoration(
         color: Colors.grey.withOpacity(0.4),
         borderRadius: BorderRadius.circular(5),
       ),
-      child: Text(label?.name??"+${count.toString()}", style: AppStyles.styleRegular16(context)),
+      child: Text(label?.name ?? "+${count.toString()}",
+          style: tapped
+              ? AppStyles.styleRegular20(context)
+              : AppStyles.styleRegular16(context).copyWith(
+              color: Colors.grey[400]
+          )),
     );
   }
 }

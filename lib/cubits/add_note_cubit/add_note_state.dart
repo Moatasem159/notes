@@ -9,6 +9,7 @@ class EditNoteSuccessState extends AddNoteStates {}
 class AddNoteLoadingState extends AddNoteStates {}
 class AddNoteErrorState extends AddNoteStates {}
 class ChangeColorState extends AddNoteStates {}
+class SetReminderState extends AddNoteStates {}
 class ChangePinNoteState extends AddNoteStates {}
 class RestoreNoteState extends AddNoteStates {}
 class DeleteNoteForeverState extends AddNoteStates {}
