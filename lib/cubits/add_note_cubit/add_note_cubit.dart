@@ -1,8 +1,10 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:notes/core/extension/context_extension.dart';
 import 'package:notes/core/image/image_helper.dart';
+import 'package:notes/core/notification/app_notification.dart';
 import 'package:notes/cubits/get_active_notes_cubit/get_active_notes_cubit.dart';
 import 'package:notes/cubits/get_archived_notes_cubit/get_archived_notes_cubit.dart';
 import 'package:notes/cubits/get_deleted_notes_cubit/get_deleted_notes_cubit.dart';
@@ -17,7 +19,10 @@ part 'add_note_state.dart';
 
 class AddNoteCubit extends Cubit<AddNoteStates> {
   AddNoteCubit(this._dataSource,
-      {required this.note, required this.noteStatus, required this.label,required this.isSearch})
+      {required this.note,
+      required this.noteStatus,
+      required this.label,
+      required this.isSearch})
       : super(AddNoteInitialState()) {
     isNew = note == null ? true : false;
     note ??= Note(
@@ -76,9 +81,10 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
     emit(ChangeNoteStatusState());
   }
 
-  setReminder(){
+  setReminder() {
     emit(SetReminderState());
   }
+
   changePinNote() {
     note!.pinned = !note!.pinned;
     if (note!.pinned) {
@@ -88,14 +94,14 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
   }
 
   pickLabel(List<Label> labels) {
-    if(labels.isNotEmpty) {
-     note!.labels.clear();
-     note!.labels.addAll(labels);
-     note!.labeled=true;
-    }
-    if(labels.isEmpty) {
+    if (labels.isNotEmpty) {
       note!.labels.clear();
-      note!.labeled=false;
+      note!.labels.addAll(labels);
+      note!.labeled = true;
+    }
+    if (labels.isEmpty) {
+      note!.labels.clear();
+      note!.labeled = false;
     }
     emit(PickLabelState());
   }
@@ -135,6 +141,7 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
     note!.imagePath = '';
     emit(RemoveImageState());
   }
+
   absorb(BuildContext context) {
     if (restored == false) {
       CustomToast.showToast(context, msg: context.local.canNotEdit);
@@ -142,6 +149,7 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
       null;
     }
   }
+
   listen(BuildContext context, AddNoteStates state) {
     if (state is DeleteNoteState) {
       Navigator.of(context).pop();
@@ -154,22 +162,44 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
     if (state is ChangeNoteStatusState) {
       context.pop();
       if (noteStatus == NoteStatus.archive) {
-        if(isSearch)
-          {
-            SearchCubit.of(context).search(edit: true);
-          }
+        if (isSearch) {
+          SearchCubit.of(context).search(edit: true);
+        }
         GetArchivedNotesCubit.of(context).getArchivedNotes(edit: true);
-      }
-      else if (noteStatus==NoteStatus.active){
-        if(isSearch)
-        {
-
+      } else if (noteStatus == NoteStatus.active) {
+        if (isSearch) {
           SearchCubit.of(context).search(edit: true);
         }
         GetActiveNotesCubit.of(context).getNotes(edit: true);
       }
     }
     if (state is AddNoteSuccessState && state.isAdded) {
+      if (note!.reminderDate!=null) {
+        DateTime date=note!.reminderDate!;
+        TimeOfDay time=note!.reminderTime!;
+        NotificationManager.createNotification(
+          context,
+          content: NotificationContent(
+            id: note!.key,
+            title: note?.title,
+            body: note?.note,
+            bigPicture: note?.imagePath,
+            displayOnBackground: true,
+            displayOnForeground: true,
+            color:Color(note?.color??0x00000000),
+            notificationLayout: NotificationLayout.Default,
+            payload:note!.toMap(),
+            channelKey: NotificationsConstants.channelKey,
+          ),
+          schedule: NotificationCalendar(
+            day: date.day,
+            month: date.month,
+            year: date.year,
+            minute: time.minute,
+            hour: date.hour,
+          )
+        );
+      }
       if (noteStatus == NoteStatus.active) {
         GetActiveNotesCubit.of(context).getNotes();
       }
@@ -183,10 +213,10 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
     if (state is EditNoteSuccessState && noteStatus == NoteStatus.archive) {
       GetArchivedNotesCubit.of(context).getArchivedNotes(edit: true);
     }
-    if (state is EditNoteSuccessState&&noteStatus == NoteStatus.labeled) {
+    if (state is EditNoteSuccessState && noteStatus == NoteStatus.labeled) {
       GetLabeledNotesCubit.of(context).getLabeledNotes(edit: true);
     }
-    if (state is EditNoteSuccessState&&noteStatus == NoteStatus.active) {
+    if (state is EditNoteSuccessState && noteStatus == NoteStatus.active) {
       GetActiveNotesCubit.of(context).getNotes(edit: true);
     }
     if (state is EditNoteSuccessState && noteStatus == NoteStatus.deleted) {
@@ -197,4 +227,5 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
       Navigator.of(context).pop();
     }
   }
+
 }

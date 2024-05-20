@@ -17,8 +17,8 @@ class NoteLabelList extends StatelessWidget {
             spacing: 10,
               runSpacing: 10,
               children:[
-                if(note.reminderDate.isNotEmpty)
-                ReminderWidget(tapped: true, date: note.reminderDate, time: note.reminderTime),
+                if(note.reminderDate!=null)
+                ReminderWidget(tapped: true, date: note.reminderDate!, time: note.reminderTime!),
                 for (var label in note.labels)
                   LabelWidget(label:label,tapped: true)
               ]),

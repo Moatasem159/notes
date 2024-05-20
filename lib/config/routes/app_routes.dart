@@ -9,6 +9,7 @@ import 'package:notes/models/create_label_params.dart';
 import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/models/search_screen_params.dart';
+import 'package:notes/screens/add_note_screen.dart';
 import 'package:notes/screens/deleted_screen.dart';
 import 'package:notes/screens/home_screen.dart';
 import 'package:notes/screens/label_screen.dart';
@@ -23,6 +24,7 @@ part 'slide_from_down_to_up_with_fading.dart';
 part 'no_animation.dart';
 abstract class Routes {
   static const String homeRoute = "home";
+  static const String noteRoute = "note";
   static const String reminderRoute = "reminder";
   static const String createLabelRoute = "createLabel";
   static const String pickLabelRoute = "pickLabel";
@@ -41,6 +43,14 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => const HomeScreen(),
+        );
+      case Routes.noteRoute:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_){
+            Note note =settings.arguments as Note;
+            return AddNoteScreen(notification: true,note: note);
+          },
         );
       case Routes.reminderRoute:
         return MaterialPageRoute(

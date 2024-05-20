@@ -1,9 +1,9 @@
 import 'package:get_it/get_it.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:notes/core/notification/app_notification.dart';
 import 'package:notes/models/label.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/app/bloc_observer.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:notes/sources/labels_data_source.dart';
 import 'package:path_provider/path_provider.dart';
@@ -23,6 +23,7 @@ _iniHive()async{
   Hive.registerAdapter(NoteAdapter());
   Hive.registerAdapter(NoteStatusAdapter());
   Hive.registerAdapter(LabelAdapter());
+  Hive.registerAdapter(TimeOfDayAdapter());
   Box<Note> noteBox=await Hive.openBox<Note>(AppConstants.noteBox);
   Box<Label> labelBox=await Hive.openBox<Label>(AppConstants.labelBox);
   sl.registerLazySingleton<Box<Note>>(() =>noteBox);

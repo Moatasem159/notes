@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:notes/core/functions/format_date.dart';
 import 'package:notes/models/label.dart';
-
 part 'note.g.dart';
-
 @HiveType(typeId: 0)
 class Note extends HiveObject {
   @HiveField(0)
@@ -24,9 +24,9 @@ class Note extends HiveObject {
   @HiveField(8)
   String imagePath;
   @HiveField(9)
-  String reminderDate;
+  DateTime ?reminderDate;
   @HiveField(10)
-  String reminderTime;
+  TimeOfDay ?reminderTime;
 
   Note({
     this.title = '',
@@ -37,10 +37,11 @@ class Note extends HiveObject {
     this.labels = const [],
     this.imagePath = '',
     required this.date,
-    this.reminderDate ='',
-    this.reminderTime ='',
+    this.reminderDate,
+    this.reminderTime,
     required this.color,
   });
+
 
   bool isEmpty() {
     return title == '' && note == '' && imagePath == '' ? true : false;
@@ -50,6 +51,40 @@ class Note extends HiveObject {
     title = '';
     note = '';
     imagePath = '';
+  }
+
+  Map<String, String> toMap() {
+    return {
+      'title': title,
+      'note': note,
+      'date': date,
+      'status': status.toString(),
+      'pinned': pinned.toString(),
+      'labeled': labeled.toString(),
+      'labels': Label.listToJson(labels),
+      'color': color.toString(),
+      'imagePath': imagePath,
+      'reminderDate': reminderDate.toString(),
+      'reminderTime': timeOfDayToString(reminderTime!),
+    };
+  }
+
+  factory Note.fromMap(Map<String, dynamic> map) {
+
+
+    return Note(
+      title: map['title'] as String,
+      note: map['note'] as String,
+      date: map['date'] as String,
+      status: map['status'].toString().toNoteStatus(),
+      pinned: map['pinned']=="true" ? true : false,
+      labeled: map['labeled']=="true" ? true:false,
+      labels: Label.listFromJson(map['labels']),
+      color: int.parse(map['color']),
+      imagePath: map['imagePath'] as String,
+      reminderDate: DateTime.parse(map['reminderDate']) ,
+      reminderTime: stringToTimeOfDay(map['reminderTime']),
+    );
   }
 }
 
@@ -67,6 +102,26 @@ enum NoteStatus {
   labeled,
   @HiveField(5)
   searched,
+}
+extension NoteStatusExtension on String {
+  NoteStatus toNoteStatus() {
+    switch (this) {
+      case 'NoteStatus.active':
+        return NoteStatus.active;
+      case 'NoteStatus.reminder':
+        return NoteStatus.reminder;
+      case 'NoteStatus.archive':
+        return NoteStatus.archive;
+      case 'NoteStatus.deleted':
+        return NoteStatus.deleted;
+      case 'NoteStatus.labeled':
+        return NoteStatus.labeled;
+      case 'NoteStatus.searched':
+        return NoteStatus.searched;
+      default:
+        return NoteStatus.active;
+    }
+  }
 }
 extension GetPinned on List<Note>{
   (bool,bool) listHasPinnedNotes(){

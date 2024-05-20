@@ -12,17 +12,18 @@ class SetReminderDialog extends StatefulWidget {
   State<SetReminderDialog> createState() => _SetReminderDialogState();
 }
 class _SetReminderDialogState extends State<SetReminderDialog> {
-  String? date=DateTime.now().formatDate();
-  String? time=TimeOfDay.now().getInitialTime();
+  late DateTime? date;
+  late TimeOfDay? time;
   @override
   void initState() {
-    date=DateTime.now().formatDate();
-    time=TimeOfDay.now().getInitialTime();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      AddNoteCubit.of(context).note!.reminderDate=date!;
-      AddNoteCubit.of(context).note!.reminderTime=time!;
-    },);
     super.initState();
+    date=DateTime.now();
+    time=TimeOfDay.now();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AddNoteCubit.of(context).note!.reminderDate=date;
+      AddNoteCubit.of(context).note!.reminderTime=time;
+    },);
+
   }
   @override
   Widget build(BuildContext context) {
@@ -44,14 +45,14 @@ class _SetReminderDialogState extends State<SetReminderDialog> {
               ).then(
                 (DateTime? value) {
                   setState(() {
-                    date=value!.formatDate();
-                    AddNoteCubit.of(context).note!.reminderDate=date!;
+                    date=value!;
+                    AddNoteCubit.of(context).note!.reminderDate=value;
                   });
                 },
               );
             },
             title: context.local.pickDate,
-            subTitle: date,
+            subTitle: date!.formatDate(),
             icon: Icons.calendar_month_rounded,
           ),
           _ReminderListTile(
@@ -61,14 +62,15 @@ class _SetReminderDialogState extends State<SetReminderDialog> {
                 initialTime: TimeOfDay.now(),
               ).then((TimeOfDay? value) {
                 setState(() {
-                    time=value?.formatTime()??TimeOfDay.now().getInitialTime();
+                    time=value;
+                    AddNoteCubit.of(context).note!.reminderTime=value;
                   });
-                AddNoteCubit.of(context).note!.reminderTime=time!;
+
               },
               );
             },
             title: context.local.pickTime,
-            subTitle: time,
+            subTitle: time!.formatTime(),
             icon: Icons.access_time_rounded,
           ),
         ],
@@ -76,8 +78,8 @@ class _SetReminderDialogState extends State<SetReminderDialog> {
       actions: [
         CustomButton(
             onTap: () {
-              AddNoteCubit.of(context).note!.reminderDate='';
-              AddNoteCubit.of(context).note!.reminderTime='';
+              AddNoteCubit.of(context).note!.reminderDate=null;
+              AddNoteCubit.of(context).note!.reminderTime==null;
               AddNoteCubit.of(context).setReminder();
               context.pop();
             },

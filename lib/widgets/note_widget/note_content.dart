@@ -40,7 +40,7 @@ class _NoteContent extends StatelessWidget {
               ],
             ),
           ),
-        if (note.labeled||note.reminderTime!='')
+        if (note.labeled||note.reminderTime!=null)
           15.ph,
         if(note.imagePath.isNotEmpty)
         Padding(

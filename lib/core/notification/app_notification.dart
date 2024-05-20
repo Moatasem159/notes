@@ -2,6 +2,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/config/routes/app_routes.dart';
 import 'package:notes/core/extension/context_extension.dart';
+import 'package:notes/models/note.dart';
 abstract class NotificationsConstants {
   static String channelName = "Schedule channel";
   static String channelKey = "Schedule key";
@@ -25,6 +26,7 @@ class NotificationManager {
     ],
 
     );
+    await AwesomeNotifications().getInitialNotificationAction(removeFromActionEvents: false);
   }
   static void _showPermissionDialog(BuildContext context) {
     showDialog(
@@ -75,11 +77,6 @@ class NotificationManager {
   }
 
   static handleNotificationAction()async{
-    ReceivedAction? receivedAction=await AwesomeNotifications().getInitialNotificationAction();
-    if(receivedAction?.channelKey == NotificationsConstants.channelKey)
-      {
-        NotificationController.onActionReceivedMethod(receivedAction!);
-      }
     await AwesomeNotifications().setListeners(
       onNotificationDisplayedMethod: NotificationController.onNotificationDisplayedMethod,
       onNotificationCreatedMethod: NotificationController.onNotificationCreatedMethod,
@@ -110,8 +107,8 @@ class NotificationController {
   /// Use this method to detect when the user taps on a notification or action button
   @pragma("vm:entry-point")
   static Future <void> onActionReceivedMethod(ReceivedAction receivedAction) async {
-    // Your code goes here
-    // Navigate into pages, avoiding to open the notification details page over another details page already opened
-    AppRouter.navigatorKey.currentState?.pushReplacementNamed(Routes.archivedRoute);
+    dynamic payload=receivedAction.payload;
+    Note note=Note.fromMap(payload);
+    AppRouter.navigatorKey.currentState?.pushReplacementNamed(Routes.noteRoute,arguments: note);
   }
 }

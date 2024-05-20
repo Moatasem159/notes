@@ -1,7 +1,7 @@
 part of 'reminder_dialog.dart';
 class _ReminderListTile extends StatelessWidget {
   final String title;
-  final String ?subTitle;
+  final dynamic subTitle;
   final IconData icon;
   final VoidCallback onTap;
   const _ReminderListTile({
@@ -17,7 +17,7 @@ class _ReminderListTile extends StatelessWidget {
       title: Text(title, style: AppStyles.styleRegular20(context)),
       subtitle: subTitle == null
           ? null
-          : Text(subTitle!, style: AppStyles.styleRegular16(context)),
+          : Text(subTitle.toString(), style: AppStyles.styleRegular16(context)),
       trailing: Icon(icon),
       onTap: onTap,
       dense: true,

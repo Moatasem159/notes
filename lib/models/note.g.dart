@@ -25,8 +25,8 @@ class NoteAdapter extends TypeAdapter<Note> {
       labels: (fields[6] as List).cast<Label>(),
       imagePath: fields[8] as String,
       date: fields[2] as String,
-      reminderDate: fields[9] as String,
-      reminderTime: fields[10] as String,
+      reminderDate: fields[9] as DateTime?,
+      reminderTime: fields[10] as TimeOfDay?,
       color: fields[7] as int,
     );
   }
